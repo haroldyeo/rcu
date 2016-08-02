@@ -9,6 +9,15 @@
     <url-pattern>/bonjour</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>com.servlets.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>
