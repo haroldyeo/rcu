@@ -35,6 +35,27 @@ public class Agent {
 		this.telFixe = telFixe;
 		this.telMobile = telMobile;
 	}
+	
+	
+
+
+	public Agent(int id, String nom, String prenom, Date dob, String lieuNaissance, String adresse, String telFixe,
+			String telMobile, String email, String aviso, String orangeMoney, String service, String typeService) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dob = dob;
+		this.lieuNaissance = lieuNaissance;
+		this.adresse = adresse;
+		this.telFixe = telFixe;
+		this.telMobile = telMobile;
+		this.email = email;
+		this.aviso = aviso;
+		this.orangeMoney = orangeMoney;
+		this.service = service;
+		this.typeService = typeService;
+	}
 
 
 	public int getId() {
