@@ -1,20 +1,20 @@
-function onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance){
+function onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece, typepiece){
 
-	  var v_url="find.jsp?ajax=true&controle=true";
+	  var v_url="find";
 	  var v_type= "POST";
 	  $.ajax({
 		  type: v_type,
 		  url: v_url,
 		  data: {
-			    test: JSON.stringify({
 				      nom: nom,
 				      prenoms: prenoms,
 				      tel: tel,
 				      adresse: adresse,
 				      dateNaissance: dateNaissance,
-				      lieuNaissance: lieuNaissance
-			      }),
-		    },
+				      lieuNaissance: lieuNaissance,
+				      piece: piece,
+				      typepiece : typepiece
+			      },
 		  dataType: 'text',
 		  success: function(response){
 			  $("#dataTable").html(response);

@@ -25,15 +25,13 @@ public class Agent {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	public Agent(int id, String nom, String prenom, String lieuNaissance, String telFixe, String telMobile) {
-		super();
-		this.id = id;
+	public Agent(String nom, String prenom, Date dob, String lieuNaissance, String adresse, String telFixe) {
 		this.nom = nom;
 		this.prenom = prenom;
+		this.dob = dob;
 		this.lieuNaissance = lieuNaissance;
+		this.adresse = adresse;
 		this.telFixe = telFixe;
-		this.telMobile = telMobile;
 	}
 	
 	
@@ -56,7 +54,6 @@ public class Agent {
 		this.service = service;
 		this.typeService = typeService;
 	}
-
 
 	public int getId() {
 		return id;

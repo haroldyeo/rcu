@@ -34,6 +34,15 @@
 			height: 50px;
 			border-radius: 10px;
 			}
+			
+			#diverror{
+				height: 40px; width:80%;
+				border: solid  1px red; 
+				color: red; 
+				background-color: #eee";
+				font-size: 12px;
+				display:none;
+			}
 		</style>
 		
 	</head>
@@ -52,8 +61,8 @@
 			
 				<table class="searchTable" style="width: 80%">
 					<tr>
-						<td>Nom: </td> <td><input type="text" id="txtNom" class="corner10"></td>
-						<td>Prénoms:</td> <td><input type="text" id="txtPrenom"></td>
+						<td>Nom*: </td> <td><input type="text" id="txtNom" class="corner10"></td>
+						<td>Prénoms*:</td> <td><input type="text" id="txtPrenom"></td>
 						<td>Téléphone: </td> <td><input type="text" id="txtPhone"></td>
 						
 					</tr>
@@ -65,16 +74,22 @@
 					</tr>
 					
 					<tr>
+						<td>Pièce d'identité: </td> <td><input type="text" id="txtPiece"></td>
+						<td>Type de pièce d'identité: </td> <td><input type="text" id="txtTypePiece"></td>
+						
+					</tr>
+					
+					<tr>
 						<td colspan="5"></td>
 						<td><input type="button" value="Rechercher" id="btnSearch"></td>
 					</tr>
 				</table>
 			
 			</div>
-
+			<div id="diverror" ></div>
 <!-- --------	Table data -->
 
-		<table class="table table-bordered  table-hover" style="width: 80%" id="dataTable">
+		<table class="table table-bordered  table-hover" style="width: 80%; margin: 15px 0px" id="dataTable">
 			<thead>
 				<tr class="info">
 					<th colspan="6">Liste des services</th>
@@ -109,10 +124,11 @@
 		
 		<c:set var="id_selected" value="${id}"/>
 		<input type="hidden" id="inputId" >
-
+	
 <%-- 		<%@ include file="modal.jsp" %> --%>
 		<div id="myModal" class="modal fade" role="dialog">  				
   		</div>
+  	</div>
   </body>
   
   <script>
@@ -134,8 +150,23 @@
   			adresse = $("#txtAdresse").val();
   			dateNaissance = $("#txtDob").val();
   			lieuNaissance = $("#txtLob").val();
+  			piece = $("#txtPiece").val();
+  			typePiece = $("#txtTypePiece").val();
   			
-  			onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance);
+  			if(nom==''){
+  				$("#diverror").text("Le champs Nom est obligatoire").slideDown("3000").delay(4000).slideUp("3000");
+  			}else 
+  			if(prenoms==''){
+  				$("#diverror").text("Le champs Prénoms est obligatoire").slideDown("3000").delay(4000).slideUp("3000");
+  			}
+  			
+  			if(nom!='' && prenoms != ''){
+  				if(tel=='' && adresse=='' && dateNaissance=='' && lieuNaissance=='' && piece='' && typePiece=''){
+  					$("#diverror").text("Saisir au moins un paramètre supplémentaire").slideDown("3000").delay(4000).slideUp("3000");
+  				} else {
+  					
+  				}
+  			}
   			
   			
   		});
