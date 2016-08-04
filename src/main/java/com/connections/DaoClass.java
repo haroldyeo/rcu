@@ -11,6 +11,8 @@ import java.util.List;
 
 import com.pojos.Agent;
 
+import oracle.jdbc.driver.OracleDriver;
+
 public class DaoClass {
 
     private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
@@ -20,13 +22,14 @@ public class DaoClass {
 
  
     public static List<Agent> getListAgents() throws SQLException {
+    	
 
         Connection dbConnection = null;
         Statement statement = null;
         List<Agent> listAgents = new ArrayList<Agent>();
 
-        String selectTableSQL = "select ID , NOM , PRENOMS  DATE_NAISSANCE , LIEU_NAISSANCE , ADRESSE , TEL_FIXE , TEL_MOBILE"
-        						+"EMAIL , AVISO , ORANGE_MONEY , SERVICE , TYPE_SERVICE   from t_users";
+        String selectTableSQL = "select ID , NOM , PRENOMS,  DATE_NAISSANCE , LIEU_NAISSANCE , ADRESSE , TEL_FIXE , TEL_MOBILE,"
+        						+" EMAIL , AVISO , ORANGE_MONEY , SERVICE , TYPE_SERVICE   from t_users";
 
         try {
            

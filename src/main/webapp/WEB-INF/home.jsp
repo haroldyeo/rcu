@@ -5,10 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Bienvenue</title>
-		<link rel="stylesheet" href="/rcudemo/bootstrap/css/bootstrap.css" ></link>
-		<script src="/rcudemo/bootstrap/js/bootstrap.min.js" ></script>
-		<script src="/rcudemo/jquery/jquery.min.js" ></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<%@ include file="links.jsp" %>
 		
 		<style>
 			body{
@@ -67,7 +64,7 @@
 					
 					<tr>
 						<td colspan="5"></td>
-						<td><input type="button" value="Rechercher"></td>
+						<td><input type="button" value="Rechercher" id="btnSearch"></td>
 					</tr>
 				</table>
 			
@@ -75,7 +72,7 @@
 
 <!-- --------	Table data -->
 
-		<table class="table table-bordered  table-hover" style="width: 80%">
+		<table class="table table-bordered  table-hover" style="width: 80%" id="dataTable">
 			<thead>
 				<tr class="info">
 					<th colspan="6">Liste des services</th>
@@ -111,5 +108,51 @@
   				
   		</div>
   </body>
+  
+  <script>
+  function onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance){
+
+	  var v_url="find.jsp?ajax=true&controle=true";
+	  var v_type= "POST";
+	  $.ajax({
+		  type: v_type,
+		  url: v_url,
+		  data: {
+			    test: JSON.stringify({
+				      nom: nom,
+				      prenoms: prenoms,
+				      tel: tel,
+				      adresse: adresse,
+				      dateNaissance: dateNaissance,
+				      lieuNaissance: lieuNaissance
+			      }),
+		    },
+		  dataType: 'text',
+		  success: function(response){
+			  $("#dataTable").html(response);
+		  },
+		  error: function(e){
+		  alert('Une Erreur est survenue!');
+		  }		
+	  });
+  }
+  
+  
+  	$(document).ready(function(){
+  		var nom, prenoms, tel, adresse, dateNaissance, lieuNaissance;
+  		$("#btnSearch").click(function(){
+  			nom = $("#txtNom").val();
+  			prenoms = $("#txtPrenom").val();
+  			tel = $("#txtPhone").val();
+  			adresse = $("#txtAdresse").val();
+  			dateNaissance = $("#txtDob").val();
+  			lieuNaissance = $("#txtLob").val();
+  			
+  			onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance);
+  			
+  			
+  		});
+  	});
+  </script>
   
 </html>
