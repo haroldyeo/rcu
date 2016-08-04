@@ -18,6 +18,15 @@
     <url-pattern>/home</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>Find2</servlet-name>
+    <servlet-class>com.servlets.Find2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Find2</servlet-name>
+    <url-pattern>/find2</url-pattern>
+  </servlet-mapping>
+  
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>

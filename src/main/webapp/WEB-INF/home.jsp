@@ -7,6 +7,7 @@
 		<title>Bienvenue</title>
 		<%@ include file="links.jsp" %>
 		
+		
 		<style>
 			body{
 				font-size: 10px!important;
@@ -41,6 +42,7 @@
 	
 		
 	<body>
+		
 		
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
   				<h2>Référentiel Client Unique</h2>
@@ -98,47 +100,32 @@
 						<td>${item.telFixe }</td>
 						<td>${item.telMobile }</td>
 						<td>${item.email }</td>
-						<td><input type="button" id="btnDetails" value="Details"/> </td>
+						<td><input type="button" id="btnDetails" data-toggle="modal" data-target="#myModal" data-id="${item.id}" class="btnDetails" value="Details"/> </td>
 					</tr>					
 				</c:forEach>
 			
 			</tbody>
 		</table>
+		
+		<c:set var="id_selected" value="${id}"/>
+		<input type="hidden" id="inputId" >
 
-  				
+<%-- 		<%@ include file="modal.jsp" %> --%>
+		<div id="myModal" class="modal fade" role="dialog">  				
   		</div>
   </body>
   
   <script>
-  function onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance){
-
-	  var v_url="find.jsp?ajax=true&controle=true";
-	  var v_type= "POST";
-	  $.ajax({
-		  type: v_type,
-		  url: v_url,
-		  data: {
-			    test: JSON.stringify({
-				      nom: nom,
-				      prenoms: prenoms,
-				      tel: tel,
-				      adresse: adresse,
-				      dateNaissance: dateNaissance,
-				      lieuNaissance: lieuNaissance
-			      }),
-		    },
-		  dataType: 'text',
-		  success: function(response){
-			  $("#dataTable").html(response);
-		  },
-		  error: function(e){
-		  alert('Une Erreur est survenue!');
-		  }		
-	  });
-  }
-  
-  
+  <%@ include file="java.js" %>
   	$(document).ready(function(){
+  		
+  		$(".btnDetails").click(function(){
+//   			alert($(this).attr("data-id"));
+  			var id = $(this).attr("data-id");
+  			onSubmitDetails(id);
+  		});
+  		
+  		
   		var nom, prenoms, tel, adresse, dateNaissance, lieuNaissance;
   		$("#btnSearch").click(function(){
   			nom = $("#txtNom").val();

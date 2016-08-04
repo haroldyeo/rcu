@@ -37,7 +37,7 @@ public class DaoClass {
              dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
 
-            System.out.println(selectTableSQL);
+//            System.out.println(selectTableSQL);
 
             
             Agent ag = null;
