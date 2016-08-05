@@ -81,14 +81,19 @@ public class DaoClass {
         String selectTableSQL = "select ID , NOM , PRENOMS,  DATE_NAISSANCE , LIEU_NAISSANCE , ADRESSE , TEL_FIXE , TEL_MOBILE,"
         						+" EMAIL , AVISO , ORANGE_MONEY , SERVICE , TYPE_SERVICE   from t_users"
         						+ " WHERE 1=1 "
-        						+ " AND NOM = "+ag.getNom();
+        						+ " AND NOM = "+ag.getNom()
+						        + " AND PRENOMS = "+ag.getPrenom()
+						        + " AND DATE_NAISSANCE = "+ag.getDob()
+						        + " AND LIEU_NAISSANCE = "+ag.getLieuNaissance()
+						        + " AND ADRESSE = "+ag.getAdresse()
+						        + " AND TEL_FIXE = "+ag.getTelFixe();
 
         try {        
             
              dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
 
-//            System.out.println(selectTableSQL);
+            System.out.println(selectTableSQL);
 
             // execute select SQL stetement
             ResultSet rs = statement.executeQuery(selectTableSQL);

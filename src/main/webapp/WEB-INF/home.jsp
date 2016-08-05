@@ -142,7 +142,7 @@
   		});
   		
   		
-  		var nom, prenoms, tel, adresse, dateNaissance, lieuNaissance;
+  		var nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece, typePiece;
   		$("#btnSearch").click(function(){
   			nom = $("#txtNom").val();
   			prenoms = $("#txtPrenom").val();
@@ -151,7 +151,7 @@
   			dateNaissance = $("#txtDob").val();
   			lieuNaissance = $("#txtLob").val();
   			piece = $("#txtPiece").val();
-  			typePiece = $("#txtTypePiece").val();
+  			typepiece = $("#txtTypePiece").val();
   			
   			if(nom==''){
   				$("#diverror").text("Le champs Nom est obligatoire").slideDown("3000").delay(4000).slideUp("3000");
@@ -161,10 +161,11 @@
   			}
   			
   			if(nom!='' && prenoms != ''){
-  				if(tel=='' && adresse=='' && dateNaissance=='' && lieuNaissance=='' && piece='' && typePiece=''){
+  				if(tel=='' && adresse=='' && dateNaissance=='' && lieuNaissance=='' && piece=='' && typepiece==''){
   					$("#diverror").text("Saisir au moins un paramètre supplémentaire").slideDown("3000").delay(4000).slideUp("3000");
   				} else {
-  					
+  					console.log("helloooooo");
+  					onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece, typepiece);
   				}
   			}
   			

@@ -1,6 +1,7 @@
 package com.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.connections.DaoClass;
 import com.pojos.Agent;
 
 public class Find extends HttpServlet {
@@ -24,6 +26,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("Find.doPost()WE HERE");
 		
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -41,6 +45,12 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		
 		Agent searchedAgent = new Agent(nom, prenom, dob, lieuNaissance, adresse, tel);
 		
+		try {
+			request.setAttribute("dataAgents", DaoClass.getListAgentsWithCriteria(searchedAgent));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/find.jsp").forward(request, response);
 	
