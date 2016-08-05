@@ -13,7 +13,7 @@ function onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piec
 				      dateNaissance: dateNaissance,
 				      lieuNaissance: lieuNaissance,
 				      piece: piece,
-				      typepiece : typepiece
+//				      typepiece : typepiece
 			      },
 		  dataType: 'text',
 		  success: function(response){

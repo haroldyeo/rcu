@@ -76,7 +76,7 @@
 					
 					<tr>
 						<td>Pièce d'identité: </td> <td><input type="text" id="txtPiece"></td>
-						<td>Type de pièce d'identité: </td> <td><input type="text" id="txtTypePiece"></td>
+<!-- 						<td>Type de pièce d'identité: </td> <td><input type="text" id="txtTypePiece"></td> -->
 						
 					</tr>
 					
@@ -144,7 +144,7 @@
   		});
   		
   		
-  		var nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece, typePiece;
+  		var nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece;
   		$("#btnSearch").click(function(){
   			nom = $("#txtNom").val();
   			prenoms = $("#txtPrenom").val();
@@ -153,7 +153,7 @@
   			dateNaissance = $("#txtDob").val();
   			lieuNaissance = $("#txtLob").val();
   			piece = $("#txtPiece").val();
-  			typepiece = $("#txtTypePiece").val();
+//   			typepiece = $("#txtTypePiece").val();
   			
   			if(nom==''){
   				$("#diverror").text("Le champs Nom est obligatoire").slideDown("3000").delay(4000).slideUp("3000");
@@ -163,11 +163,11 @@
   			}
   			
   			if(nom!='' && prenoms != ''){
-  				if(tel=='' && adresse=='' && dateNaissance=='' && lieuNaissance=='' && piece=='' && typepiece==''){
+  				if(tel=='' && adresse=='' && dateNaissance=='' && lieuNaissance=='' && piece=='' ){
   					$("#diverror").text("Saisir au moins un paramètre supplémentaire").slideDown("3000").delay(4000).slideUp("3000");
   				} else {
   					
-  					onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece, typepiece);
+  					onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece);
   					
   				}
   			}
@@ -176,8 +176,20 @@
   		});
   		
   		$("#btnRefresh").click(function(){
+  			$("#txtNom").val("");
+  			$("#txtPrenom").val("");
+  			$("#txtPhone").val("");
+  			$("#txtAdresse").val("");
+  			$("#txtDob").val("");
+  			$("#txtLob").val("");
+  			$("#txtPiece").val("");
+//   			$("#txtTypePiece").val("");
   			window.location.reload();
   		});
+  		
+//   		$("input").blur(function(){
+//   			$(this).val($(this).val().toUpperCase());
+//   		});
   		
   	});
   </script>
