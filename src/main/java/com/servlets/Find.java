@@ -2,9 +2,6 @@ package com.servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,19 +23,20 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("Find.doPost()WE HERE");
-		
+				
 		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-		String dateInString = request.getParameter("dateNaissance").toString();
-		Date dob = null;
-		try {
-			dob = formatter.parse(dateInString);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		String prenom = request.getParameter("prenoms");
+		String dob = request.getParameter("dateNaissance");;
+//		if(request.getParameter("dateNaissance")!=null && request.getParameter("dateNaissance") != ""){
+//			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//			String dateInString = request.getParameter("dateNaissance");
+//			try {
+//				dob = formatter.parse(dateInString);
+//			} catch (ParseException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		
 		String lieuNaissance = request.getParameter("lieuNaissance");
 		String adresse = request.getParameter("adresse");
 		String tel = request.getParameter("tel");
@@ -48,7 +46,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		try {
 			request.setAttribute("dataAgents", DaoClass.getListAgentsWithCriteria(searchedAgent));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

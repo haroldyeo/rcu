@@ -29,7 +29,7 @@
 						
 			h2{
 			color: white;
-			background-color: orange;
+			background-color: #ff6500;
 			width: 80%;
 			height: 50px;
 			border-radius: 10px;
@@ -54,6 +54,7 @@
 		
 		
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
+  				<img alt="orange_logo" src="/rcudemo/orange_logo.PNG" height="60px">
   				<h2>Référentiel Client Unique</h2>
   				
 <!-- --------	Table search options -->
@@ -68,7 +69,7 @@
 					</tr>
 					<tr>
 						<td>Adresse: </td> <td><input type="text" id="txtAdresse"></td>
-						<td>Date de naissance: </td> <td><input type="text" id="txtDob"></td>
+						<td>Date de naissance: </td> <td><input type="date" id="txtDob"></td>
 						<td>Lieu de naissance: </td> <td><input type="text" id="txtLob"></td>
 						
 					</tr>
@@ -80,8 +81,9 @@
 					</tr>
 					
 					<tr>
-						<td colspan="5"></td>
+						<td colspan="4"></td>
 						<td><input type="button" value="Rechercher" id="btnSearch"></td>
+						<td><input type="button" value="Rafraichir" id="btnRefresh"></td>
 					</tr>
 				</table>
 			
@@ -136,8 +138,8 @@
   	$(document).ready(function(){
   		
   		$(".btnDetails").click(function(){
-//   			alert($(this).attr("data-id"));
   			var id = $(this).attr("data-id");
+  			alert("sbmit");
   			onSubmitDetails(id);
   		});
   		
@@ -164,13 +166,19 @@
   				if(tel=='' && adresse=='' && dateNaissance=='' && lieuNaissance=='' && piece=='' && typepiece==''){
   					$("#diverror").text("Saisir au moins un paramètre supplémentaire").slideDown("3000").delay(4000).slideUp("3000");
   				} else {
-  					console.log("helloooooo");
+  					
   					onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece, typepiece);
+  					
   				}
   			}
   			
   			
   		});
+  		
+  		$("#btnRefresh").click(function(){
+  			window.location.reload();
+  		});
+  		
   	});
   </script>
   

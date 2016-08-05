@@ -44,7 +44,7 @@ public class DaoClass {
             while (rs.next()) {
 
             	ag = new Agent(rs.getInt("ID"), rs.getString("NOM"), rs.getString("PRENOMS"), 
-            			       rs.getDate("DATE_NAISSANCE"), rs.getString("LIEU_NAISSANCE"), rs.getString("ADRESSE"), 
+            			       rs.getString("DATE_NAISSANCE"), rs.getString("LIEU_NAISSANCE"), rs.getString("ADRESSE"), 
             			       rs.getString("TEL_FIXE"), rs.getString("TEL_MOBILE"), rs.getString("EMAIL"), 
             			       rs.getString("AVISO"), rs.getString("ORANGE_MONEY"), rs.getString("SERVICE"), rs.getString("TYPE_SERVICE"));
             	
@@ -77,17 +77,11 @@ public class DaoClass {
     	Connection dbConnection = null;
         Statement statement = null;
         List<Agent> listAgents = new ArrayList<Agent>();
-
+        
+       
         String selectTableSQL = "select ID , NOM , PRENOMS,  DATE_NAISSANCE , LIEU_NAISSANCE , ADRESSE , TEL_FIXE , TEL_MOBILE,"
-        						+" EMAIL , AVISO , ORANGE_MONEY , SERVICE , TYPE_SERVICE   from t_users"
-        						+ " WHERE 1=1 "
-        						+ " AND NOM = "+ag.getNom()
-						        + " AND PRENOMS = "+ag.getPrenom()
-						        + " AND DATE_NAISSANCE = "+ag.getDob()
-						        + " AND LIEU_NAISSANCE = "+ag.getLieuNaissance()
-						        + " AND ADRESSE = "+ag.getAdresse()
-						        + " AND TEL_FIXE = "+ag.getTelFixe();
-
+        						+" EMAIL , AVISO , ORANGE_MONEY , SERVICE , TYPE_SERVICE   FROM t_users WHERE 1=1 ".concat(getAndClause(ag));
+        
         try {        
             
              dbConnection = getDBConnection();
@@ -101,7 +95,7 @@ public class DaoClass {
             while (rs.next()) {
 
             	ag = new Agent(rs.getInt("ID"), rs.getString("NOM"), rs.getString("PRENOMS"), 
-            			       rs.getDate("DATE_NAISSANCE"), rs.getString("LIEU_NAISSANCE"), rs.getString("ADRESSE"), 
+            			       rs.getString("DATE_NAISSANCE"), rs.getString("LIEU_NAISSANCE"), rs.getString("ADRESSE"), 
             			       rs.getString("TEL_FIXE"), rs.getString("TEL_MOBILE"), rs.getString("EMAIL"), 
             			       rs.getString("AVISO"), rs.getString("ORANGE_MONEY"), rs.getString("SERVICE"), rs.getString("TYPE_SERVICE"));
             	
@@ -128,7 +122,9 @@ public class DaoClass {
 		return listAgents;
     }
 
-    private static Connection getDBConnection() {
+    
+
+	private static Connection getDBConnection() {
 
         Connection dbConnection = null;
 
@@ -156,5 +152,34 @@ public class DaoClass {
         return dbConnection;
 
     }
+	
+	private static String getAndClause(Agent ag) {
+		String andClauses = "";
+        
+        if(ag.getNom()!=null && !ag.getNom().isEmpty()){
+        	andClauses+=" AND NOM = '"+ag.getNom()+"'";
+        }
+        
+        if(ag.getPrenom()!=null && !ag.getPrenom().isEmpty()){
+        	andClauses+=" AND PRENOMS = '"+ag.getPrenom()+"'";
+        }
+        
+        if(ag.getDob()!=null && !ag.getDob().isEmpty()){
+        	andClauses+=" AND DATE_NAISSANCE = '"+ag.getDob()+"'";
+        }
+        
+        if(ag.getLieuNaissance()!=null && !ag.getLieuNaissance().isEmpty()){
+        	andClauses+=" AND LIEU_NAISSANCE = '"+ag.getLieuNaissance()+"'";
+        }
+        
+        if(ag.getAdresse()!=null && !ag.getAdresse().isEmpty()){
+        	andClauses+=" AND ADRESSE = '"+ag.getAdresse()+"'";
+        }
+        
+        if(ag.getTelFixe()!=null && !ag.getTelFixe().isEmpty()){
+        	andClauses+=" AND TEL_FIXE = '"+ag.getTelFixe()+"'";
+        }
+		return andClauses;
+	}
    
  }

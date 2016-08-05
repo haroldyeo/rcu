@@ -1,13 +1,11 @@
 package com.pojos;
 
-import java.util.Date;
-
 public class Agent {
 	
 	private int id;
 	private String nom;
 	private String prenom;
-	private Date dob;
+	private String dob;
 	private String lieuNaissance;
 	private String adresse;
 	private String telFixe;
@@ -25,7 +23,7 @@ public class Agent {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Agent(String nom, String prenom, Date dob, String lieuNaissance, String adresse, String telFixe) {
+	public Agent(String nom, String prenom, String dob, String lieuNaissance, String adresse, String telFixe) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dob = dob;
@@ -37,7 +35,7 @@ public class Agent {
 	
 
 
-	public Agent(int id, String nom, String prenom, Date dob, String lieuNaissance, String adresse, String telFixe,
+	public Agent(int id, String nom, String prenom, String dob, String lieuNaissance, String adresse, String telFixe,
 			String telMobile, String email, String aviso, String orangeMoney, String service, String typeService) {
 		super();
 		this.id = id;
@@ -73,10 +71,10 @@ public class Agent {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 	public String getLieuNaissance() {

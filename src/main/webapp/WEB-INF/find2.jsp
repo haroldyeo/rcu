@@ -24,7 +24,7 @@
 								<td>Prénoms:</td> <td><input type="text" value="${agent.prenom}"  readonly="readonly"></td>
 							</tr>
 							<tr>
-								<td>Téléphone: </td> <td><input type="text"  readonly="readonly"></td>
+								<td>Téléphone: </td> <td><input type="text" value="${agent.telFixe}"  readonly="readonly"></td>
 							</tr>
 							<tr>
 								<td>Adresse: </td> <td><input type="text"  readonly="readonly"></td>

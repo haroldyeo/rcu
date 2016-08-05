@@ -26,8 +26,22 @@
 			<td>${item.telFixe }</td>
 			<td>${item.telMobile }</td>
 			<td>${item.email }</td>
-			<td><input type="button" id="btnDetails" value="Details"/> </td>
+			<td><input type="button" id="btnDetails" data-toggle="modal" data-target="#myModal" data-id="${item.id}" class="btnDetails" value="Details"/> </td>
 		</tr>					
 	</c:forEach>
 
 </tbody>
+
+<script>
+ <%@ include file="java.js" %>
+  	$(document).ready(function(){
+  		
+  		$(".btnDetails").click(function(){
+  			var id = $(this).attr("data-id");
+  			alert("sbmit");
+  			onSubmitDetails(id);
+  			});
+  		});
+</script>  		
+  	
+
