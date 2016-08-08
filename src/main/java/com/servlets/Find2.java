@@ -31,20 +31,23 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			System.out.println("request param: "+id);
 		}
 		
-		Agent selectedAgent = new Agent();
+		Agent selectedAgent = new Agent(Integer.parseInt(id), null, null, null, null, null, null, null, null, null, null, null, null);
 		
 		try {
-			List<Agent> list = DaoClass.getListAgents();
+			List<Agent> list = DaoClass.getListAgentsWithCriteria(selectedAgent);
 			
-			for(Agent ag : list){
-				if(ag.getId() == Integer.parseInt(id)){
-					selectedAgent = ag;
-					System.out.println("Found agent");
-					break;
-				}
+//			for(Agent ag : list){
+//				if(ag.getId() == Integer.parseInt(id)){
+//					selectedAgent = ag;
+//					System.out.println("Found agent");
+//					break;
+//				}
+//			}
+			if(list.size()==1){
+				System.out.println("Found agent");
 			}
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		request.setAttribute("agent", selectedAgent);

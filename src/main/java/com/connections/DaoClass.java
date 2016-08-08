@@ -181,5 +181,55 @@ public class DaoClass {
         }
 		return andClauses;
 	}
+	
+//	public void getClientDetails(){
+//		String req = "select IDCLIENT ,NOM ,PRENOM , DATNAI ,LIEUNAI , PIECEIDENTITE , DESCRIPTION , TYPE_PIECE ,ADRESSPOSTAL ,"
+//				    + " PHONE , TYPESERVICE , CPOSTAL_BP , NUMEROBP , REF_CLIENT_EXT , PHONE_PRINCIPAL , CONTACT , IDENTITE ,"
+//				    +" NUMERO_MOBILE , STATUT , EMAIL  from LIST_SELECTION_STG;";
+//		
+//		Connection dbConnection = null;
+//        Statement statement = null;
+//        List<Agent> listAgents = new ArrayList<Agent>();
+//        
+//        try {        
+//            
+//            dbConnection = getDBConnection();
+//           statement = dbConnection.createStatement();
+//
+//           System.out.println(req);
+//
+//           // execute select SQL stetement
+//           ResultSet rs = statement.executeQuery(req);
+//
+//           while (rs.next()) {
+//
+//           	ag = new Agent(rs.getInt("ID"), rs.getString("NOM"), rs.getString("PRENOMS"), 
+//           			       rs.getString("DATE_NAISSANCE"), rs.getString("LIEU_NAISSANCE"), rs.getString("ADRESSE"), 
+//           			       rs.getString("TEL_FIXE"), rs.getString("TEL_MOBILE"), rs.getString("EMAIL"), 
+//           			       rs.getString("AVISO"), rs.getString("ORANGE_MONEY"), rs.getString("SERVICE"), rs.getString("TYPE_SERVICE"));
+//           	
+//           	listAgents.add(ag);
+//
+//           }
+//           System.out.println("size list agents: "+listAgents.size());
+//
+//       } catch (SQLException e) {
+//
+//           System.out.println(e.getMessage());
+//
+//       } finally {
+//
+//           if (statement != null) {
+//               statement.close();
+//           }
+//
+//           if (dbConnection != null) {
+//               dbConnection.close();
+//           }
+//
+//       }
+//        
+//        
+//	}
    
  }

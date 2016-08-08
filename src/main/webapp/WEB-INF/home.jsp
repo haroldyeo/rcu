@@ -6,44 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Bienvenue</title>
 		<%@ include file="links.jsp" %>
-		
-		
-		<style>
-			body{
-				font-size: 10px!important;
-			}		
-			
-			#searchDiv{
-				width: 80%;
-				background-color: #eee;
-				margin: 15px 0px;
-				padding: 15px;
-				border-radius: 10px;
-			}
-			
-			.searchTable tr td{
-				padding: 5px;
-				margin: 20px 0px;
-			}
-			
-						
-			h2{
-			color: white;
-			background-color: #ff6500;
-			width: 80%;
-			height: 50px;
-			border-radius: 10px;
-			}
-			
-			#diverror{
-				height: 40px; width:80%;
-				border: solid  1px red; 
-				color: red; 
-				background-color: #eee";
-				font-size: 12px;
-				display:none;
-			}
-		</style>
+		<link href="/rcudemo/css/style.css" rel="stylesheet" type="text/css">
 		
 	</head>
 	
@@ -54,7 +17,7 @@
 		
 		
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-  				<img alt="orange_logo" src="/rcudemo/orange_logo.PNG" height="60px">
+  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
   				<h2>Référentiel Client Unique</h2>
   				
 <!-- --------	Table search options -->
@@ -89,13 +52,11 @@
 			
 			</div>
 			<div id="diverror" ></div>
+			
 <!-- --------	Table data -->
-
+	<div id="dataDiv">
 		<table class="table table-bordered  table-hover" style="width: 80%; margin: 15px 0px" id="dataTable">
 			<thead>
-				<tr class="info">
-					<th colspan="6">Liste des services</th>
-				</tr>
 				
 				<tr class="success">
 					<th>Nom</th>
@@ -123,11 +84,9 @@
 			
 			</tbody>
 		</table>
-		
-		<c:set var="id_selected" value="${id}"/>
-		<input type="hidden" id="inputId" >
+	</div> <!--  end data div   -->
 	
-<%-- 		<%@ include file="modal.jsp" %> --%>
+
 		<div id="myModal" class="modal fade" role="dialog">  				
   		</div>
   	</div>
@@ -139,7 +98,7 @@
   		
   		$(".btnDetails").click(function(){
   			var id = $(this).attr("data-id");
-  			alert("sbmit");
+//   			alert("sbmit");
   			onSubmitDetails(id);
   		});
   		

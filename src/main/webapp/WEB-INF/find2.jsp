@@ -18,22 +18,22 @@
 			        <table class="detailsTable" style="width: 70%">
 			        
 					        		<tr>
-								<td>Nom: </td> <td><input type="text" value="${agent.nom}" readonly="readonly"></td>
+								<td>Nom: </td> <td><label>${agent.nom}</label></td>
 							</tr>
 							<tr>
-								<td>Prénoms:</td> <td><input type="text" value="${agent.prenom}"  readonly="readonly"></td>
+								<td>Prénoms:</td> <td>${agent.prenom}</td>
 							</tr>
 							<tr>
-								<td>Téléphone: </td> <td><input type="text" value="${agent.telFixe}"  readonly="readonly"></td>
+								<td>Téléphone: </td> <td>${agent.telFixe}</td>
 							</tr>
 							<tr>
-								<td>Adresse: </td> <td><input type="text"  readonly="readonly"></td>
+								<td>Adresse: </td> <td>${agent.adresse}</td>
 							</tr>
 							<tr>
-								<td>Date de naissance: </td> <td><input type="text"  readonly="readonly"></td>
+								<td>Date de naissance: </td> <td>${agent.dob}</td>
 							</tr>
 							<tr>
-								<td>Lieu de naissance: </td> <td><input type="text"  readonly="readonly"></td>
+								<td>Lieu de naissance: </td> <td>${agent.lieuNaissance}</td>
 							</tr>
 					</table>
 			      </div>

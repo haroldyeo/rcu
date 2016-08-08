@@ -1,3 +1,4 @@
+
 function onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece, typepiece){
 
 	  var v_url="find";
@@ -17,7 +18,7 @@ function onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piec
 			      },
 		  dataType: 'text',
 		  success: function(response){
-			  $("#dataTable").html(response);
+			  $("#dataDiv").html(response);
 		  },
 		  error: function(e){
 		  alert('Une Erreur est survenue!');
