@@ -2,6 +2,7 @@ package com.utils;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -67,10 +68,12 @@ public class OperationsDb {
             }
     }
     
-    public static Object find (String strEntity, HashMap<String, Object> params){
+    @SuppressWarnings("unchecked")
+	public static Object find (String strEntity, HashMap<String, Object> params){
         // a = nom de l'entité; b,c,d,e => paramètres de recherces
         
-        Object returnedList = null;
+        @SuppressWarnings("rawtypes")
+		List returnedList = null;
         
         switch(strEntity){
             
@@ -106,7 +109,8 @@ public class OperationsDb {
         					
                        		}
 
-                          returnedList = criteria.list();
+                       		returnedList = (List<TUsers>)criteria.list();
+                          System.out.println("list size: "+returnedList.size());
                         break;
            
             
@@ -116,6 +120,7 @@ public class OperationsDb {
                         break;
             
         }
+        
         return returnedList;
     }
     
