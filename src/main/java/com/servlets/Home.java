@@ -1,7 +1,6 @@
 package com.servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.connections.DaoClass;
+import com.utils.OperationsDb;
 
 @WebServlet("/Home")
 public class Home extends HttpServlet {
@@ -26,8 +25,8 @@ public class Home extends HttpServlet {
 		
 		
 		try {
-			request.setAttribute("dataAgents", DaoClass.getListAgents());
-		} catch (SQLException e) {
+			request.setAttribute("dataAgents", OperationsDb.find("agents", null));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);

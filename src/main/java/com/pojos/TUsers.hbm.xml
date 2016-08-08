@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 8 ao?t 2016 01:05:35 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.TUsers" table="T_USERS" schema="DEMO" optimistic-lock="version">
+        <id name="id" type="big_decimal">
+            <column name="ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nom" type="string">
+            <column name="NOM" length="20" />
+        </property>
+        <property name="prenoms" type="string">
+            <column name="PRENOMS" length="40" />
+        </property>
+        <property name="lieuNaissance" type="string">
+            <column name="LIEU_NAISSANCE" length="40" />
+        </property>
+        <property name="adresse" type="string">
+            <column name="ADRESSE" length="40" />
+        </property>
+        <property name="telFixe" type="string">
+            <column name="TEL_FIXE" length="10" />
+        </property>
+        <property name="telMobile" type="string">
+            <column name="TEL_MOBILE" length="10" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="40" />
+        </property>
+        <property name="aviso" type="string">
+            <column name="AVISO" length="40" />
+        </property>
+        <property name="orangeMoney" type="string">
+            <column name="ORANGE_MONEY" length="40" />
+        </property>
+        <property name="service" type="string">
+            <column name="SERVICE" length="40" />
+        </property>
+        <property name="typeService" type="string">
+            <column name="TYPE_SERVICE" length="40" />
+        </property>
+        <property name="dateNaissance" type="string">
+            <column name="DATE_NAISSANCE" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>
