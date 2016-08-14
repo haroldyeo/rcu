@@ -87,7 +87,7 @@ public class OperationsDb {
                         */
 
                        Criteria criteria = getHibSession().createCriteria(TUsers.class);
-                       criteria.addOrder(Order.asc("id"));
+//                       criteria.addOrder(Order.asc("id"));
                        		if(params != null){
                        			
                        			Integer id = (Integer)params.get("id"); 
