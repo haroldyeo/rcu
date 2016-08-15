@@ -1,16 +1,17 @@
 package com.servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.connections.DaoClass;
-import com.pojos.Agent;
+import com.pojos.TUsers;
+import com.utils.OperationsDb;
 
 public class Find2 extends HttpServlet {
 	
@@ -23,34 +24,26 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	}
 
 
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id = null;
-		if(request.getParameter("id")!=null){
-			id = request.getParameter("id");
-			System.out.println("request param: "+id);
-		}
+		Map<String, Object>  params = new HashMap<String, Object>();
 		
-		Agent selectedAgent = new Agent(Integer.parseInt(id), null, null, null, null, null, null, null, null, null, null, null, null);
+		if(request.getParameter("id")!=null){
+			params.put("id", request.getParameter("id"));
+		}
+				
 		
 		try {
-			List<Agent> list = DaoClass.getListAgentsWithCriteria(selectedAgent);
-			
-//			for(Agent ag : list){
-//				if(ag.getId() == Integer.parseInt(id)){
-//					selectedAgent = ag;
-//					System.out.println("Found agent");
-//					break;
-//				}
-//			}
-			if(list.size()==1){
-				System.out.println("Found agent");
-			}
-			
-		} catch (SQLException e) {
+			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", params);
+			if(list!=null && !list.isEmpty())
+				request.setAttribute("agent", list.get(0));
+			else
+				System.out.println("No agent found");
+						
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("agent", selectedAgent);
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/find2.jsp").forward(request, response);
 	

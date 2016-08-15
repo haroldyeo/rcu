@@ -21,7 +21,7 @@
 								<td>Nom: </td> <td><label>${agent.nom}</label></td>
 							</tr>
 							<tr>
-								<td>Prénoms:</td> <td>${agent.prenom}</td>
+								<td>Prénoms:</td> <td>${agent.prenoms}</td>
 							</tr>
 							<tr>
 								<td>Téléphone: </td> <td>${agent.telFixe}</td>
@@ -30,7 +30,7 @@
 								<td>Adresse: </td> <td>${agent.adresse}</td>
 							</tr>
 							<tr>
-								<td>Date de naissance: </td> <td>${agent.dob}</td>
+								<td>Date de naissance: </td> <td>${agent.dateNaissance}</td>
 							</tr>
 							<tr>
 								<td>Lieu de naissance: </td> <td>${agent.lieuNaissance}</td>

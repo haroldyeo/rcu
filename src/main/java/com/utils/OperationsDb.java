@@ -1,8 +1,9 @@
 package com.utils;
 
 
-import java.util.HashMap;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -69,8 +70,7 @@ public class OperationsDb {
     }
     
     @SuppressWarnings("unchecked")
-	public static Object find (String strEntity, HashMap<String, Object> params){
-        // a = nom de l'entité; b,c,d,e => paramètres de recherces
+	public static Object find (String strEntity, Map<String, Object> params){
         
         @SuppressWarnings("rawtypes")
 		List returnedList = null;
@@ -87,15 +87,18 @@ public class OperationsDb {
                         */
 
                        Criteria criteria = getHibSession().createCriteria(TUsers.class);
-//                       criteria.addOrder(Order.asc("id"));
+                       criteria.addOrder(Order.asc("id"));
                        		if(params != null){
                        			
-                       			Integer id = (Integer)params.get("id"); 
+                       			BigDecimal id = params.get("id") != null ? new BigDecimal((String)params.get("id")) : null; 
                            	   String nom = (String)params.get("nom");
                           	   String prenoms = (String)params.get("prenoms");
+                          	   String tel = (String)params.get("tel");
+	                          	 String adresse = (String)params.get("adresse");
+	                          	String lieuNaissance = (String)params.get("lieuNaissance");
                            	   
                            	   
-                       			if ( id!= null && id != 0){
+                       			if ( id!= null ){
                                          criteria.add(Restrictions.eq("id", id));
                                      }                    			
 
@@ -105,6 +108,18 @@ public class OperationsDb {
 
                                 if (prenoms != null && !prenoms.equals("")){
                                      	criteria.add(Restrictions.ilike("prenoms", "%"+prenoms+"%"));
+                                }
+                                
+                                if (tel != null && !tel.equals("")){
+                                 	criteria.add(Restrictions.ilike("telFixe", "%"+tel+"%"));
+                                }
+                                
+                                if (adresse != null && !adresse.equals("")){
+                                 	criteria.add(Restrictions.ilike("adresse", "%"+adresse+"%"));
+                                }
+                                
+                                if (lieuNaissance != null && !lieuNaissance.equals("")){
+                                 	criteria.add(Restrictions.ilike("lieuNaissance", "%"+lieuNaissance+"%"));
                                 }
         					
                        		}
@@ -116,7 +131,7 @@ public class OperationsDb {
             
            
                 
-            case ("ENFANTS"):
+            case (""):
                         break;
             
         }

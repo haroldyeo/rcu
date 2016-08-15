@@ -19,7 +19,7 @@
 		<c:forEach items="${dataAgents}" var="item">
 			<tr>
 				<td>${item.nom }</td>
-				<td>${item.prenom }</td>
+				<td>${item.prenoms }</td>
 				<td>${item.telFixe }</td>
 				<td>${item.telMobile }</td>
 				<td>${item.email }</td>
