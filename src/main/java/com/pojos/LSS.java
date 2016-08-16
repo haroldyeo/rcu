@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name="LIST_SELECTION_STG"
     ,schema="DEMO"
 )
-public class ListSelectionStg  implements java.io.Serializable {
+public class LSS  implements java.io.Serializable {
 
 
      /**
@@ -43,14 +43,14 @@ public class ListSelectionStg  implements java.io.Serializable {
      private String statut;
      private String email;
 
-    public ListSelectionStg() {
+    public LSS() {
     }
 
 	
-    public ListSelectionStg(int idclient) {
+    public LSS(int idclient) {
         this.idclient = idclient;
     }
-    public ListSelectionStg(int idclient, String nom, String prenom, String datnai, String lieunai, String pieceidentite, String description, String typePiece, String adresspostal, String phone, BigDecimal typeservice, String cpostalBp, String numerobp, String refClientExt, String phonePrincipal, String contact, String identite, String numeroMobile, String statut, String email) {
+    public LSS(int idclient, String nom, String prenom, String datnai, String lieunai, String pieceidentite, String description, String typePiece, String adresspostal, String phone, BigDecimal typeservice, String cpostalBp, String numerobp, String refClientExt, String phonePrincipal, String contact, String identite, String numeroMobile, String statut, String email) {
        this.idclient = idclient;
        this.nom = nom;
        this.prenom = prenom;

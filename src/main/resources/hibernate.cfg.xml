@@ -9,7 +9,7 @@
     <property name="hibernate.connection.username">demo</property>
     <property name="hibernate.connection.password">demo2016</property>
     <mapping resource="com/pojos/TUsers.hbm.xml"/>
-    <mapping resource="com/pojos/ClientUniqueOcit.hbm.xml"/>
-    <mapping resource="com/pojos/ListSelectionStg.hbm.xml"/>
+    <mapping resource="com/pojos/CUO.hbm.xml"/>
+    <mapping resource="com/pojos/LSS.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

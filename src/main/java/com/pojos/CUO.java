@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 @Table(name="CLIENT_UNIQUE_OCIT"
     ,schema="DEMO"
 )
-public class ClientUniqueOcit  implements java.io.Serializable {
+public class CUO  implements java.io.Serializable {
 
 
      /**
@@ -32,15 +32,15 @@ public class ClientUniqueOcit  implements java.io.Serializable {
      private String typeMatch;
      private BigDecimal typeservice;
 
-    public ClientUniqueOcit() {
+    public CUO() {
     }
 
 	
-    public ClientUniqueOcit(String phone, BigDecimal masterId) {
+    public CUO(String phone, BigDecimal masterId) {
         this.phone = phone;
         this.masterId = masterId;
     }
-    public ClientUniqueOcit(String phone, BigDecimal masterId, Date dateCreation, Date dateCessation, String typeMatch, BigDecimal typeservice) {
+    public CUO(String phone, BigDecimal masterId, Date dateCreation, Date dateCessation, String typeMatch, BigDecimal typeservice) {
        this.phone = phone;
        this.masterId = masterId;
        this.dateCreation = dateCreation;
