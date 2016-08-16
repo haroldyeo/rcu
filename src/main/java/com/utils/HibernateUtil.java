@@ -6,36 +6,20 @@
 
 package com.utils;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import org.hibernate.Session;
 
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory;
+	public static EntityManagerFactory entityManagerFactory;
+	public static EntityManager entityManager;
     
-    static {
-        try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            
-        	Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-        	StandardServiceRegistryBuilder registry = new StandardServiceRegistryBuilder();
-        	registry.applySettings(configuration.getProperties());
-        	ServiceRegistry serviceRegistry = registry.build();
-        	sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            
-            
-            
-        } catch (Throwable ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-    
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
+    public static Session getHibSession(){
+		entityManagerFactory = Persistence.createEntityManagerFactory("rcudemo");
+		entityManager = entityManagerFactory.createEntityManager();
+		return (Session) entityManager.getDelegate();
+	}
 }

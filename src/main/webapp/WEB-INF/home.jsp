@@ -23,9 +23,9 @@
 <!-- --------	Table search options -->
 			<div id="searchDiv">
 			
-				<table class="searchTable" style="width: 80%">
+				<table class="searchTable table table-responsive" style="width: 80%">
 					<tr>
-						<td>Nom*: </td> <td><input type="text" id="txtNom" class="corner10"></td>
+						<td>Nom*: </td> <td><input type="text" id="txtNom" ></td>
 						<td>Prénoms*:</td> <td><input type="text" id="txtPrenom"></td>
 						<td>Téléphone: </td> <td><input type="text" id="txtPhone"></td>
 						
