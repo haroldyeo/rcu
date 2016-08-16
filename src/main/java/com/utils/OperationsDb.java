@@ -2,6 +2,7 @@ package com.utils;
 
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import com.pojos.CUO;
 import com.pojos.TUsers;
 
 /**
@@ -79,8 +81,54 @@ public class OperationsDb {
             
            
                 
-            case (""):
-                        break;
+            case("cuo"):
+                /**
+                * DEFINITION DES PARAMETRES
+                * 
+                * int id; 
+                * String nom;
+                * String prenoms ;
+                */
+
+               Criteria CuoCr = HibernateUtil.getHibSession().createCriteria(CUO.class);
+            		CuoCr.addOrder(Order.asc("masterId"));
+               		if(params != null){
+               		   String phone = (String)params.get("phone");
+               		   BigDecimal masterId = params.get("masterId") != null ? new BigDecimal((String)params.get("masterId")) : null; 
+                   	   Date dateCreation = (Date)params.get("dateCreation");
+                   	   Date dateCessation = (Date)params.get("dateCessation");
+                  	   String typeMatch = (String)params.get("typeMatch");
+                  	   BigDecimal typeservice = params.get("typeservice") != null ? new BigDecimal((String)params.get("typeservice")) : null;
+                   	   
+                   	   
+                  	 if (phone != null && !phone.equals("")){
+                      	CuoCr.add(Restrictions.ilike("phone", "%"+phone+"%"));
+                 }
+               			if ( masterId!= null ){
+                                 CuoCr.add(Restrictions.eq("masterId", masterId));
+                             }  
+               			if ( typeservice!= null ){
+                            CuoCr.add(Restrictions.eq("typeservice", typeservice));
+                        }
+
+                        if (dateCreation != null){
+                             	CuoCr.add(Restrictions.eq("dateCreation", dateCreation));
+                        }
+                        
+                        if (dateCessation != null){
+                         	CuoCr.add(Restrictions.eq("dateCessation", dateCessation));
+                    }
+
+                        if (typeMatch != null && !typeMatch.equals("")){
+                             	CuoCr.add(Restrictions.ilike("typeMatch", "%"+typeMatch+"%"));
+                        }
+                        
+                        					
+               		}
+
+               		returnedList = (List<TUsers>)CuoCr.list();
+                  System.out.println("list size: "+returnedList.size());
+                break;
             
         }
         
