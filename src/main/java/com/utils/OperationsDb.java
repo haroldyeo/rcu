@@ -11,6 +11,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.pojos.CUO;
+import com.pojos.LSS;
 import com.pojos.TUsers;
 
 /**
@@ -28,14 +29,6 @@ public class OperationsDb {
         switch(strEntity){
             
             case("agents"):
-                        /**
-                        * DEFINITION DES PARAMETRES
-                        * 
-                        * int id; 
-                        * String nom;
-                        * String prenoms ;
-                        */
-
                        Criteria criteria = HibernateUtil.getHibSession().createCriteria(TUsers.class);
                        criteria.addOrder(Order.asc("id"));
                        		if(params != null){
@@ -75,20 +68,12 @@ public class OperationsDb {
                        		}
 
                        		returnedList = (List<TUsers>)criteria.list();
-                          System.out.println("list size: "+returnedList.size());
                         break;
            
             
            
                 
             case("cuo"):
-                /**
-                * DEFINITION DES PARAMETRES
-                * 
-                * int id; 
-                * String nom;
-                * String prenoms ;
-                */
 
                Criteria CuoCr = HibernateUtil.getHibSession().createCriteria(CUO.class);
             		CuoCr.addOrder(Order.asc("masterId"));
@@ -103,7 +88,7 @@ public class OperationsDb {
                    	   
                   	 if (phone != null && !phone.equals("")){
                       	CuoCr.add(Restrictions.ilike("phone", "%"+phone+"%"));
-                 }
+                  	 }
                			if ( masterId!= null ){
                                  CuoCr.add(Restrictions.eq("masterId", masterId));
                              }  
@@ -121,17 +106,80 @@ public class OperationsDb {
 
                         if (typeMatch != null && !typeMatch.equals("")){
                              	CuoCr.add(Restrictions.ilike("typeMatch", "%"+typeMatch+"%"));
-                        }
-                        
-                        					
+                        }			
                		}
 
                		returnedList = (List<TUsers>)CuoCr.list();
-                  System.out.println("list size: "+returnedList.size());
                 break;
+                
+                
+            case("lss"):
+
+                Criteria LssCr = HibernateUtil.getHibSession().createCriteria(LSS.class);
+        		LssCr.addOrder(Order.asc("idclient"));
+                		if(params != null){
+                			Integer idclient = (Integer)params.get("idclient");
+                		   String nom = (String)params.get("nom");
+                		   String prenom = (String)params.get("prenom");
+                		   String datnai = (String)params.get("datnai");
+                		   String lieunai = (String)params.get("lieunai");
+                		   String pieceidentite = (String)params.get("pieceidentite");
+                		   String description = (String)params.get("description");
+                		   String typePiece = (String)params.get("typePiece");
+                		   String adresspostal = (String)params.get("adresspostal");
+                		   String phone = (String)params.get("phone");
+                		   String cpostalBp = (String)params.get("cpostalBp");
+                		   String numerobp = (String)params.get("numerobp");
+                		   String refClientExt = (String)params.get("refClientExt");
+                		   String phonePrincipal = (String)params.get("phonePrincipal");
+                		   String contact = (String)params.get("contact");
+                		   String identite = (String)params.get("identite");
+                		   BigDecimal typeservice = params.get("typeservice") != null ? new BigDecimal((String)params.get("typeservice")) : null;
+                		   String numeroMobile = (String)params.get("numeroMobile");
+                		   String statut = (String)params.get("statut");
+                		   String email = (String)params.get("email");
+                    	   
+                    	 
+                		 if (idclient != null && !idclient.equals("")){
+   	                   		LssCr.add(Restrictions.eq("idclient", "idclient"));
+   	                   	 }
+                		 if (nom != null && !nom.equals("")){
+ 	                   		LssCr.add(Restrictions.ilike("nom", "%"+nom+"%"));
+ 	                   	 }
+                		 if (prenom != null && !prenom.equals("")){
+ 	                   		LssCr.add(Restrictions.ilike("prenom", "%"+prenom+"%"));
+ 	                   	 }
+                		 if (datnai != null && !datnai.equals("")){
+ 	                   		LssCr.add(Restrictions.ilike("datnai", "%"+datnai+"%"));
+ 	                   	 }
+	                   	 if (lieunai != null && !lieunai.equals("")){
+	                   		LssCr.add(Restrictions.ilike("lieunai", "%"+lieunai+"%"));
+	                   	 }
+	                   	if (pieceidentite != null && !pieceidentite.equals("")){
+	                   		LssCr.add(Restrictions.ilike("pieceidentite", "%"+pieceidentite+"%"));
+	                   	 }
+	                   	if (description != null && !description.equals("")){
+	                   		LssCr.add(Restrictions.ilike("description", "%"+description+"%"));
+	                   	 }
+	                   	if (adresspostal != null && !adresspostal.equals("")){
+	                   		LssCr.add(Restrictions.ilike("adresspostal", "%"+adresspostal+"%"));
+	                   	 }
+	                   	if (typePiece != null && !typePiece.equals("")){
+	                   		LssCr.add(Restrictions.ilike("lieunai", "%"+lieunai+"%"));
+	                   	 }
+	                   	if (phone != null && !phone.equals("")){
+	                   		LssCr.add(Restrictions.ilike("phone", "%"+phone+"%"));
+	                   	 }
+                				
+                		}
+
+                		returnedList = (List<TUsers>)LssCr.list();
+                   
+                 break;
             
         }
         
+        System.out.println("list for keyword: "+strEntity +" -  size: "+returnedList.size());
         return returnedList;
     }
     
