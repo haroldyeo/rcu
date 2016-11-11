@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -20,11 +21,14 @@ import com.pojos.TUsers;
  */
 public class OperationsDb {
 
-    @SuppressWarnings("unchecked")
+    private static final String QUERY_SEARCH_AGENTS = "select u from TUsers u where u.nom like :nom ";
+
+	@SuppressWarnings("unchecked")
 	public static Object find (String strEntity, Map<String, Object> params){
         
         @SuppressWarnings("rawtypes")
 		List returnedList = null;
+        Query q = null;
         
         switch(strEntity){
             
@@ -66,6 +70,14 @@ public class OperationsDb {
                                 }
         					
                        		}
+                       		
+                       		q = HibernateUtil.getHibSession().createQuery(QUERY_SEARCH_AGENTS);
+                       		q.setParameter("id", "%"+ params.get("id") != null ? new BigDecimal((String)params.get("id")) : "" +"%");
+                       		q.setParameter("nom", "%"+ params.get("nom").toString().toLowerCase()+"%");
+                       		q.setParameter("prenoms", "%"+ params.get("prenoms").toString().toLowerCase()+"%");
+                       		q.setParameter("telFixe", "%"+ params.get("telFixe").toString().toLowerCase()+"%");
+                       		q.setParameter("adresse", "%"+ params.get("adresse").toString().toLowerCase()+"%");
+                       		q.setParameter("lieuNaissance", "%"+ params.get("lieuNaissance").toString().toLowerCase()+"%");
 
                        		returnedList = (List<TUsers>)criteria.list();
                         break;

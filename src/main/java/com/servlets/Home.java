@@ -29,23 +29,42 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 		try {
-//			request.setAttribute("dataAgents", OperationsDb.find("agents", null));
 			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", null);
-			JSONArray jarr = new JSONArray();
-			for (TUsers u : list){
-				JSONObject job = new JSONObject();
-				job.put("nom", u.getNom());
-				job.put("prenoms", u.getPrenoms());
-				job.put("telephone", u.getTelFixe());
-				
-				jarr.add(job);
-				
-			}
-			request.setAttribute("dataAgents", jarr);
+			request.setAttribute("dataAgents", doMakeJson(list));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+		
+	}
+
+
+	@SuppressWarnings("unchecked")
+	private JSONArray doMakeJson(List<TUsers> list) {
+		JSONArray jarr = new JSONArray();
+		for (TUsers u : list){
+			JSONObject job = new JSONObject();
+			
+			job.put("nom", u.getNom());
+			job.put("prenoms", u.getPrenoms());
+			job.put("lieuNaissance", u.getLieuNaissance());
+			job.put("id", u.getId());
+			
+			job.put("adresse", u.getAdresse());
+			job.put("telFixe", u.getTelFixe());
+			job.put("telMobile", u.getTelMobile());
+			job.put("email", u.getEmail());
+			
+			job.put("aviso", u.getAviso());
+			job.put("orangeMoney", u.getOrangeMoney());
+			job.put("service", u.getService());
+			job.put("typeService", u.getTypeService());
+			job.put("dateNaissance", u.getDateNaissance());
+							
+			jarr.add(job);
+			
+		}
+		return jarr;
 		
 	}
 

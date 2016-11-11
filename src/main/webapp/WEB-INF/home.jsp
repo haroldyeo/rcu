@@ -10,11 +10,7 @@
 		
 	</head>
 	
-	
-	
-		
 	<body>
-		
 		
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
 <!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
@@ -57,7 +53,7 @@
 					</form>
 					
 			
-			<div id="diverror" ></div>
+			<div id="diverror" style="float: left; width: 100%"></div>
 		</div>	
 <!-- --------	Table data -->
 			<div id="dataDiv">
@@ -69,7 +65,6 @@
 							<th>Nom</th>
 							<th>Prénoms</th>
 							<th>Fixe</th>
-							<th>Mobile</th>
 							<th>Email</th>
 							<th>Détails</th>
 						</tr>
@@ -81,8 +76,9 @@
 						 <tr>
 			                  <td data-bind="text: nom"></td>
 			                  <td data-bind="text: prenoms"></td>
-			                  <td data-bind="text: telephone"></td>
-<!-- 			                  <td data-bind="text: email"></td> -->
+			                  <td data-bind="text: telFixe"></td>
+			                  <td data-bind="text: email"></td>
+			                  <td><input type="button" data-bind="text: id" id="btnDetails" data-toggle="modal" data-target="#myModal" data-id="${item.id}" class="btnDetails" value="Details"/> </td>
 			             </tr>
 					
 					</tbody>
@@ -102,64 +98,8 @@
   
   <script src="jquery/knockout-3.4.1.js"></script>
   <script src="jquery/ko.js"></script>
-  <script src="jquery/url.js"></script>
   <script>
   <%@ include file="java.js" %>
-  	$(document).ready(function(){
-  		
-  		$(".btnDetails").click(function(){
-  			var id = $(this).attr("data-id");
-//   			alert("sbmit");
-  			onSubmitDetails(id);
-  		});
-  		
-  		
-  		var nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece;
-  		$("#btnSearch").click(function(){
-  			nom = $("#txtNom").val();
-  			prenoms = $("#txtPrenom").val();
-  			tel = $("#txtPhone").val();
-  			adresse = $("#txtAdresse").val();
-  			dateNaissance = $("#txtDob").val();
-  			lieuNaissance = $("#txtLob").val();
-  			piece = $("#txtPiece").val();
-//   			typepiece = $("#txtTypePiece").val();
-  			
-  			if(nom==''){
-  				$("#diverror").text("Le champs Nom est obligatoire").slideDown("3000").delay(4000).slideUp("3000");
-  			}else 
-  			if(prenoms==''){
-  				$("#diverror").text("Le champs Prénoms est obligatoire").slideDown("3000").delay(4000).slideUp("3000");
-  			}
-  			
-  			if(nom!='' && prenoms != ''){
-  				if(tel=='' && adresse=='' && dateNaissance=='' && lieuNaissance=='' && piece=='' ){
-  					$("#diverror").text("Saisir au moins un paramètre supplémentaire").slideDown("3000").delay(4000).slideUp("3000");
-  				} else {
-  					onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece);
-  				}
-  			}
-  			
-  			
-  		});
-  		
-  		$("#btnRefresh").click(function(){
-  			$("#txtNom").val("");
-  			$("#txtPrenom").val("");
-  			$("#txtPhone").val("");
-  			$("#txtAdresse").val("");
-  			$("#txtDob").val("");
-  			$("#txtLob").val("");
-  			$("#txtPiece").val("");
-//   			$("#txtTypePiece").val("");
-  			window.location.reload();
-  		});
-  		
-//   		$("input").blur(function(){
-//   			$(this).val($(this).val().toUpperCase());
-//   		});
-  		
-  	});
   </script>
   
   
