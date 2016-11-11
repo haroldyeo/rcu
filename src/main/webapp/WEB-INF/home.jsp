@@ -17,38 +17,47 @@
 		
 		
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
+<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
   				<h2>Référentiel Client Unique</h2>
   				
 <!-- --------	Table search options -->
-			<div id="searchDiv">
+			<div id="searchDiv" class="container">
+				<div class="row">
+					<form id="signinForm" class="form-inline ">
+						<div class="form-group col-sm-4 col-md-4">
+					        <input type="text" class="form-control " id="txtNom" placeholder="Nom" style="width: 100%;" />
+					    </div>
+					
+					    <div class="form-group col-sm-4 col-md-4" >
+					        <input type="text" class="form-control" id="txtPrenom" placeholder="Prénoms" style="width: 100%;" />
+					    </div>
+					    
+					    <div class="form-group form-col-sm-4 col-md-4" >
+					        <input type="text" class="form-control" id="txtPhone"  placeholder="Téléphone" style="width: 100%;" />
+					    </div>
+					
+					    <div class="form-group col-sm-4 col-md-4" >
+					        <input type="text" class="form-control" id="txtAdresse" placeholder="Adresse" style="width: 100%;" />
+					    </div>
+					    <div class="form-group col-sm-4 col-md-4" >
+					        <input type="text" class="form-control"  id="txtDob"  placeholder="Date de naissance" style="width: 100%;" />
+					    </div>
+					
+					    <div class="form-group col-sm-4 col-md-4" >
+					        <input type="text" class="form-control" id="txtLob" placeholder="Lieu de naissance" style="width: 100%;" />
+					    </div>
+					    <div class="form-group col-sm-4 col-md-4" >
+					        <input type="text" class="form-control" id="txtPiece" placeholder="Lieu de naissance" style="width: 100%;" />
+					    </div>
+					    
+					    <div class="form-group" style="width: 100%">
+					    	<input type="button" class="btn btn-default navbar-btn" value="Rechercher" id="btnSearch">
+							<input type="button" class="btn btn-default navbar-btn" value="Rafraichir" id="btnRefresh">
+					    </div>
+					</form>
+					
+				</div>
 			
-				<table class="searchTable table table-responsive" style="width: 80%">
-					<tr>
-						<td>Nom*: </td> <td><input type="text" id="txtNom" ></td>
-						<td>Prénoms*:</td> <td><input type="text" id="txtPrenom"></td>
-						<td>Téléphone: </td> <td><input type="text" id="txtPhone"></td>
-						
-					</tr>
-					<tr>
-						<td>Adresse: </td> <td><input type="text" id="txtAdresse"></td>
-						<td>Date de naissance: </td> <td><input type="date" id="txtDob"></td>
-						<td>Lieu de naissance: </td> <td><input type="text" id="txtLob"></td>
-						
-					</tr>
-					
-					<tr>
-						<td>Pièce d'identité: </td> <td><input type="text" id="txtPiece"></td>
-<!-- 						<td>Type de pièce d'identité: </td> <td><input type="text" id="txtTypePiece"></td> -->
-						
-					</tr>
-					
-					<tr>
-						<td colspan="4"></td>
-						<td><input type="button" value="Rechercher" id="btnSearch"></td>
-						<td><input type="button" value="Rafraichir" id="btnRefresh"></td>
-					</tr>
-				</table>
 			
 			</div>
 			<div id="diverror" ></div>
