@@ -91,6 +91,19 @@
 					</tbody>
 				</table>
 			</div> <!--  end data div   -->
+			
+			<div>
+				<p>First name: <strong data-bind="text: firstName">Harold</strong></p>
+				<p>Last name: <strong  data-bind="text: lastName">YEO</strong></p>
+				
+				<p>First name: <input data-bind="value: firstName" /></p>
+				<p>Last name: <input data-bind="value: lastName" /></p>
+				
+				<p>Full name:  <strong data-bind="text: fullName"></strong></p>
+				
+				<button data-bind="click: capitalizeLastName">Go caps</button>
+			</div>
+			
 		</div>
 			
 	</div>
@@ -100,6 +113,7 @@
   	</div>
   </body>
   
+  <script src="jquery/knockout-3.4.1.js"></script>
   <script>
   <%@ include file="java.js" %>
   	$(document).ready(function(){
@@ -159,6 +173,27 @@
 //   		});
   		
   	});
+  	
+ // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+  	function AppViewModel() {
+  	       this.firstName = ko.observable("Zlatan");
+  	       this.lastName = ko.observable("Ibra");
+  	       
+  	       this.fullName = ko.computed(function() {
+  	       return this.firstName() + " " + this.lastName();    
+  	        }, this);
+  	        
+  	        this.capitalizeLastName = function() {
+  	        var currentVal = this.lastName();        // Read the current value
+  	        this.lastName(currentVal.toUpperCase()); // Write back a modified value
+  	    };
+  	}
+
+  	// Activates knockout.js
+  	ko.applyBindings(new AppViewModel());
+  	
   </script>
+  
+  
   
 </html>
