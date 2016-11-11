@@ -28,6 +28,7 @@ h2{
 }
 
 #diverror{
+	width: 100%;
 	height: 40px; width:80%;
 	border: solid  1px red; 
 	color: red; 

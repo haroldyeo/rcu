@@ -30,7 +30,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		String lieuNaissance = request.getParameter("lieuNaissance");
 		String adresse = request.getParameter("adresse");
 		String tel = request.getParameter("tel");
-		
 //		if(request.getParameter("dateNaissance")!=null && request.getParameter("dateNaissance") != ""){
 //			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 //			String dateInString = request.getParameter("dateNaissance");

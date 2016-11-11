@@ -61,6 +61,7 @@
 		</div>	
 <!-- --------	Table data -->
 			<div id="dataDiv">
+				<div id="dataAgents" style="display: none" ></div>
 				<table class="table table-bordered  table-hover" style="width: 80%; margin: 15px 0px" id="dataTable">
 					<thead>
 						
@@ -75,45 +76,33 @@
 						
 					</thead>
 					
-					<tbody>
+					<tbody data-bind="foreach: agents">
 					
-						<c:forEach items="${dataAgents}" var="item">
-							<tr>
-								<td>${item.nom }</td>
-								<td>${item.prenoms }</td>
-								<td>${item.telFixe }</td>
-								<td>${item.telMobile }</td>
-								<td>${item.email }</td>
-								<td><input type="button" id="btnDetails" data-toggle="modal" data-target="#myModal" data-id="${item.id}" class="btnDetails" value="Details"/> </td>
-							</tr>					
-						</c:forEach>
+						 <tr>
+			                  <td data-bind="text: nom"></td>
+			                  <td data-bind="text: prenoms"></td>
+			                  <td data-bind="text: telephone"></td>
+<!-- 			                  <td data-bind="text: email"></td> -->
+			             </tr>
 					
 					</tbody>
 				</table>
 			</div> <!--  end data div   -->
-			
-			<div>
-				<p>First name: <strong data-bind="text: firstName">Harold</strong></p>
-				<p>Last name: <strong  data-bind="text: lastName">YEO</strong></p>
-				
-				<p>First name: <input data-bind="value: firstName" /></p>
-				<p>Last name: <input data-bind="value: lastName" /></p>
-				
-				<p>Full name:  <strong data-bind="text: fullName"></strong></p>
-				
-				<button data-bind="click: capitalizeLastName">Go caps</button>
-			</div>
-			
+						
 		</div>
 			
 	</div>
+	
+	<input type="hidden" id="inputAgents" data='${dataAgents}'></input>
 
-	<div id="myModal" class="modal fade" role="dialog">  				
- 		
+	<div id="myModal" class="modal fade" role="dialog">
   	</div>
+  	
   </body>
   
   <script src="jquery/knockout-3.4.1.js"></script>
+  <script src="jquery/ko.js"></script>
+  <script src="jquery/url.js"></script>
   <script>
   <%@ include file="java.js" %>
   	$(document).ready(function(){
@@ -147,9 +136,7 @@
   				if(tel=='' && adresse=='' && dateNaissance=='' && lieuNaissance=='' && piece=='' ){
   					$("#diverror").text("Saisir au moins un paramètre supplémentaire").slideDown("3000").delay(4000).slideUp("3000");
   				} else {
-  					
   					onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece);
-  					
   				}
   			}
   			
@@ -173,25 +160,6 @@
 //   		});
   		
   	});
-  	
- // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
-  	function AppViewModel() {
-  	       this.firstName = ko.observable("Zlatan");
-  	       this.lastName = ko.observable("Ibra");
-  	       
-  	       this.fullName = ko.computed(function() {
-  	       return this.firstName() + " " + this.lastName();    
-  	        }, this);
-  	        
-  	        this.capitalizeLastName = function() {
-  	        var currentVal = this.lastName();        // Read the current value
-  	        this.lastName(currentVal.toUpperCase()); // Write back a modified value
-  	    };
-  	}
-
-  	// Activates knockout.js
-  	ko.applyBindings(new AppViewModel());
-  	
   </script>
   
   
