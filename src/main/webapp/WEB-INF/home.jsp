@@ -21,9 +21,9 @@
   				<h2>Référentiel Client Unique</h2>
   				
 <!-- --------	Table search options -->
-			<div id="searchDiv" class="container">
-				<div class="row">
-					<form id="signinForm" class="form-inline ">
+			<div class="container">
+				<div id="searchDiv"  class="row">
+					<form id="signinForm">
 						<div class="form-group col-sm-4 col-md-4">
 					        <input type="text" class="form-control " id="txtNom" placeholder="Nom" style="width: 100%;" />
 					    </div>
@@ -50,54 +50,53 @@
 					        <input type="text" class="form-control" id="txtPiece" placeholder="Lieu de naissance" style="width: 100%;" />
 					    </div>
 					    
-					    <div class="form-group" style="width: 100%">
+					    <div class="form-group col-md-12" style="margin-bottom: 0px">
 					    	<input type="button" class="btn btn-default navbar-btn" value="Rechercher" id="btnSearch">
 							<input type="button" class="btn btn-default navbar-btn" value="Rafraichir" id="btnRefresh">
 					    </div>
 					</form>
 					
-				</div>
 			
-			
-			</div>
 			<div id="diverror" ></div>
-			
+		</div>	
 <!-- --------	Table data -->
-	<div id="dataDiv">
-		<table class="table table-bordered  table-hover" style="width: 80%; margin: 15px 0px" id="dataTable">
-			<thead>
-				
-				<tr class="success">
-					<th>Nom</th>
-					<th>Prénoms</th>
-					<th>Fixe</th>
-					<th>Mobile</th>
-					<th>Email</th>
-					<th>Détails</th>
-				</tr>
-				
-			</thead>
+			<div id="dataDiv">
+				<table class="table table-bordered  table-hover" style="width: 80%; margin: 15px 0px" id="dataTable">
+					<thead>
+						
+						<tr class="success">
+							<th>Nom</th>
+							<th>Prénoms</th>
+							<th>Fixe</th>
+							<th>Mobile</th>
+							<th>Email</th>
+							<th>Détails</th>
+						</tr>
+						
+					</thead>
+					
+					<tbody>
+					
+						<c:forEach items="${dataAgents}" var="item">
+							<tr>
+								<td>${item.nom }</td>
+								<td>${item.prenoms }</td>
+								<td>${item.telFixe }</td>
+								<td>${item.telMobile }</td>
+								<td>${item.email }</td>
+								<td><input type="button" id="btnDetails" data-toggle="modal" data-target="#myModal" data-id="${item.id}" class="btnDetails" value="Details"/> </td>
+							</tr>					
+						</c:forEach>
+					
+					</tbody>
+				</table>
+			</div> <!--  end data div   -->
+		</div>
 			
-			<tbody>
-			
-				<c:forEach items="${dataAgents}" var="item">
-					<tr>
-						<td>${item.nom }</td>
-						<td>${item.prenoms }</td>
-						<td>${item.telFixe }</td>
-						<td>${item.telMobile }</td>
-						<td>${item.email }</td>
-						<td><input type="button" id="btnDetails" data-toggle="modal" data-target="#myModal" data-id="${item.id}" class="btnDetails" value="Details"/> </td>
-					</tr>					
-				</c:forEach>
-			
-			</tbody>
-		</table>
-	</div> <!--  end data div   -->
-	
+	</div>
 
-		<div id="myModal" class="modal fade" role="dialog">  				
-  		</div>
+	<div id="myModal" class="modal fade" role="dialog">  				
+ 		
   	</div>
   </body>
   
