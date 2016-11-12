@@ -17,7 +17,7 @@
 			      <div class="modal-body">
 			        <table class="detailsTable" style="width: 70%">
 			        
-					        		<tr>
+					        <tr>
 								<td>Nom: </td> <td><label>${agent.nom}</label></td>
 							</tr>
 							<tr>

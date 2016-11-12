@@ -18,9 +18,7 @@ public class Find2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/find2.jsp").forward(request, response);
-		
 	}
 
 
@@ -30,6 +28,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		Map<String, Object>  params = new HashMap<String, Object>();
 		
 		if(request.getParameter("id")!=null){
+			System.out.println("param id: "+request.getParameter("id"));
 			params.put("id", request.getParameter("id"));
 		}
 				

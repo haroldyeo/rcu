@@ -30,7 +30,8 @@
 	</tbody>
 </table>
 <script>
- <%@ include file="java.js" %>
+ <%@ include file="homeJS.js" %>
+ <%@ include file="ajax.js" %>
   	$(document).ready(function(){
   		
   		$(".btnDetails").click(function(){
