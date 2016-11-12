@@ -24,7 +24,6 @@
     		      piece: piece};
     	
     	$.post("home", 	data, function(response){
-    		alert(response);
     		constructAgents(JSON.parse(response));
     	  }).fail(function(){
     		  alert('Une Erreur est survenue!');

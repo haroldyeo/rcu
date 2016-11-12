@@ -85,8 +85,7 @@
 					
 					</tbody>
 				</table>
-			</div> <!--  end data div   -->
-			<button data-bind="click: vm.displayModal">test</button>	
+			</div> <!--  end data div   -->	
 		</div>
 			
 	</div>
