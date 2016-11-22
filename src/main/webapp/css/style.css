@@ -36,3 +36,11 @@ h2{
 	font-size: 12px;
 	display:none;
 }
+
+.color-orange{
+	color: #ff8000;
+}
+
+.bold{
+	font-weight: bold;
+}

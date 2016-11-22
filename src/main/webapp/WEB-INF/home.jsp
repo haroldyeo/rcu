@@ -13,7 +13,7 @@
 	<body>
 		  
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
+  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
   				<h2>Référentiel Client Unique</h2>
   				
 <!-- --------	Table search options -->
@@ -43,7 +43,7 @@
 					        <input type="text" class="form-control" id="txtLob" placeholder="Lieu de naissance" style="width: 100%;" />
 					    </div>
 					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtPiece" placeholder="Lieu de naissance" style="width: 100%;" />
+					        <input type="text" class="form-control" id="txtPiece" placeholder="Type de pièce" style="width: 100%;" />
 					    </div>
 					    
 					    <div class="form-group col-md-12" style="margin-bottom: 0px">
@@ -78,7 +78,7 @@
 			                  <td data-bind="text: telFixe"></td>
 			                  <td data-bind="text: email"></td>
 			                  <td>
-			                  	<input type="button" data-bind="click: vm.displayModal(id)" id="btnDetails"
+			                  	<input type="button" data-bind="click: vm.displayModal.bind(id)" id="btnDetails"
 			                  	data-toggle="modal" data-target="#myModal" class="btnDetails" value="Details"/> 
 			                  </td>
 			             </tr>
@@ -92,11 +92,10 @@
 	
 	<input type="hidden" id="inputAgents" value='${dataAgents}'></input>
 
-	<div id="myModal" class="modal fade" role="dialog">
-  	</div>
+	<div id="myModal" class="modal fade" role="dialog"></div>
   	
   	 	<script src="jquery/knockout-3.4.1.js"></script>
-		  
+		<script src="jquery/ko.js"></script>
 		  <script>
 		
 		  
@@ -152,7 +151,7 @@
 	});
 
 		  </script>
-  		<script src="jquery/ko.js"></script>
+  		
   </body>
 
   

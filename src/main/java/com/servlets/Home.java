@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 
 import com.pojos.TUsers;
 import com.utils.OperationsDb;
+import com.utils.Utils;
 
 @WebServlet("/Home")
 public class Home extends HttpServlet {
@@ -33,7 +34,7 @@ public class Home extends HttpServlet {
 			
 		try {
 			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", null);
-			request.setAttribute("dataAgents", doMakeJson(list));
+			request.setAttribute("dataAgents", Utils.doMakeJsonAgent(list));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -41,35 +42,6 @@ public class Home extends HttpServlet {
 		
 	}
 
-
-	@SuppressWarnings("unchecked")
-	private JSONArray doMakeJson(List<TUsers> list) {
-		JSONArray jarr = new JSONArray();
-		for (TUsers u : list){
-			JSONObject job = new JSONObject();
-			
-			job.put("nom", u.getNom());
-			job.put("prenoms", u.getPrenoms());
-			job.put("lieuNaissance", u.getLieuNaissance());
-			job.put("id", u.getId());
-			
-			job.put("adresse", u.getAdresse());
-			job.put("telFixe", u.getTelFixe());
-			job.put("telMobile", u.getTelMobile());
-			job.put("email", u.getEmail());
-			
-			job.put("aviso", u.getAviso());
-			job.put("orangeMoney", u.getOrangeMoney());
-			job.put("service", u.getService());
-			job.put("typeService", u.getTypeService());
-			job.put("dateNaissance", u.getDateNaissance());
-							
-			jarr.add(job);
-			
-		}
-		return jarr;
-		
-	}
 
 
 	@SuppressWarnings("unchecked")
@@ -93,7 +65,7 @@ public class Home extends HttpServlet {
 			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", params);
 			response.setContentType("application/text");
 			PrintWriter out = response.getWriter();
-			out.print(doMakeJson(list));
+			out.print(Utils.doMakeJsonAgent(list));
 			out.flush();
 			
 		} catch (Exception e) {

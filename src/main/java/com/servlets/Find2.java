@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pojos.TUsers;
 import com.utils.OperationsDb;
+import com.utils.Utils;
 
 public class Find2 extends HttpServlet {
 	
@@ -30,13 +31,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		if(request.getParameter("id")!=null){
 			System.out.println("param id: "+request.getParameter("id"));
 			params.put("id", request.getParameter("id"));
-		}
-				
-		
+		}		
 		try {
 			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", params);
-			if(list!=null && !list.isEmpty())
-				request.setAttribute("agent", list.get(0));
+			if(list!=null && !list.isEmpty() && list.size()==1)
+				request.setAttribute("agent", Utils.doMakeJsonAgent(list).get(0));
 			else
 				System.out.println("No agent found");
 						
