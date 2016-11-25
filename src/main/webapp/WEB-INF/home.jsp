@@ -55,10 +55,12 @@
 			
 			<div id="diverror" style="float: left; width: 100%"></div>
 		</div>	
+		
+		<div>Nombre de clients dans Customer_Master: <span style="color: red; font-weight: bold">${countComptes}</span> client(s) </div>
 <!-- --------	Table data -->
 			<div id="dataDiv">
 				<table class="table table-bordered  table-hover" style="width: 80%; margin: 15px 0px" id="dataTable">
-					<thead>
+					<thead>	
 						
 						<tr class="success">
 							<th>Nom</th>

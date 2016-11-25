@@ -11,8 +11,14 @@ var vm = {
 };
 
 // obtenir la liste d'agents initiale depuis inputAgents
-var v = JSON.parse($("#inputAgents").val());
-buildListAgents(v);
+var dataInput = $("#inputAgents").val();
+var dataParsed;
+if(dataInput != ''){
+	dataParsed = JSON.parse(dataInput);
+}
+
+if(dataParsed != '')
+	buildListAgents(dataParsed);
 
 // MAJ des données d'agents
 function buildListAgents(data) {
@@ -50,12 +56,12 @@ function onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance,
 // Recherche par id pour faire afficher le popup de details
 function onSubmitDetails(obj) {
 	var data = {
-		id : obj.id
+		compteId : obj.id
 	};
 	$.post("find2", data, function(response) {
 		$("#myModal").html(response);
-		var agentSelected = JSON.parse($("#inputDetailAgent").val());
-		buildAgent(agentSelected);
+//		var agentSelected = JSON.parse($("#inputDetailAgent").val());
+//		buildAgent(agentSelected);
 	}).fail(function() {
 		alert('Une Erreur est survenue!');
 	});

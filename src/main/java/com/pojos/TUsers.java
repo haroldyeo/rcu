@@ -24,6 +24,7 @@ public class TUsers  implements java.io.Serializable {
 	private BigDecimal id;
      private String nom;
      private String prenoms;
+     private String dateNaissance;
      private String lieuNaissance;
      private String adresse;
      private String telFixe;
@@ -33,7 +34,9 @@ public class TUsers  implements java.io.Serializable {
      private String orangeMoney;
      private String service;
      private String typeService;
-     private String dateNaissance;
+     private String typePiece;
+     private String piece;
+     
 
     public TUsers() {
     }
@@ -190,6 +193,27 @@ public class TUsers  implements java.io.Serializable {
         this.dateNaissance = dateNaissance;
     }
 
+    @Column(name="TYPE_PIECE", length=2)
+	public String getTypePiece() {
+		return typePiece;
+	}
+
+
+	public void setTypePiece(String typePiece) {
+		this.typePiece = typePiece;
+	}
+
+	@Column(name="PIECE", length=20)
+	public String getPiece() {
+		return piece;
+	}
+
+
+	public void setPiece(String piece) {
+		this.piece = piece;
+	}
+
+    
 
 
 

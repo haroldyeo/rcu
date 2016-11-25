@@ -11,6 +11,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.pojos.CUO;
+import com.pojos.FinalTable;
 import com.pojos.LSS;
 import com.pojos.TUsers;
 
@@ -19,7 +20,7 @@ import com.pojos.TUsers;
  * @author Harold
  */
 public class OperationsDb {
-
+	
     @SuppressWarnings("unchecked")
 	public static Object find (String strEntity, Map<String, Object> params){
         
@@ -69,8 +70,22 @@ public class OperationsDb {
 
                        		returnedList = (List<TUsers>)criteria.list();
                         break;
-           
-            
+                    
+            case("final"):
+                Criteria criteriaFn = HibernateUtil.getHibSession().createCriteria(FinalTable.class);
+                criteriaFn.addOrder(Order.asc("masterId"));
+                		if(params != null){
+                			String masterId = params.get("masterId") != null ? ((String)params.get("masterId")) : null;
+                			String compteId = params.get("compteId") != null ? ((String)params.get("compteId")) : null;
+                			if ( masterId!= null ){
+                				criteriaFn.add(Restrictions.eq("masterId", masterId));
+                              }
+                			if ( compteId!= null ){
+                				criteriaFn.add(Restrictions.eq("compteId", compteId));
+                              }
+                			}
+                		returnedList = (List<FinalTable>)criteriaFn.list();
+                 break;
            
                 
             case("cuo"):

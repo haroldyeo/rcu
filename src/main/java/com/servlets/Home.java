@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import com.pojos.TUsers;
 import com.utils.OperationsDb;
 import com.utils.Utils;
@@ -29,15 +26,21 @@ public class Home extends HttpServlet {
     }
 
 
-	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// generate schema
+//	    Persistence.generateSchema("rcudemo", null);
+		
+		// Obtenir le nombre de comptes pour affichage dans la vue -> T_FINAL
+		request.setAttribute("countComptes", Utils.countComptes);
+		
 			
-		try {
-			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", null);
-			request.setAttribute("dataAgents", Utils.doMakeJsonAgent(list));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", null);
+//			request.setAttribute("dataAgents", Utils.doMakeJsonAgent(list));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 		
 	}
@@ -62,10 +65,13 @@ public class Home extends HttpServlet {
 		params.put("lieuNaissance", lieuNaissance);
 		
 		try {
+			TUsers uniqueResult = null;
 			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", params);
+			if(list.size()>0) // ==> un seul compte ne doit être affiché à la suite de la recherche
+				uniqueResult = list.get(0); 
 			response.setContentType("application/text");
 			PrintWriter out = response.getWriter();
-			out.print(Utils.doMakeJsonAgent(list));
+			out.print(Utils.doMakeJsonAgent(uniqueResult));
 			out.flush();
 			
 		} catch (Exception e) {

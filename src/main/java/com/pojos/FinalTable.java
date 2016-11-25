@@ -7,13 +7,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="T_FINAL" ,schema="DEMO")
-public class FinalTable implements java.io.Serializable {
+public class FinalTable  {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
+	
+	private long id;
 	private String masterId;
 	private String compteId;
 	private String masterIdB2C;
@@ -24,10 +22,18 @@ public class FinalTable implements java.io.Serializable {
 	private String dateCessation;
 	
 	@Id
-	@Column(name="master_id", unique=true, nullable=false)
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	@Column(name="master_id", nullable=false)
 	public String getMasterId() {
 		return masterId;
 	}
+	
 	public void setMasterId(String masterId) {
 		this.masterId = masterId;
 	}
