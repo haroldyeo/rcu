@@ -43,17 +43,7 @@
 					    <div class="form-group col-sm-4 col-md-4" >
 					        <input type="text" class="form-control" id="txtTypePiece" placeholder="Type de pièce" style="width: 100%;" />
 					    </div>
-					    
-<!-- 					    <div class="form-group form-col-sm-4 col-md-4" > -->
-<!-- 					        <input type="text" class="form-control" id="txtPhone"  placeholder="Téléphone" style="width: 100%;" /> -->
-<!-- 					    </div> -->
-					
-<!-- 					    <div class="form-group col-sm-4 col-md-4" > -->
-<!-- 					        <input type="text" class="form-control" id="txtAdresse" placeholder="Adresse" style="width: 100%;" /> -->
-<!-- 					    </div> -->
-					    
-					    
-					    
+					    					    
 					    <div class="form-group col-md-12" style="margin-bottom: 0px">
 					    	<input type="button" class="btn btn-default navbar-btn" value="Rechercher" id="btnSearch">
 							<input type="button" class="btn btn-default navbar-btn" value="Rafraichir" id="btnRefresh">
@@ -104,17 +94,8 @@
   	
   	 	<script src="jquery/knockout-3.4.1.js"></script>
 		<script src="jquery/ko.js"></script>
-		  <script>
-		
-		  
+		<script>
 		  $(document).ready(function(){
-			  		
-				
-// 			  $(".btnDetails").click(function(){
-// 					var id = $(this).attr("data-id");
-// 					onSubmitDetails(id);
-// 				});
-				
 				var nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece;
 				$("#btnSearch").click(function(){
 					nom = $("#txtNom").val();
@@ -152,10 +133,10 @@
 					$("#txtTypePiece").val("");
 					window.location.reload();
 				});
+				
+			});
 		
-	});
-
-		  </script>
+		</script>
   		
   </body>
 

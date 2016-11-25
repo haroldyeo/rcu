@@ -1,12 +1,9 @@
 <%@ include file="taglibs.jsp" %>
 		
-<!-- Modal -->
-		<!-- Trigger the modal with a button -->
-<!-- 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 			
 			<!-- Modal -->
 			
-			  <div class="modal-dialog modal-lg">
+			  <div class="modal-dialog ">
 			
 			    <!-- Modal content-->
 			    <div class="modal-content">
@@ -21,30 +18,43 @@
 					  <div class="col-md-12 color-orange"><h4>Informations personnelles</h4></div>
 					</div>
 					<div class="row">
-					  <div class="col-md-3">Nom et prénoms:</div><div class="col-md-9 bold"> ${agent.nom} ${agent.prenoms}</div>
+					  <div class="col-md-5">Nom et prénoms:</div><div class="col-md-7 bold"> ${agent.nom} ${agent.prenoms}</div>
 					  
-					  <div class="col-md-3">Date de n.:</div><div class="col-md-9 bold"> ${agent.dateNaissance}</div>
-					  <div class="col-md-3">Lieu de n.:</div><div class="col-md-9 bold"> ${agent.lieuNaissance} </div>
-					  <div class="col-md-3">Adresse:</div><div class="col-md-9 bold"> ${agent.adresse} </div>
+					  <div class="col-md-5">Date de naissance:</div><div class="col-md-7 bold"> ${agent.dateNaissance}</div>
+					  <div class="col-md-5">Lieu de naissance:</div><div class="col-md-7 bold"> ${agent.lieuNaissance} </div>
+					  <div class="col-md-5">Adresse:</div><div class="col-md-7 bold"> ${agent.adresse} </div>
 					  
-					  <div class="col-md-3">Pièce d'identité:</div><div class="col-md-9 bold">${agent.piece} </div>
-					  <div class="col-md-3">Type de pièce:</div><div class="col-md-9 bold"> ${agent.typePiece} </div>
+					  <div class="col-md-5">Pièce d'identité:</div><div class="col-md-7 bold">${agent.piece} </div>
+					  <div class="col-md-5">Type de pièce:</div><div class="col-md-7 bold"> ${agent.typePiece} </div>
 					</div>
 					<div class="row">
 					  <div class="col-md-12 color-orange" style="margin-top:15px"><h4>Comptes</h4></div>
 					</div>
-					<!-- <div class="row">
-					  
-					  <div class="col-md-2">Mobile:</div><div class="col-md-10 bold">${agent.telMobile}</div>
-					  <div class="col-md-2">Fixe:</div><div class="col-md-10 bold">${agent.telFixe}</div>
-					  
-					  <div class="col-md-2">Aviso:</div><div class="col-md-10 bold">${agent.aviso}</div>
-					  <div class="col-md-2" style="margin-bottom:15px">Orange Money:</div><div class="col-md-10 bold">${agent.orangeMoney}</div>
-					  
-					  
-					  
-					</div> -->
-								      	
+					
+					<div class="row" style="padding: 10px 0px">
+						Master ID: <strong>${masterId}</strong>
+					</div>
+					
+					<div class="row">
+						<table class="table table-bordered" >
+							<c:forEach items="${comptes}" var="a">
+							<tr>
+								<td width="35%">N° compte: <strong>${a.id}</strong></td>
+								<td>
+									<c:if test="${!empty a.telFixe}">Fixe: <strong>${a.telFixe}</strong> <br /></c:if> 
+									<c:if test="${!empty a.telMobile}">Mobile: <strong>${a.telMobile}</strong> <br /></c:if> 
+						  			<c:if test="${!empty a.aviso}">Aviso: <strong>${a.aviso}</strong> <br /></c:if> 
+						  			<c:if test="${!empty a.orangeMoney}">OM: <strong>${a.orangeMoney}</strong> <br /></c:if> 
+									<!-- WIMAX TO BE ADDED -->
+								</td>
+							</tr>
+<!-- 							<tr> -->
+								
+<!-- 							</tr> -->
+							</c:forEach>
+						</table>
+					
+					</div>      	
 			     
 			      </div>
 			      

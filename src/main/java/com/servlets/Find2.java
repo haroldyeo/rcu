@@ -107,6 +107,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 //			mapComptesValeurs.put(String.valueOf(a.getId()), a);
 //		}
 		
+		request.setAttribute("masterId", masterCompteForm.getMasterId());
 		request.setAttribute("agent", endUser);
 		request.setAttribute("comptes", listComptes);
 	
