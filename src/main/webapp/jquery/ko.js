@@ -6,8 +6,7 @@ var vm = {
 	agentSel : ko.observable(),
 	displayModal : function(data) {
 		onSubmitDetails(data);
-	},
-	hello : ko.observable("hello")
+	}
 };
 
 // obtenir la liste d'agents initiale depuis inputAgents
@@ -32,16 +31,14 @@ function buildAgent(data){
 }
 
 // Recherche de 1er niveau
-function onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance,
-		piece, typepiece) {
+function onSubmit(nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece) {
 	var data = {
 		nom : nom,
 		prenoms : prenoms,
-		tel : tel,
-		adresse : adresse,
 		dateNaissance : dateNaissance,
 		lieuNaissance : lieuNaissance,
-		piece : piece
+		piece : piece,
+		typePiece : typePiece
 	};
 
 	$.post("home", data, function(response) {

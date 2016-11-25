@@ -34,12 +34,14 @@ public class OperationsDb {
                        criteria.addOrder(Order.asc("id"));
                        		if(params != null){
                        			
-                       			BigDecimal id = params.get("id") != null ? new BigDecimal((String)params.get("id")) : null; 
+                       		   BigDecimal id = params.get("id") != null ? new BigDecimal((String)params.get("id")) : null; 
                            	   String nom = (String)params.get("nom");
                           	   String prenoms = (String)params.get("prenoms");
-                          	   String tel = (String)params.get("tel");
-	                          	 String adresse = (String)params.get("adresse");
-	                          	String lieuNaissance = (String)params.get("lieuNaissance");
+                          	   String dateNaissance = (String)params.get("dateNaissance");
+                          	   String lieuNaissance = (String)params.get("lieuNaissance");
+	                           String piece = (String)params.get("piece");
+	                           String typePiece = (String)params.get("typePiece");
+	                          	
                            	   
                            	   
                        			if ( id!= null ){
@@ -54,17 +56,23 @@ public class OperationsDb {
                                      	criteria.add(Restrictions.ilike("prenoms", "%"+prenoms+"%"));
                                 }
                                 
-                                if (tel != null && !tel.equals("")){
-                                 	criteria.add(Restrictions.ilike("telFixe", "%"+tel+"%"));
-                                }
-                                
-                                if (adresse != null && !adresse.equals("")){
-                                 	criteria.add(Restrictions.ilike("adresse", "%"+adresse+"%"));
+                                if (dateNaissance != null && !dateNaissance.equals("")){
+                                 	criteria.add(Restrictions.ilike("dateNaissance", "%"+dateNaissance+"%"));
                                 }
                                 
                                 if (lieuNaissance != null && !lieuNaissance.equals("")){
                                  	criteria.add(Restrictions.ilike("lieuNaissance", "%"+lieuNaissance+"%"));
                                 }
+                                
+                                if (piece != null && !piece.equals("")){
+                                 	criteria.add(Restrictions.ilike("piece", "%"+piece+"%"));
+                                }
+                                
+                                if (typePiece != null && !typePiece.equals("")){
+                                 	criteria.add(Restrictions.ilike("typePiece", "%"+typePiece+"%"));
+                                }
+                                
+                                
         					
                        		}
 
@@ -194,7 +202,7 @@ public class OperationsDb {
             
         }
         
-        System.out.println("list for keyword: "+strEntity +" -  size: "+returnedList.size());
+        System.out.println("----------   Entity: "+strEntity +" -  size: "+returnedList.size() +" elements -------------");
         return returnedList;
     }
     

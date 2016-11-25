@@ -28,13 +28,6 @@
 					        <input type="text" class="form-control" id="txtPrenom" placeholder="Prénoms" style="width: 100%;" />
 					    </div>
 					    
-					    <div class="form-group form-col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtPhone"  placeholder="Téléphone" style="width: 100%;" />
-					    </div>
-					
-					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtAdresse" placeholder="Adresse" style="width: 100%;" />
-					    </div>
 					    <div class="form-group col-sm-4 col-md-4" >
 					        <input type="text" class="form-control"  id="txtDob"  placeholder="Date de naissance" style="width: 100%;" />
 					    </div>
@@ -42,9 +35,24 @@
 					    <div class="form-group col-sm-4 col-md-4" >
 					        <input type="text" class="form-control" id="txtLob" placeholder="Lieu de naissance" style="width: 100%;" />
 					    </div>
+					    
 					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtPiece" placeholder="Type de pièce" style="width: 100%;" />
+					        <input type="text" class="form-control" id="txtPiece" placeholder="Pièce" style="width: 100%;" />
 					    </div>
+					    
+					    <div class="form-group col-sm-4 col-md-4" >
+					        <input type="text" class="form-control" id="txtTypePiece" placeholder="Type de pièce" style="width: 100%;" />
+					    </div>
+					    
+<!-- 					    <div class="form-group form-col-sm-4 col-md-4" > -->
+<!-- 					        <input type="text" class="form-control" id="txtPhone"  placeholder="Téléphone" style="width: 100%;" /> -->
+<!-- 					    </div> -->
+					
+<!-- 					    <div class="form-group col-sm-4 col-md-4" > -->
+<!-- 					        <input type="text" class="form-control" id="txtAdresse" placeholder="Adresse" style="width: 100%;" /> -->
+<!-- 					    </div> -->
+					    
+					    
 					    
 					    <div class="form-group col-md-12" style="margin-bottom: 0px">
 					    	<input type="button" class="btn btn-default navbar-btn" value="Rechercher" id="btnSearch">
@@ -63,10 +71,9 @@
 					<thead>	
 						
 						<tr class="success">
+							<th>Compte</th>
 							<th>Nom</th>
 							<th>Prénoms</th>
-							<th>Fixe</th>
-							<th>Email</th>
 							<th>Détails</th>
 						</tr>
 						
@@ -75,10 +82,9 @@
 					<tbody data-bind="foreach: vm.agents">
 					
 						 <tr>
+						 	  <td data-bind="text: id"></td>
 			                  <td data-bind="text: nom"></td>
 			                  <td data-bind="text: prenoms"></td>
-			                  <td data-bind="text: telFixe"></td>
-			                  <td data-bind="text: email"></td>
 			                  <td>
 			                  	<input type="button" data-bind="click: vm.displayModal.bind(id)" id="btnDetails"
 			                  	data-toggle="modal" data-target="#myModal" class="btnDetails" value="Details"/> 
@@ -109,15 +115,14 @@
 // 					onSubmitDetails(id);
 // 				});
 				
-				var nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece;
+				var nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece;
 				$("#btnSearch").click(function(){
 					nom = $("#txtNom").val();
 					prenoms = $("#txtPrenom").val();
-					tel = $("#txtPhone").val();
-					adresse = $("#txtAdresse").val();
 					dateNaissance = $("#txtDob").val();
 					lieuNaissance = $("#txtLob").val();
 					piece = $("#txtPiece").val();
+					typePiece = $("#txtTypePiece").val();
 		//			typepiece = $("#txtTypePiece").val();
 					
 					if(nom==''){
@@ -128,10 +133,10 @@
 					}
 					
 					if(nom!='' && prenoms != ''){
-						if(tel=='' && adresse=='' && dateNaissance=='' && lieuNaissance=='' && piece=='' ){
+						if(dateNaissance=='' && lieuNaissance=='' && piece==''&& typePiece==''){
 							$("#diverror").text("Saisir au moins un paramètre supplémentaire").slideDown("3000").delay(4000).slideUp("3000");
 						} else {
-							onSubmit(nom, prenoms, tel, adresse, dateNaissance, lieuNaissance, piece);
+							onSubmit(nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece);
 						}
 					}
 					
@@ -141,12 +146,10 @@
 				$("#btnRefresh").click(function(){
 					$("#txtNom").val("");
 					$("#txtPrenom").val("");
-					$("#txtPhone").val("");
-					$("#txtAdresse").val("");
 					$("#txtDob").val("");
 					$("#txtLob").val("");
 					$("#txtPiece").val("");
-		//			$("#txtTypePiece").val("");
+					$("#txtTypePiece").val("");
 					window.location.reload();
 				});
 		

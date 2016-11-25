@@ -64,16 +64,40 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		// MAJ des informations autres que les comptes
 		TUsers endUser = listComptes.get(0);
 		for(TUsers a : listComptes){
-			endUser.setAdresse(endUser.getAdresse() == null && a.getAdresse()!= null  ? a.getAdresse() : null);
-			endUser.setDateNaissance(endUser.getDateNaissance() == null && a.getDateNaissance()!= null  ? a.getDateNaissance() : null);
-			endUser.setEmail(endUser.getEmail() == null && a.getEmail()!= null  ? a.getEmail() : null);
 			
-			endUser.setLieuNaissance(endUser.getLieuNaissance() == null && a.getLieuNaissance()!= null  ? a.getLieuNaissance() : null);
-			endUser.setNom(endUser.getNom() == null && a.getNom()!= null  ? a.getNom() : null);
-			endUser.setPrenoms(endUser.getPrenoms() == null && a.getPrenoms()!= null  ? a.getPrenoms() : null);
+			if(endUser.getAdresse() == null){
+				endUser.setAdresse(a.getAdresse()!= null  ? a.getAdresse() : null);
+			}
 			
-			endUser.setAviso(endUser.getService() == null && a.getService()!= null  ? a.getService() : null);
-			endUser.setAviso(endUser.getTypeService() == null && a.getTypeService()!= null  ? a.getTypeService() : null);
+			if(endUser.getDateNaissance() == null){
+				endUser.setDateNaissance(a.getDateNaissance()!= null  ? a.getDateNaissance() : null);
+			}
+			
+			if(endUser.getEmail() == null){
+				endUser.setEmail(a.getEmail()!= null  ? a.getEmail() : null);
+			}
+			
+			if(endUser.getLieuNaissance() == null){
+				endUser.setLieuNaissance(a.getLieuNaissance()!= null  ? a.getLieuNaissance() : null);
+			}
+			if(endUser.getNom() == null){
+				endUser.setNom( a.getNom()!= null  ? a.getNom() : null);
+			}
+			if(endUser.getPrenoms() == null){
+				endUser.setPrenoms(a.getPrenoms()!= null  ? a.getPrenoms() : null);
+			}
+			if(endUser.getService() == null){
+				endUser.setService( a.getService()!= null  ? a.getService() : null);
+			}
+			if(endUser.getTypeService() == null){
+				endUser.setTypeService( a.getTypeService()!= null  ? a.getTypeService() : null);
+			}
+			if(endUser.getPiece() == null){
+				endUser.setPiece( a.getPiece()!= null  ? a.getPiece() : null);
+			}
+			if(endUser.getTypePiece() == null){
+				endUser.setTypePiece( a.getTypePiece()!= null  ? a.getTypePiece() : null);
+			}
 			
 		}
 		

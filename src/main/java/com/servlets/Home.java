@@ -51,18 +51,18 @@ public class Home extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nom = request.getParameter("nom");
 		String prenoms = request.getParameter("prenoms");
-		String dob = request.getParameter("dateNaissance");
+		String dateNaissance = request.getParameter("dateNaissance");
 		String lieuNaissance = request.getParameter("lieuNaissance");
-		String adresse = request.getParameter("adresse");
-		String tel = request.getParameter("tel");
+		String piece = request.getParameter("piece");
+		String typePiece = request.getParameter("typePiece");
 		
 		Map<String, Object>  params = new HashMap<String, Object>();
 		params.put("nom", nom);
 		params.put("prenoms", prenoms);
-		params.put("dob", dob);
-		params.put("tel", tel);
-		params.put("adresse", adresse);
+		params.put("dateNaissance", dateNaissance);
 		params.put("lieuNaissance", lieuNaissance);
+		params.put("piece", piece);
+		params.put("typePiece", typePiece);
 		
 		try {
 			TUsers uniqueResult = null;
