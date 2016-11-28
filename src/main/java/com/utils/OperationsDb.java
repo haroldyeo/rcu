@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -156,16 +155,6 @@ public class OperationsDb {
                 		   String typePiece = (String)params.get("typePiece");
                 		   String adresspostal = (String)params.get("adresspostal");
                 		   String phone = (String)params.get("phone");
-                		   String cpostalBp = (String)params.get("cpostalBp");
-                		   String numerobp = (String)params.get("numerobp");
-                		   String refClientExt = (String)params.get("refClientExt");
-                		   String phonePrincipal = (String)params.get("phonePrincipal");
-                		   String contact = (String)params.get("contact");
-                		   String identite = (String)params.get("identite");
-                		   BigDecimal typeservice = params.get("typeservice") != null ? new BigDecimal((String)params.get("typeservice")) : null;
-                		   String numeroMobile = (String)params.get("numeroMobile");
-                		   String statut = (String)params.get("statut");
-                		   String email = (String)params.get("email");
                     	   
                     	 
                 		 if (idclient != null && !idclient.equals("")){
@@ -211,6 +200,7 @@ public class OperationsDb {
         return returnedList;
     }
 
+	@SuppressWarnings("unchecked")
 	public static List<TUsers> getComptesClient(String compteForm) {
 		SQLQuery q = HibernateUtil.getHibSession().createSQLQuery(GET_COMPTES_FORM);
 		q.addEntity(TUsers.class);

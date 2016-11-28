@@ -13,8 +13,8 @@
 	<body>
 		  
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
-<!--   				<h2>Référentiel Client Unique</h2> -->
+  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
+  				<h2>Référentiel Client Unique</h2>
   				
 <!-- --------	Table search options -->
 			<div class="container">
@@ -54,7 +54,7 @@
 			<div id="diverror" style="float: left; width: 100%"></div>
 		</div>	
 		
-		<div>Nombre de clients dans Customer_Master: <span style="color: red; font-weight: bold">${countComptes}</span> client(s) </div>
+<%-- 		<div>Nombre de clients dans Customer_Master: <span style="color: red; font-weight: bold">${countComptes}</span> client(s) </div> --%>
 <!-- --------	Table data -->
 			<div id="dataDiv">
 				<table class="table table-bordered  table-hover" style="width: 80%; margin: 15px 0px" id="dataTable">
