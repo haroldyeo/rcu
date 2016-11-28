@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -21,6 +23,9 @@ import com.pojos.TUsers;
  */
 public class OperationsDb {
 	
+	public static final String GET_COMPTES_FORM = "select * from T_USERS u  inner  join "
+				+ " (select f1.COMPTEID from T_FINAL f1 left outer join T_FINAL f on f.master_id = f1.master_id where f.COMPTEID = :compteForm) i"
+				+ " on u.id = i.COMPTEID";
     @SuppressWarnings("unchecked")
 	public static Object find (String strEntity, Map<String, Object> params){
         
@@ -202,59 +207,15 @@ public class OperationsDb {
             
         }
         
-        System.out.println("----------   Entity: "+strEntity +" -  size: "+returnedList.size() +" elements -------------");
+        System.out.println("---   Entity: "+strEntity +" -  size: "+returnedList.size() +" elements -------------");
         return returnedList;
     }
-    
-    
-//  public static Session getHibSession()
-//  {
-//      return HibernateUtil.getHibSession().openSession();
-//  }
 
-	/*
-  
-  public static void persistObject(Object obj){
-       
-          try{
-              Session session = HibernateUtil.getHibSession();
-              session.beginTransaction();
-              session.save(obj);
-              session.getTransaction().commit();
-              
-          } catch (HibernateException e){
-              e.printStackTrace();
-              JOptionPane.showMessageDialog(null, "Une erreur est survenue", "Base de données des fidèles", JOptionPane.ERROR);
-          }
-  }
-  
-  public static void updateObject(Object obj){
-       
-          try{
-              Session session = HibernateUtil.getHibSession();
-              session.beginTransaction();
-              session.merge(obj);  
-              session.getTransaction().commit();
-              
-          } catch (HibernateException e){
-              e.printStackTrace();
-              JOptionPane.showMessageDialog(null, "Une erreur est survenue", "Base de données des fidèles", JOptionPane.ERROR);
-          }
-  }
-  
-  public static void deleteObject(Object obj){
-       
-          try{
-//              Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//              session.beginTransaction();
-              HibernateUtil.getCurrentSession().delete(obj);
-              HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
-              
-          } catch (HibernateException e){
-              e.printStackTrace();
-              JOptionPane.showMessageDialog(null, "Une erreur est survenue", "Base de données des fidèles", JOptionPane.ERROR);
-          }
-  }
-  */
+	public static List<TUsers> getComptesClient(String compteForm) {
+		SQLQuery q = HibernateUtil.getHibSession().createSQLQuery(GET_COMPTES_FORM);
+		q.addEntity(TUsers.class);
+		q.setParameter("compteForm", compteForm);
+		return (List<TUsers>)q.list();
+	}
     
 }

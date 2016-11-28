@@ -24,44 +24,20 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	}
 
 
-	@SuppressWarnings({ "unchecked"})
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Map<String, Object>  params = new HashMap<String, Object>();
-		
-		//--------- Obtenir le masterID  du compteID du formulaire ==> masterCompteForm
-		
-		FinalTable masterCompteForm = null;
-		if(request.getParameter("compteId")!=null){
-			System.out.println("param id: "+request.getParameter("compteId"));
-			params.put("compteId", request.getParameter("compteId"));
-		}		
-		try {
-			masterCompteForm = ((List<FinalTable>) OperationsDb.find("final", params)).get(0);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		//------Obtenir la liste des master/comptes where masterId = masterCompteForm.masterId ==> listMasters
-		List<FinalTable> listMasters = null;
-		params.clear(); params.put("masterId", masterCompteForm.getMasterId());
-		listMasters = (List<FinalTable>) OperationsDb.find("final", params);
-		
-		
-		//----- Obtenir la liste des comptes ==> listComptes
+		String compteForm = request.getParameter("compteId");
 		List<TUsers> listComptes = new ArrayList<>();
-		if(listMasters.isEmpty()){
-			System.out.println("Find2.doPost(): NO MASTER ID FOUND");
-		} else 
-		for(FinalTable f : listMasters){
-			params.clear(); params.put("id", f.getCompteId());
-			listComptes.addAll((List<TUsers>) OperationsDb.find("agents", params));
-		}
 		
-		//--- Compiler les informations du user
+		// ----  ALL IN ONE
+		/* La requete suiveante permet d'obtenir la liste des comptes d'1 client à partir du compte du formulaire
+		 * 1. Obtenir le masterID  du compteID du formulaire
+		 * 2. Obtenir la liste des master/comptes where masterId = masterCompteForm.masterId
+		 */
+		listComptes  = OperationsDb.getComptesClient(compteForm);
 		
-				
-		// MAJ des informations autres que les comptes
+		//Compiler les informations du user:  MAJ des informations autres que les comptes
 		TUsers endUser = listComptes.get(0);
 		for(TUsers a : listComptes){
 			
@@ -101,13 +77,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			
 		}
 		
-		// PEC des comptes
-//		Map<String,Object> mapComptesValeurs = new HashMap<>();
-//		for(TUsers a : listComptes){
-//			mapComptesValeurs.put(String.valueOf(a.getId()), a);
-//		}
-		
-		request.setAttribute("masterId", masterCompteForm.getMasterId());
 		request.setAttribute("agent", endUser);
 		request.setAttribute("comptes", listComptes);
 	

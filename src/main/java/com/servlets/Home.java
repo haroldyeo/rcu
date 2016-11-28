@@ -32,7 +32,7 @@ public class Home extends HttpServlet {
 //	    Persistence.generateSchema("rcudemo", null);
 		
 		// Obtenir le nombre de comptes pour affichage dans la vue -> T_FINAL
-		request.setAttribute("countComptes", Utils.countComptes);
+//		request.setAttribute("countComptes", Utils.countComptes);
 		
 			
 //		try {
