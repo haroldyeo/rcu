@@ -5,15 +5,14 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.pojos.FinalTable;
 import com.pojos.TUsers;
 
 public class Utils {
 	
-	public static final long countComptes = getCountComptes();
+//	public static final long countComptes = getCountComptes();
 
 	/**
-	 * Fonction qui transforme une liste d'utlisateurs en format JSON
+	 * Fonction qui transforme une liste d'utilisateurs en format JSON
 	 * @param list
 	 * @return
 	 */
@@ -46,13 +45,12 @@ public class Utils {
 	}
 	
 	/**
-	 * Fonction qui transforme une utlisateur en format JSON
+	 * Fonction qui transforme une utlisateur en format JSONArray
 	 * @param list
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static JSONArray doMakeJsonAgent(TUsers u){
-		JSONArray jarr = new JSONArray();
+	public static JSONObject doMakeJsonAgent(TUsers u){
 			JSONObject job = new JSONObject();
 			
 			job.put("nom", u.getNom());
@@ -69,15 +67,13 @@ public class Utils {
 			job.put("orangeMoney", u.getOrangeMoney());
 			job.put("service", u.getService());
 			job.put("typeService", u.getTypeService());
-			job.put("dateNaissance", u.getDateNaissance());
-							
-			jarr.add(job);
-		return jarr;
+			job.put("dateNaissance", u.getDateNaissance());		
+		return job;
 	}
 
-	private static long getCountComptes() {
-		@SuppressWarnings("unchecked")
-		List<FinalTable> list = (List<FinalTable>) OperationsDb.find("final", null);
-		return list.size();
-	}
+//	private static long getCountComptes() {
+//		@SuppressWarnings("unchecked")
+//		List<FinalTable> list = (List<FinalTable>) OperationsDb.find("final", null);
+//		return list.size();
+//	}
 }

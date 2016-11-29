@@ -1,33 +1,22 @@
-// This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 
 // viewModel object
 var vm = {
-	agents : ko.observableArray(),
-	agentSel : ko.observable(),
+	agents : ko.observable(),
+	agentSelected : ko.observable(),
 	displayModal : function(data) {
 		onSubmitDetails(data);
 	}
 };
 
-// obtenir la liste d'agents initiale depuis inputAgents
-var dataInput = $("#inputAgents").val();
-var dataParsed;
-if(dataInput != ''){
-	dataParsed = JSON.parse(dataInput);
-}
-
-if(dataParsed != '')
-	buildListAgents(dataParsed);
-
 // MAJ des données d'agents
-function buildListAgents(data) {
+function doMajAgent(data) {
 	vm.agents(data);
 }
 
 // MAJ détails de l'agent
-function buildAgent(data){
-	vm.agentSel(data);
-//	alert(vm.agentSel().nom +"    -    " +vm.agentSel().prenoms);
+function doMajAgentSelected(data){
+	vm.agentSelected(data);
+//	alert(vm.agentSelected().nom +"    -    " +vm.agentSelected().prenoms);
 }
 
 // Recherche de 1er niveau
@@ -42,7 +31,7 @@ function onSubmit(nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece) 
 	};
 
 	$.post("home", data, function(response) {
-		buildListAgents(JSON.parse(response));
+		doMajAgent(JSON.parse(response));
 	}).fail(function() {
 		alert('Une Erreur est survenue!');
 	});
@@ -56,15 +45,41 @@ function onSubmitDetails(obj) {
 		compteId : obj.id
 	};
 	$.post("find2", data, function(response) {
-		$("#myModal").html(response);
-//		var agentSelected = JSON.parse($("#inputDetailAgent").val());
-//		buildAgent(agentSelected);
+//		$("#myModal").html(response);
+//		$("#inputDetailAgent").val(response);
+//		alert($("#inputDetailAgent").val());
+		var agentSelected = JSON.parse(response);
+		doMajAgentSelected(agentSelected);
 	}).fail(function() {
 		alert('Une Erreur est survenue!');
 	});
 
 	
 }
+
+//ko.bindingHandlers.modal = {
+//	    init: function (element, valueAccessor) {
+//	        $(element).modal({
+//	            show: false
+//	        });
+//
+//	        var value = valueAccessor();
+//	        if (ko.isObservable(value)) {
+//	            $(element).on('hide.bs.modal', function() {
+//	               value(false);
+//	            });
+//	        }
+//
+//	    },
+//	    update: function (element, valueAccessor) {
+//	        var value = valueAccessor();
+//	        if (ko.utils.unwrapObservable(value)) {
+//	            $(element).modal('show');
+//	        } else {
+//	            $(element).modal('hide');
+//	        }
+//	    }
+//	}
 
 // Activates knockout.js
 ko.applyBindings(vm);
