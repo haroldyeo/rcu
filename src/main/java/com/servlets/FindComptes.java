@@ -1,7 +1,6 @@
 package com.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,14 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import com.pojos.TUsers;
 import com.utils.OperationsDb;
 import com.utils.Utils;
 
-public class Find2 extends HttpServlet {
+public class FindComptes extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -41,7 +37,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		listComptes  = OperationsDb.getComptesClient(compteForm);
 		
 		//Compiler les informations du user:  MAJ des informations autres que les comptes
-		doCompileCompteClient(listComptes, request, response);
+		doCompileCompteClient(listComptes,  response);
 				
 //		this.getServletContext().getRequestDispatcher("/WEB-INF/find2.jsp").forward(request, response);
 	
@@ -49,7 +45,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 
 
 
-	private void doCompileCompteClient(List<TUsers> listComptes, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void doCompileCompteClient(List<TUsers> listComptes, HttpServletResponse response) throws IOException {
 		TUsers endUser = listComptes.get(0);
 		for(TUsers a : listComptes){
 			
@@ -89,25 +85,10 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			
 		}
 		
-		doBuildEndUserJson(endUser);
-		
 		response.setContentType("application/text");
-		PrintWriter out = response.getWriter();
-		out.print(Utils.doMakeJsonAgent(endUser));
-		
-		request.setAttribute("agent", endUser);
-		request.setAttribute("comptes", listComptes);
-		
+		String agentAndListComptes = "["+Utils.doMakeJsonAgent(endUser)+","+Utils.doMakeJsonAgent(listComptes)+"]"; 
+		response.getWriter().write(agentAndListComptes);
 	}
 
-
-
-	private void doBuildEndUserJson(TUsers endUser) {
-		JSONObject eu = Utils.doMakeJsonAgent(endUser);
-		String s = String.valueOf(eu);
-		System.out.println(s);
-//		JSONObject extra = new JSONObject();
-		
-	}
 }
 

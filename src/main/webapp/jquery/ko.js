@@ -3,6 +3,7 @@
 var vm = {
 	agents : ko.observable(),
 	agentSelected : ko.observable(),
+	comptes : ko.observableArray(),
 	displayModal : function(data) {
 		onSubmitDetails(data);
 	}
@@ -18,6 +19,13 @@ function doMajAgentSelected(data){
 	vm.agentSelected(data);
 //	alert(vm.agentSelected().nom +"    -    " +vm.agentSelected().prenoms);
 }
+
+//MAJ des comptes
+function doMAJComptes(data) {
+	vm.comptes(data);
+}
+
+// MAJ des infos des comptes
 
 // Recherche de 1er niveau
 function onSubmit(nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece) {
@@ -44,12 +52,11 @@ function onSubmitDetails(obj) {
 	var data = {
 		compteId : obj.id
 	};
-	$.post("find2", data, function(response) {
-//		$("#myModal").html(response);
-//		$("#inputDetailAgent").val(response);
-//		alert($("#inputDetailAgent").val());
-		var agentSelected = JSON.parse(response);
-		doMajAgentSelected(agentSelected);
+	$.post("findComptes", data, function(response) {
+		var agentAndComptes = JSON.parse(response);
+		var agent = agentAndComptes[0];  doMajAgentSelected(agent);
+		var comptes = agentAndComptes[1]; doMAJComptes(comptes);
+		
 	}).fail(function() {
 		alert('Une Erreur est survenue!');
 	});
@@ -57,29 +64,6 @@ function onSubmitDetails(obj) {
 	
 }
 
-//ko.bindingHandlers.modal = {
-//	    init: function (element, valueAccessor) {
-//	        $(element).modal({
-//	            show: false
-//	        });
-//
-//	        var value = valueAccessor();
-//	        if (ko.isObservable(value)) {
-//	            $(element).on('hide.bs.modal', function() {
-//	               value(false);
-//	            });
-//	        }
-//
-//	    },
-//	    update: function (element, valueAccessor) {
-//	        var value = valueAccessor();
-//	        if (ko.utils.unwrapObservable(value)) {
-//	            $(element).modal('show');
-//	        } else {
-//	            $(element).modal('hide');
-//	        }
-//	    }
-//	}
 
 // Activates knockout.js
 ko.applyBindings(vm);

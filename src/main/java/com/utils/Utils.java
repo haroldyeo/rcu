@@ -12,47 +12,29 @@ public class Utils {
 //	public static final long countComptes = getCountComptes();
 
 	/**
-	 * Fonction qui transforme une liste d'utilisateurs en format JSON
-	 * @param list
-	 * @return
+	 * Fonction qui transforme une liste d'utilisateurs en array JSON
+	 * @param list liste Utilisateurs
+	 * @return JsonArray
 	 */
 	@SuppressWarnings("unchecked")
 	public static JSONArray doMakeJsonAgent(List<TUsers> list){
-		JSONArray jarr = new JSONArray();
-		for (TUsers u : list){
-			JSONObject job = new JSONObject();
-			
-			job.put("nom", u.getNom());
-			job.put("prenoms", u.getPrenoms());
-			job.put("lieuNaissance", u.getLieuNaissance());
-			job.put("id", u.getId());
-			
-			job.put("adresse", u.getAdresse());
-			job.put("telFixe", u.getTelFixe());
-			job.put("telMobile", u.getTelMobile());
-			job.put("email", u.getEmail());
-			
-			job.put("aviso", u.getAviso());
-			job.put("orangeMoney", u.getOrangeMoney());
-			job.put("service", u.getService());
-			job.put("typeService", u.getTypeService());
-			job.put("dateNaissance", u.getDateNaissance());
-							
-			jarr.add(job);
-			
+		JSONArray jsonArray = new JSONArray();
+		for (TUsers u : list){			
+			jsonArray.add(doMakeJsonAgent(u));
 		}
-		return jarr;
+		return jsonArray;
 	}
 	
 	/**
-	 * Fonction qui transforme une utlisateur en format JSONArray
-	 * @param list
-	 * @return
+	 * Fonction qui transforme un utlisateur en format objet JSON
+	 * @param u objet utilisateur
+	 * @return JsonObject
 	 */
 	@SuppressWarnings("unchecked")
 	public static JSONObject doMakeJsonAgent(TUsers u){
 			JSONObject job = new JSONObject();
 			
+			job.put("id", u.getId());
 			job.put("nom", u.getNom());
 			job.put("prenoms", u.getPrenoms());
 			job.put("lieuNaissance", u.getLieuNaissance());
@@ -68,6 +50,9 @@ public class Utils {
 			job.put("service", u.getService());
 			job.put("typeService", u.getTypeService());
 			job.put("dateNaissance", u.getDateNaissance());		
+			
+			job.put("piece", u.getPiece());
+			job.put("typePiece", u.getTypePiece());
 		return job;
 	}
 

@@ -19,12 +19,12 @@
   </servlet-mapping>
       
   <servlet>
-    <servlet-name>Find2</servlet-name>
-    <servlet-class>com.servlets.Find2</servlet-class>
+    <servlet-name>findComptes</servlet-name>
+    <servlet-class>com.servlets.FindComptes</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Find2</servlet-name>
-    <url-pattern>/find2</url-pattern>
+    <servlet-name>findComptes</servlet-name>
+    <url-pattern>/findComptes</url-pattern>
   </servlet-mapping>
   
   
