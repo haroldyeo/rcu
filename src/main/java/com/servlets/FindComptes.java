@@ -29,7 +29,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		List<TUsers> listComptes = new ArrayList<>();
 		
 		// ----  ALL IN ONE
-		/* La requete suiveante permet d'obtenir la liste des comptes d'1 client à partir du compte du formulaire
+		/* La requete suivante permet d'obtenir la liste des comptes d'1 client à partir du compte du formulaire
 		 * 1. Obtenir le masterID  du compteID du formulaire
 		 * 2. Obtenir la liste des master/comptes where masterId = masterCompteForm.masterId
 		 * 3. Obtenir la liste des comptes depuis la liste précédente

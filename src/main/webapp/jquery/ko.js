@@ -42,6 +42,7 @@ function onSubmit(nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece) 
 		if(response.length > 0){
 			doMajAgent(JSON.parse(response));
 		}else{
+			doMajAgent('');
 			$("#divNoData").text("Aucune donnée ne correspond aux critères de recherche").slideDown("3000").delay(4000).slideUp("3000");
 		}
 			
@@ -52,7 +53,7 @@ function onSubmit(nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece) 
 }
 
 
-// Recherche par id pour faire afficher le popup de details
+// Recherche par id pour faire afficher le popup des comptes
 function onSubmitDetails(obj) {
 	var data = {
 		compteId : obj.id
