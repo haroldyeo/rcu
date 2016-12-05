@@ -39,7 +39,12 @@ function onSubmit(nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece) 
 	};
 
 	$.post("home", data, function(response) {
-		doMajAgent(JSON.parse(response));
+		if(response.length > 0){
+			doMajAgent(JSON.parse(response));
+		}else{
+			$("#divNoData").text("Aucune donnée ne correspond aux critères de recherche").slideDown("3000").delay(4000).slideUp("3000");
+		}
+			
 	}).fail(function() {
 		alert('Une Erreur est survenue!');
 	});

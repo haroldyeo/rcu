@@ -69,10 +69,13 @@ public class Home extends HttpServlet {
 			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", params);
 			if(list.size()>0) // ==> un seul compte ne doit être affiché à la suite de la recherche
 				uniqueResult = list.get(0); 
-			response.setContentType("application/text");
-			PrintWriter out = response.getWriter();
-			out.print(Utils.doMakeJsonAgent(uniqueResult));
-			out.flush();
+			if(uniqueResult != null){
+				response.setContentType("application/text");
+				PrintWriter out = response.getWriter();
+				out.print(Utils.doMakeJsonAgent(uniqueResult));
+				out.flush();
+			}
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

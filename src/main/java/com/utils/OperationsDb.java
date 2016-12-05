@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -22,6 +23,8 @@ import com.pojos.TUsers;
  */
 public class OperationsDb {
 	
+	public static final Session hibSession = HibernateUtil.getHibSession();
+	
 	public static final String GET_COMPTES_FORM = "select * from T_USERS u  inner  join "
 				+ " (select f1.COMPTEID from T_FINAL f1 left outer join T_FINAL f on f.master_id = f1.master_id where f.COMPTEID = :compteForm) i"
 				+ " on u.id = i.COMPTEID";
@@ -34,7 +37,7 @@ public class OperationsDb {
         switch(strEntity){
             
             case("agents"):
-                       Criteria criteria = HibernateUtil.getHibSession().createCriteria(TUsers.class);
+                       Criteria criteria = hibSession.createCriteria(TUsers.class);
                        criteria.addOrder(Order.asc("id"));
                        		if(params != null){
                        			
@@ -84,7 +87,7 @@ public class OperationsDb {
                         break;
                     
             case("final"):
-                Criteria criteriaFn = HibernateUtil.getHibSession().createCriteria(FinalTable.class);
+                Criteria criteriaFn = hibSession.createCriteria(FinalTable.class);
                 criteriaFn.addOrder(Order.asc("masterId"));
                 		if(params != null){
                 			String masterId = params.get("masterId") != null ? ((String)params.get("masterId")) : null;
@@ -102,7 +105,7 @@ public class OperationsDb {
                 
             case("cuo"):
 
-               Criteria CuoCr = HibernateUtil.getHibSession().createCriteria(CUO.class);
+               Criteria CuoCr = hibSession.createCriteria(CUO.class);
             		CuoCr.addOrder(Order.asc("masterId"));
                		if(params != null){
                		   String phone = (String)params.get("phone");
@@ -142,7 +145,7 @@ public class OperationsDb {
                 
             case("lss"):
 
-                Criteria LssCr = HibernateUtil.getHibSession().createCriteria(LSS.class);
+                Criteria LssCr = hibSession.createCriteria(LSS.class);
         		LssCr.addOrder(Order.asc("idclient"));
                 		if(params != null){
                 			Integer idclient = (Integer)params.get("idclient");
@@ -202,7 +205,7 @@ public class OperationsDb {
 
 	@SuppressWarnings("unchecked")
 	public static List<TUsers> getComptesClient(String compteForm) {
-		SQLQuery q = HibernateUtil.getHibSession().createSQLQuery(GET_COMPTES_FORM);
+		SQLQuery q = hibSession.createSQLQuery(GET_COMPTES_FORM);
 		q.addEntity(TUsers.class);
 		q.setParameter("compteForm", compteForm);
 		return (List<TUsers>)q.list();
