@@ -2,7 +2,6 @@ package com.utils;
 
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,10 +11,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import com.pojos.CUO;
+import com.pojos.Compte;
 import com.pojos.FinalTable;
-import com.pojos.LSS;
-import com.pojos.TUsers;
 
 /**
  *
@@ -25,9 +22,9 @@ public class OperationsDb {
 	
 	public static final Session hibSession = HibernateUtil.getHibSession();
 	
-	public static final String GET_COMPTES_FORM = "select * from T_USERS u  inner  join "
+	public static final String GET_COMPTES_FORM = "select * from COMPTE c  inner  join "
 				+ " (select f1.COMPTEID from T_FINAL f1 left outer join T_FINAL f on f.master_id = f1.master_id where f.COMPTEID = :compteForm) i"
-				+ " on u.id = i.COMPTEID";
+				+ " on c.id = i.COMPTEID";
     @SuppressWarnings("unchecked")
 	public static Object find (String strEntity, Map<String, Object> params){
         
@@ -37,7 +34,7 @@ public class OperationsDb {
         switch(strEntity){
             
             case("agents"):
-                       Criteria criteria = hibSession.createCriteria(TUsers.class);
+                       Criteria criteria = hibSession.createCriteria(Compte.class);
                        criteria.addOrder(Order.asc("id"));
                        		if(params != null){
                        			
@@ -83,7 +80,7 @@ public class OperationsDb {
         					
                        		}
 
-                       		returnedList = (List<TUsers>)criteria.list();
+                       		returnedList = (List<Compte>)criteria.list();
                         break;
                     
             case("final"):
@@ -101,102 +98,7 @@ public class OperationsDb {
                 			}
                 		returnedList = (List<FinalTable>)criteriaFn.list();
                  break;
-           
-                
-            case("cuo"):
-
-               Criteria CuoCr = hibSession.createCriteria(CUO.class);
-            		CuoCr.addOrder(Order.asc("masterId"));
-               		if(params != null){
-               		   String phone = (String)params.get("phone");
-               		   BigDecimal masterId = params.get("masterId") != null ? new BigDecimal((String)params.get("masterId")) : null; 
-                   	   Date dateCreation = (Date)params.get("dateCreation");
-                   	   Date dateCessation = (Date)params.get("dateCessation");
-                  	   String typeMatch = (String)params.get("typeMatch");
-                  	   BigDecimal typeservice = params.get("typeservice") != null ? new BigDecimal((String)params.get("typeservice")) : null;
-                   	   
-                   	   
-                  	 if (phone != null && !phone.equals("")){
-                      	CuoCr.add(Restrictions.ilike("phone", "%"+phone+"%"));
-                  	 }
-               			if ( masterId!= null ){
-                                 CuoCr.add(Restrictions.eq("masterId", masterId));
-                             }  
-               			if ( typeservice!= null ){
-                            CuoCr.add(Restrictions.eq("typeservice", typeservice));
-                        }
-
-                        if (dateCreation != null){
-                             	CuoCr.add(Restrictions.eq("dateCreation", dateCreation));
-                        }
-                        
-                        if (dateCessation != null){
-                         	CuoCr.add(Restrictions.eq("dateCessation", dateCessation));
-                    }
-
-                        if (typeMatch != null && !typeMatch.equals("")){
-                             	CuoCr.add(Restrictions.ilike("typeMatch", "%"+typeMatch+"%"));
-                        }			
-               		}
-
-               		returnedList = (List<TUsers>)CuoCr.list();
-                break;
-                
-                
-            case("lss"):
-
-                Criteria LssCr = hibSession.createCriteria(LSS.class);
-        		LssCr.addOrder(Order.asc("idclient"));
-                		if(params != null){
-                			Integer idclient = (Integer)params.get("idclient");
-                		   String nom = (String)params.get("nom");
-                		   String prenom = (String)params.get("prenom");
-                		   String datnai = (String)params.get("datnai");
-                		   String lieunai = (String)params.get("lieunai");
-                		   String pieceidentite = (String)params.get("pieceidentite");
-                		   String description = (String)params.get("description");
-                		   String typePiece = (String)params.get("typePiece");
-                		   String adresspostal = (String)params.get("adresspostal");
-                		   String phone = (String)params.get("phone");
-                    	   
-                    	 
-                		 if (idclient != null && !idclient.equals("")){
-   	                   		LssCr.add(Restrictions.eq("idclient", "idclient"));
-   	                   	 }
-                		 if (nom != null && !nom.equals("")){
- 	                   		LssCr.add(Restrictions.ilike("nom", "%"+nom+"%"));
- 	                   	 }
-                		 if (prenom != null && !prenom.equals("")){
- 	                   		LssCr.add(Restrictions.ilike("prenom", "%"+prenom+"%"));
- 	                   	 }
-                		 if (datnai != null && !datnai.equals("")){
- 	                   		LssCr.add(Restrictions.ilike("datnai", "%"+datnai+"%"));
- 	                   	 }
-	                   	 if (lieunai != null && !lieunai.equals("")){
-	                   		LssCr.add(Restrictions.ilike("lieunai", "%"+lieunai+"%"));
-	                   	 }
-	                   	if (pieceidentite != null && !pieceidentite.equals("")){
-	                   		LssCr.add(Restrictions.ilike("pieceidentite", "%"+pieceidentite+"%"));
-	                   	 }
-	                   	if (description != null && !description.equals("")){
-	                   		LssCr.add(Restrictions.ilike("description", "%"+description+"%"));
-	                   	 }
-	                   	if (adresspostal != null && !adresspostal.equals("")){
-	                   		LssCr.add(Restrictions.ilike("adresspostal", "%"+adresspostal+"%"));
-	                   	 }
-	                   	if (typePiece != null && !typePiece.equals("")){
-	                   		LssCr.add(Restrictions.ilike("lieunai", "%"+lieunai+"%"));
-	                   	 }
-	                   	if (phone != null && !phone.equals("")){
-	                   		LssCr.add(Restrictions.ilike("phone", "%"+phone+"%"));
-	                   	 }
-                				
-                		}
-
-                		returnedList = (List<TUsers>)LssCr.list();
-                   
-                 break;
-            
+          
         }
         
         System.out.println("---   Entity: "+strEntity +" -  size: "+returnedList.size() +" elements -------------");
@@ -204,11 +106,11 @@ public class OperationsDb {
     }
 
 	@SuppressWarnings("unchecked")
-	public static List<TUsers> getComptesClient(String compteForm) {
+	public static List<Compte> getComptesClient(String compteForm) {
 		SQLQuery q = hibSession.createSQLQuery(GET_COMPTES_FORM);
-		q.addEntity(TUsers.class);
+		q.addEntity(Compte.class);
 		q.setParameter("compteForm", compteForm);
-		return (List<TUsers>)q.list();
+		return (List<Compte>)q.list();
 	}
     
 }

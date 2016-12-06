@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pojos.TUsers;
+import com.pojos.Compte;
 import com.utils.OperationsDb;
 import com.utils.Utils;
 
@@ -26,7 +26,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String compteForm = request.getParameter("compteId");
-		List<TUsers> listComptes = new ArrayList<>();
+		List<Compte> listComptes = new ArrayList<>();
 		
 		// ----  ALL IN ONE
 		/* La requete suivante permet d'obtenir la liste des comptes d'1 client à partir du compte du formulaire
@@ -45,20 +45,15 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 
 
 
-	private void doCompileCompteClient(List<TUsers> listComptes, HttpServletResponse response) throws IOException {
-		TUsers endUser = listComptes.get(0);
-		for(TUsers a : listComptes){
+	private void doCompileCompteClient(List<Compte> listComptes, HttpServletResponse response) throws IOException {
+		Compte endUser = listComptes.get(0);
+		for(Compte a : listComptes){
 			
 			if(endUser.getAdresse() == null){
 				endUser.setAdresse(a.getAdresse()!= null  ? a.getAdresse() : null);
 			}
-			
 			if(endUser.getDateNaissance() == null){
 				endUser.setDateNaissance(a.getDateNaissance()!= null  ? a.getDateNaissance() : null);
-			}
-			
-			if(endUser.getEmail() == null){
-				endUser.setEmail(a.getEmail()!= null  ? a.getEmail() : null);
 			}
 			
 			if(endUser.getLieuNaissance() == null){
@@ -69,9 +64,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			}
 			if(endUser.getPrenoms() == null){
 				endUser.setPrenoms(a.getPrenoms()!= null  ? a.getPrenoms() : null);
-			}
-			if(endUser.getService() == null){
-				endUser.setService( a.getService()!= null  ? a.getService() : null);
 			}
 			if(endUser.getTypeService() == null){
 				endUser.setTypeService( a.getTypeService()!= null  ? a.getTypeService() : null);

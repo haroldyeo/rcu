@@ -32,9 +32,7 @@
 				<tr>
 					<td width="35%">N° compte: <strong data-bind="text: c.id"></strong></td>
 					<td>
-						<!-- ko if: (c.telFixe != null && c.telFixe.length > 0) -->
-							Fixe: <strong data-bind="text: c.telFixe"></strong> <br />
-						<!-- /ko  -->
+							<span data-bind="text: c.typeService"></span>: <strong data-bind="text: c.numero"></strong> <br />
 						
 						<!-- ko if: (c.telMobile != null && c.telMobile.length > 0) -->
 							Mobile: <strong data-bind="text: c.telMobile"></strong> <br />

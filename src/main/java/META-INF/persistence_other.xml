@@ -25,11 +25,11 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 				
 				<property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
 				
-				<property name="hibernate.connection.password" value="demo2016"/>
+				<property name="hibernate.connection.password" value="pocrcu"/>
 				
-				<property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+				<property name="hibernate.connection.url" value="jdbc:oracle:thin:@10.242.69.158:1521:IDENTDG"/>
 				
-				<property name="hibernate.connection.username" value="demo"/>
+				<property name="hibernate.connection.username" value="POCRCU"/>
 				
 				<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
 				

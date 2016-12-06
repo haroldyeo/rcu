@@ -13,35 +13,35 @@
 	<body>
 		  
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
-  				<h2>Référentiel Client Unique</h2>
+<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
+<!--   				<h2>Référentiel Client Unique</h2> -->
   				
 <!-- --------	Table search options -->
 			<div class="container">
 				<div id="searchDiv"  class="row">
 					<form id="signinForm">
 						<div class="form-group col-sm-4 col-md-4">
-					        <input type="text" class="form-control " id="txtNom" placeholder="Nom" style="width: 100%;" />
+					        <input type="text" class="form-control " id="txtNom" placeholder="Nom" style="width: 100%;" title="Nom" />
 					    </div>
 					
 					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtPrenom" placeholder="Prénoms" style="width: 100%;" />
+					        <input type="text" class="form-control" id="txtPrenom" placeholder="Prénoms" style="width: 100%;" title="Prénoms"/>
 					    </div>
 					    
 					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control"  id="txtDob"  placeholder="Date de naissance" style="width: 100%;" />
+					        <input type="text" class="form-control"  id="txtDob"  placeholder="Date de naissance" style="width: 100%;" title="Date de naissance"/>
 					    </div>
 					
 					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtLob" placeholder="Lieu de naissance" style="width: 100%;" />
+					        <input type="text" class="form-control" id="txtLob" placeholder="Lieu de naissance" style="width: 100%;" title="Lieu de naissance"/>
 					    </div>
 					    
 					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtPiece" placeholder="Pièce" style="width: 100%;" />
+					        <input type="text" class="form-control" id="txtPiece" placeholder="Pièce" style="width: 100%;" title="Pièce d'identité"/>
 					    </div>
 					    
 					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtTypePiece" placeholder="Type de pièce" style="width: 100%;" />
+					        <input type="text" class="form-control" id="txtTypePiece" placeholder="Type de pièce" style="width: 100%;" title="Type de pièce"/>
 					    </div>
 					    					    
 					    <div class="form-group col-md-12" style="margin-bottom: 0px">

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pojos.TUsers;
+import com.pojos.Compte;
 import com.utils.OperationsDb;
 import com.utils.Utils;
 
@@ -65,8 +65,8 @@ public class Home extends HttpServlet {
 		params.put("typePiece", typePiece);
 		
 		try {
-			TUsers uniqueResult = null;
-			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", params);
+			Compte uniqueResult = null;
+			List<Compte> list = (List<Compte>) OperationsDb.find("agents", params);
 			if(list.size()>0) // ==> un seul compte ne doit être affiché à la suite de la recherche
 				uniqueResult = list.get(0); 
 			if(uniqueResult != null){
