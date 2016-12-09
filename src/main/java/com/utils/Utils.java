@@ -46,6 +46,11 @@ public class Utils {
 			
 			job.put("piece", c.getPiece());
 			job.put("typePiece", c.getTypePiece());
+			
+			job.put("typeCompte", c.getTypeCompte());
+			job.put("statut", c.getStatut());
+			job.put("systemSourceCode", c.getSystemSourceCode());
+			job.put("compteContri", c.getCompteContribuable());
 		return job;
 	}
 

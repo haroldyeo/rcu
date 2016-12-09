@@ -42,12 +42,9 @@ public class OperationsDb {
                            	   String nom = (String)params.get("nom");
                           	   String prenoms = (String)params.get("prenoms");
                           	   String dateNaissance = (String)params.get("dateNaissance");
-                          	   String lieuNaissance = (String)params.get("lieuNaissance");
 	                           String piece = (String)params.get("piece");
-	                           String typePiece = (String)params.get("typePiece");
+	                           String compteContri = (String)params.get("compteContri");
 	                          	
-                           	   
-                           	   
                        			if ( id!= null ){
                                          criteria.add(Restrictions.eq("id", id));
                                      }                    			
@@ -64,20 +61,14 @@ public class OperationsDb {
                                  	criteria.add(Restrictions.ilike("dateNaissance", "%"+dateNaissance+"%"));
                                 }
                                 
-                                if (lieuNaissance != null && !lieuNaissance.equals("")){
-                                 	criteria.add(Restrictions.ilike("lieuNaissance", "%"+lieuNaissance+"%"));
-                                }
-                                
                                 if (piece != null && !piece.equals("")){
                                  	criteria.add(Restrictions.ilike("piece", "%"+piece+"%"));
                                 }
                                 
-                                if (typePiece != null && !typePiece.equals("")){
-                                 	criteria.add(Restrictions.ilike("typePiece", "%"+typePiece+"%"));
+                                if (compteContri != null && !compteContri.equals("")){
+                                 	criteria.add(Restrictions.ilike("compteContribuable", "%"+compteContri+"%"));
                                 }
                                 
-                                
-        					
                        		}
 
                        		returnedList = (List<Compte>)criteria.list();

@@ -31,14 +31,19 @@ public class Compte  implements java.io.Serializable {
      private String typeService;
      private String typePiece;
      private String piece;
+     private String typeCompte;
+     private String statut;
+     private String systemSourceCode;
+     private String compteContribuable;
      
 
     public Compte() {
     }
-    
-    
+  
+
 	public Compte(BigDecimal compteId, String nom, String prenoms, String dateNaissance, String lieuNaissance,
-			String adresse, String numero, String typeService, String typePiece, String piece) {
+			String adresse, String numero, String typeService, String typePiece, String piece, String typeCompte,
+			String statut, String systemSourceCode) {
 		super();
 		this.compteId = compteId;
 		this.nom = nom;
@@ -50,6 +55,9 @@ public class Compte  implements java.io.Serializable {
 		this.typeService = typeService;
 		this.typePiece = typePiece;
 		this.piece = piece;
+		this.typeCompte = typeCompte;
+		this.statut = statut;
+		this.systemSourceCode = systemSourceCode;
 	}
 
 
@@ -149,10 +157,53 @@ public class Compte  implements java.io.Serializable {
 		return piece;
 	}
 
-
+	
 	public void setPiece(String piece) {
 		this.piece = piece;
 	}
+
+	@Column(name="TYPE_COMPTE")
+	public String getTypeCompte() {
+		return typeCompte;
+	}
+
+
+	public void setTypeCompte(String typeCompte) {
+		this.typeCompte = typeCompte;
+	}
+
+	@Column(name="STATUT")
+	public String getStatut() {
+		return statut;
+	}
+
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
+	@Column(name="SYSTEM_SOURCE_CODE")
+	public String getSystemSourceCode() {
+		return systemSourceCode;
+	}
+
+
+	public void setSystemSourceCode(String systemSourceCode) {
+		this.systemSourceCode = systemSourceCode;
+	}
+
+	@Column(name="COMPTE_CONTRI")
+	public String getCompteContribuable() {
+		return compteContribuable;
+	}
+
+
+	public void setCompteContribuable(String compteContribuable) {
+		this.compteContribuable = compteContribuable;
+	}
+	
+	
+	
     
 }
 

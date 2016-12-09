@@ -28,18 +28,18 @@ function doMAJComptes(data) {
 // MAJ des infos des comptes
 
 // Recherche de 1er niveau
-function onSubmit(nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece) {
+function onSubmit(nom, prenoms, dateNaissance, piece, compteContri) {
 	var data = {
 		nom : nom,
 		prenoms : prenoms,
 		dateNaissance : dateNaissance,
-		lieuNaissance : lieuNaissance,
 		piece : piece,
-		typePiece : typePiece
+		compteContri : compteContri
 	};
 
 	$.post("home", data, function(response) {
-		if(response.length > 0){
+		alert(response);
+		if(response.length > 0 && response != '[]'){
 			doMajAgent(JSON.parse(response));
 		}else{
 			doMajAgent('');

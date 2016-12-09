@@ -31,18 +31,15 @@
 					    <div class="form-group col-sm-4 col-md-4" >
 					        <input type="text" class="form-control"  id="txtDob"  placeholder="Date de naissance" style="width: 100%;" title="Date de naissance"/>
 					    </div>
-					
+										    
 					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtLob" placeholder="Lieu de naissance" style="width: 100%;" title="Lieu de naissance"/>
-					    </div>
+					        <input type="text" class="form-control" id="txtPiece" placeholder="N° pièce d'identité" style="width: 100%;" title="N° pièce d'identité"/>
+					    </div> 
 					    
 					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtPiece" placeholder="Pièce" style="width: 100%;" title="Pièce d'identité"/>
+					        <input type="text" class="form-control" id="txtCompteContri" placeholder="Compte contribuable" style="width: 100%;" title="Compte contribuable"/>
 					    </div>
 					    
-					    <div class="form-group col-sm-4 col-md-4" >
-					        <input type="text" class="form-control" id="txtTypePiece" placeholder="Type de pièce" style="width: 100%;" title="Type de pièce"/>
-					    </div>
 					    					    
 					    <div class="form-group col-md-12" style="margin-bottom: 0px">
 					    	<input type="button" class="btn btn-default navbar-btn" value="Rechercher" id="btnSearch">
@@ -65,17 +62,19 @@
 							<th>Compte</th>
 							<th>Nom</th>
 							<th>Prénoms</th>
+							<th>Date de naissance</th>
 							<th>Détails</th>
 						</tr>
 						
 					</thead>
 					
-					<tbody data-bind="with: vm.agents">
+					<tbody data-bind="foreach: vm.agents">
 					
 						 <tr>
 						 	  <td data-bind="text: id"></td>
 			                  <td data-bind="text: nom"></td>
 			                  <td data-bind="text: prenoms"></td>
+			                  <td data-bind="text: dateNaissance"></td>
 			                  <td>
 			                  	<input type="button" data-bind="click: vm.displayModal.bind(id)" id="btnDetails"
 			                  	data-toggle="modal" data-target="#myModal" class="btnDetails" value="Details"/> 
@@ -98,42 +97,64 @@
   	 	<script src="jquery/knockout-3.4.1.js"></script>
 		<script src="jquery/ko.js"></script>
 		<script>
+		
+		// algo de recherche: everything empty
+		function checkAllSearchEmpty(array){
+			for (var i = 0; i < array.length; i++) {
+			    if(array[i] != ''){
+			    	return true; // at least 1 non empty, so its good
+			    } 
+			}			
+			return false; // all are empty
+		}
+		
+		// algo de recherche: nom, prenoms et DDN ensembles
+		function checkEmptySearchBoxes(array){
+			
+			if(checkAllSearchEmpty(array) == false){ // all are empty --> in combination with other criterias, its good 
+				return true;
+			}
+			
+			for (var i = 0; i < array.length; i++) {
+			    if(array[i] == ''){
+			    	return false;
+			    } 
+			}			
+			return true;
+		}
+		
 		  $(document).ready(function(){
-				var nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece;
+				
+			  	var nom, prenoms, dateNaissance, piece, compteContri;
+			  
+				// PEC bouton de recherche
 				$("#btnSearch").click(function(){
 					nom = $("#txtNom").val();
 					prenoms = $("#txtPrenom").val();
 					dateNaissance = $("#txtDob").val();
-					lieuNaissance = $("#txtLob").val();
 					piece = $("#txtPiece").val();
-					typePiece = $("#txtTypePiece").val();
-		//			typepiece = $("#txtTypePiece").val();
+					compteContri = $("#txtCompteContri").val();
 					
-					if(nom==''){
-						$("#diverror").text("Le champs Nom est obligatoire").slideDown("3000").delay(4000).slideUp("3000");
-					}else 
-					if(prenoms==''){
-						$("#diverror").text("Le champs Prénoms est obligatoire").slideDown("3000").delay(4000).slideUp("3000");
-					}
+					var arrayAllSearchValues = [nom, prenoms, dateNaissance, piece, compteContri];
+					var arrayComboSearchValues = [nom, prenoms, dateNaissance];
 					
-					if(nom!='' && prenoms != ''){
-						if(dateNaissance=='' && lieuNaissance=='' && piece==''&& typePiece==''){
-							$("#diverror").text("Saisir au moins un paramètre supplémentaire").slideDown("3000").delay(4000).slideUp("3000");
-						} else {
-							onSubmit(nom, prenoms, dateNaissance, lieuNaissance, piece, typePiece);
-						}
-					}
-					
-					
+					if(checkAllSearchEmpty(arrayAllSearchValues) == false){
+						$("#diverror").text("Veuillez saisir au moins un critère de recherches").slideDown("3000").delay(4000).slideUp("3000");
+					} else if(checkEmptySearchBoxes(arrayComboSearchValues) == false){
+						$("#diverror").text("Veuillez saisir le nom, le prénom et la date de naissance").slideDown("3000").delay(4000).slideUp("3000");
+					} else{
+						onSubmit(nom, prenoms, dateNaissance, piece, compteContri);
+					}					
 				});
+				
+				
 				
 				$("#btnRefresh").click(function(){
 					$("#txtNom").val("");
 					$("#txtPrenom").val("");
 					$("#txtDob").val("");
-					$("#txtLob").val("");
 					$("#txtPiece").val("");
-					$("#txtTypePiece").val("");
+					$("#txtCompteContri").val("");
 					window.location.reload();
 				});
 				

@@ -2,7 +2,9 @@ package com.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -52,21 +54,26 @@ public class Home extends HttpServlet {
 		String nom = request.getParameter("nom");
 		String prenoms = request.getParameter("prenoms");
 		String dateNaissance = request.getParameter("dateNaissance");
-		String lieuNaissance = request.getParameter("lieuNaissance");
 		String piece = request.getParameter("piece");
-		String typePiece = request.getParameter("typePiece");
+		String compteContri = request.getParameter("compteContri");
 		
 		Map<String, Object>  params = new HashMap<String, Object>();
 		params.put("nom", nom);
 		params.put("prenoms", prenoms);
 		params.put("dateNaissance", dateNaissance);
-		params.put("lieuNaissance", lieuNaissance);
 		params.put("piece", piece);
-		params.put("typePiece", typePiece);
+		params.put("compteContri", compteContri);
 		
 		try {
-			Compte uniqueResult = null;
 			List<Compte> list = (List<Compte>) OperationsDb.find("agents", params);
+			if(list.size() > 0)
+				list = getComptesUniques(list);
+			response.setContentType("application/text");
+			PrintWriter out = response.getWriter();
+			out.print(Utils.doMakeJsonAgent(list));
+			out.flush();
+			System.out.println();
+			/*
 			if(list.size()>0) // ==> un seul compte ne doit être affiché à la suite de la recherche
 				uniqueResult = list.get(0); 
 			if(uniqueResult != null){
@@ -75,11 +82,40 @@ public class Home extends HttpServlet {
 				out.print(Utils.doMakeJsonAgent(uniqueResult));
 				out.flush();
 			}
-			
+			*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+
+	private List<Compte> getComptesUniques(List<Compte> list) {
+		
+		// recenser toutes les pièces d'identités dans une liste 
+		List<String> allPieces = new ArrayList<>();
+		for(Compte c : list){
+			allPieces.add(c.getPiece());
+		}
+		
+		// get a set of uniques keys
+		LinkedHashSet<String> allPiecesSet = new LinkedHashSet<>();
+		allPiecesSet.addAll(allPieces);
+		
+		// Get the corresponding comptes in the return list
+		List<Compte> listToReturn = new ArrayList<>();
+		boolean flag = true;
+		
+		for(String s : allPiecesSet){
+			for(Compte c : list){
+				if(s.equals(c.getPiece())){
+					listToReturn.add(c);
+					flag = false;
+					break;
+				}
+			}
+		}
+		return listToReturn;
 	}
 	
 	
