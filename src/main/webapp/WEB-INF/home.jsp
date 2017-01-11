@@ -89,9 +89,12 @@
 	</div>
 	
 	<div id="myModal" class="modal fade" role="dialog">
+		<%@include file="modal_comptes.jsp" %>
+	</div>
 	
-	<%@include file="modal_comptes.jsp" %>
-	
+	<div id="wait" style="display:none; text-align: center">
+		<img src='/rcudemo/images/loading4.gif' width="128" height="128" />
+		<br>Chargement...
 	</div>
   	
   	 	<script src="jquery/knockout-3.4.1.js"></script>
@@ -160,6 +163,17 @@
 				
 			});
 		
+		</script>
+		
+		<script>
+			$(document).ready(function(){
+			    $(document).ajaxStart(function(){
+			        $("#wait").css("display", "block");
+			    });
+			    $(document).ajaxComplete(function(){
+			        $("#wait").css("display", "none");
+			    });
+			});
 		</script>
   		
   </body>

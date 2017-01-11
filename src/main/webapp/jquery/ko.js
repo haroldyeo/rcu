@@ -38,7 +38,7 @@ function onSubmit(nom, prenoms, dateNaissance, piece, compteContri) {
 	};
 
 	$.post("home", data, function(response) {
-		alert(response);
+//		alert(response);
 		if(response.length > 0 && response != '[]'){
 			doMajAgent(JSON.parse(response));
 		}else{
