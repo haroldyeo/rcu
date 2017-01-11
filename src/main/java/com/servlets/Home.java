@@ -104,13 +104,11 @@ public class Home extends HttpServlet {
 		
 		// Get the corresponding comptes in the return list
 		List<Compte> listToReturn = new ArrayList<>();
-		boolean flag = true;
 		
 		for(String s : allPiecesSet){
 			for(Compte c : list){
 				if(s.equals(c.getPiece())){
 					listToReturn.add(c);
-					flag = false;
 					break;
 				}
 			}
