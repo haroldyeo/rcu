@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pojos.Compte;
+import com.pojos.TableSource;
 import com.utils.OperationsDb;
 import com.utils.Utils;
 
@@ -26,7 +27,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String compteForm = request.getParameter("compteId");
-		List<Compte> listComptes = new ArrayList<>();
+		List<TableSource> listComptes = new ArrayList<>();
 		
 		// ----  ALL IN ONE
 		/* La requete suivante permet d'obtenir la liste des comptes d'1 client à partir du compte du formulaire
@@ -45,13 +46,13 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 
 
 
-	private void doCompileCompteClient(List<Compte> listComptes, HttpServletResponse response) throws IOException {
-		Compte endUser = listComptes.get(0);
-		for(Compte a : listComptes){
+	private void doCompileCompteClient(List<TableSource> listComptes, HttpServletResponse response) throws IOException {
+		TableSource endUser = listComptes.get(0);
+		for(TableSource a : listComptes){
 			
-			if(endUser.getAdresse() == null){
-				endUser.setAdresse(a.getAdresse()!= null  ? a.getAdresse() : null);
-			}
+//			if(endUser.getAdresse() == null){
+//				endUser.setAdresse(a.getAdresse()!= null  ? a.getAdresse() : null);
+//			}
 			if(endUser.getDateNaissance() == null){
 				endUser.setDateNaissance(a.getDateNaissance()!= null  ? a.getDateNaissance() : null);
 			}

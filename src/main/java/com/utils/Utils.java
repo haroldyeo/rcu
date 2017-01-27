@@ -5,7 +5,7 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.pojos.Compte;
+import com.pojos.TableSource;
 
 public class Utils {
 	
@@ -17,9 +17,9 @@ public class Utils {
 	 * @return JsonArray
 	 */
 	@SuppressWarnings("unchecked")
-	public static JSONArray doMakeJsonAgent(List<Compte> list){
+	public static JSONArray doMakeJsonAgent(List<TableSource> list){
 		JSONArray jsonArray = new JSONArray();
-		for (Compte c : list){			
+		for (TableSource c : list){			
 			jsonArray.add(doMakeJsonAgent(c));
 		}
 		return jsonArray;
@@ -31,7 +31,7 @@ public class Utils {
 	 * @return JsonObject
 	 */
 	@SuppressWarnings("unchecked")
-	public static JSONObject doMakeJsonAgent(Compte c){
+	public static JSONObject doMakeJsonAgent(TableSource c){
 			JSONObject job = new JSONObject();
 			
 			job.put("id", c.getCompteId());
@@ -40,7 +40,7 @@ public class Utils {
 			job.put("lieuNaissance", c.getLieuNaissance());
 			
 			job.put("numero", c.getNumero());
-			job.put("adresse", c.getAdresse());
+//			job.put("adresse", c.getAdresse());
 			job.put("typeService", c.getTypeService());
 			job.put("dateNaissance", c.getDateNaissance());		
 			
@@ -49,7 +49,7 @@ public class Utils {
 			
 			job.put("typeCompte", c.getTypeCompte());
 			job.put("statut", c.getStatut());
-			job.put("systemSourceCode", c.getSystemSourceCode());
+//			job.put("systemSourceCode", c.getSystemSourceCode());
 			job.put("compteContri", c.getCompteContribuable());
 		return job;
 	}

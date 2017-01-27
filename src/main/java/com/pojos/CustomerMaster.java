@@ -5,10 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//@Entity
-@Table(name="T_FINAL" ,schema="DEMO")
-//@Table(name="RCU_CUSTOMER_MASTER" ,schema="DEMO")
-public class FinalTable  {
+@Entity
+@Table(name="TEST_RCU_CUSTOMER_MASTER" ,schema="POCRCU")
+public class CustomerMaster  {
 
 	
 	
@@ -30,7 +29,7 @@ public class FinalTable  {
 		this.id = id;
 	}
 	
-	@Column(name="master_id", nullable=false)
+	@Column(name="MASTER_ID", nullable=false)
 	public String getMasterId() {
 		return masterId;
 	}
@@ -38,42 +37,49 @@ public class FinalTable  {
 	public void setMasterId(String masterId) {
 		this.masterId = masterId;
 	}
+	@Column(name="ID_COMPTE")
 	public String getCompteId() {
 		return compteId;
 	}
 	public void setCompteId(String compteId) {
 		this.compteId = compteId;
 	}
+	@Column(name="MASTER_ID_B2C")
 	public String getMasterIdB2C() {
 		return masterIdB2C;
 	}
 	public void setMasterIdB2C(String masterIdB2C) {
 		this.masterIdB2C = masterIdB2C;
 	}
+	@Column(name="SYSTEME_SOURCE_CD")
 	public String getSystemSourceCode() {
 		return systemSourceCode;
 	}
 	public void setSystemSourceCode(String systemSourceCode) {
 		this.systemSourceCode = systemSourceCode;
 	}
+	@Column(name="TYPE_MATCH_CD")
 	public String getTypeMatch() {
 		return typeMatch;
 	}
 	public void setTypeMatch(String typeMatch) {
 		this.typeMatch = typeMatch;
 	}
+	@Column(name="TYPE_SERVICE_ID")
 	public String getTyperService() {
 		return typerService;
 	}
 	public void setTyperService(String typerService) {
 		this.typerService = typerService;
 	}
+	@Column(name="DATE_CREATION_MID")
 	public String getDateCreation() {
 		return dateCreation;
 	}
 	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
 	}
+	@Column(name="DATE_CESSSATION_MID")
 	public String getDateCessation() {
 		return dateCessation;
 	}

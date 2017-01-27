@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pojos.Compte;
+import com.pojos.TableSource;
 import com.utils.OperationsDb;
 import com.utils.Utils;
 
@@ -65,9 +65,9 @@ public class Home extends HttpServlet {
 		params.put("compteContri", compteContri);
 		
 		try {
-			List<Compte> list = (List<Compte>) OperationsDb.find("agents", params);
+			List<TableSource> list = (List<TableSource>) OperationsDb.find("agents", params);
 			if(list.size() > 0)
-				list = getComptesUniques(list);
+				list = getComptesUniquesByPiece(list);
 			response.setContentType("application/text");
 			PrintWriter out = response.getWriter();
 			out.print(Utils.doMakeJsonAgent(list));
@@ -90,11 +90,11 @@ public class Home extends HttpServlet {
 	}
 
 
-	private List<Compte> getComptesUniques(List<Compte> list) {
+	private List<TableSource> getComptesUniquesByPiece(List<TableSource> list) {
 		
 		// recenser toutes les pièces d'identités dans une liste 
 		List<String> allPieces = new ArrayList<>();
-		for(Compte c : list){
+		for(TableSource c : list){
 			allPieces.add(c.getPiece());
 		}
 		
@@ -103,11 +103,37 @@ public class Home extends HttpServlet {
 		allPiecesSet.addAll(allPieces);
 		
 		// Get the corresponding comptes in the return list
-		List<Compte> listToReturn = new ArrayList<>();
+		List<TableSource> listToReturn = new ArrayList<>();
 		
 		for(String s : allPiecesSet){
-			for(Compte c : list){
+			for(TableSource c : list){
 				if(s.equals(c.getPiece())){
+					listToReturn.add(c);
+					break;
+				}
+			}
+		}
+		return listToReturn;
+	}
+	
+private List<TableSource> getComptesUniquesByCompte(List<TableSource> list) {
+		
+		// recenser toutes les pièces d'identités dans une liste 
+		List<String> allComptes = new ArrayList<>();
+		for(TableSource c : list){
+			allComptes.add(c.getCompteId().toString());
+		}
+		
+		// get a set of uniques keys
+		LinkedHashSet<String> allComptesSet = new LinkedHashSet<>();
+		allComptesSet.addAll(allComptes);
+		
+		// Get the corresponding comptes in the return list
+		List<TableSource> listToReturn = new ArrayList<>();
+		
+		for(String s : allComptesSet){
+			for(TableSource c : list){
+				if(s.equals(c.getCompteId())){
 					listToReturn.add(c);
 					break;
 				}

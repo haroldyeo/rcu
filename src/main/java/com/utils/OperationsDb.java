@@ -11,7 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import com.pojos.Compte;
+import com.pojos.TableSource;
 import com.pojos.FinalTable;
 
 /**
@@ -34,7 +34,7 @@ public class OperationsDb {
         switch(strEntity){
             
             case("agents"):
-                       Criteria criteria = hibSession.createCriteria(Compte.class);
+                       Criteria criteria = hibSession.createCriteria(TableSource.class);
                        criteria.addOrder(Order.asc("id"));
                        		if(params != null){
                        			
@@ -71,7 +71,7 @@ public class OperationsDb {
                                 
                        		}
 
-                       		returnedList = (List<Compte>)criteria.list();
+                       		returnedList = (List<TableSource>)criteria.list();
                         break;
                     
             case("final"):
@@ -97,11 +97,11 @@ public class OperationsDb {
     }
 
 	@SuppressWarnings("unchecked")
-	public static List<Compte> getComptesClient(String compteForm) {
+	public static List<TableSource> getComptesClient(String compteForm) {
 		SQLQuery q = hibSession.createSQLQuery(GET_COMPTES_FORM);
-		q.addEntity(Compte.class);
+		q.addEntity(TableSource.class);
 		q.setParameter("compteForm", compteForm);
-		return (List<Compte>)q.list();
+		return (List<TableSource>)q.list();
 	}
     
 }
