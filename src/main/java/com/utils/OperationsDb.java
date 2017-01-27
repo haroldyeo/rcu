@@ -22,9 +22,9 @@ public class OperationsDb {
 	
 	public static final Session hibSession = HibernateUtil.getHibSession();
 	
-	public static final String GET_COMPTES_FORM = "select * from COMPTE c  inner  join "
-				+ " (select f1.COMPTEID from T_FINAL f1 left outer join T_FINAL f on f.master_id = f1.master_id where f.COMPTEID = :compteForm) i"
-				+ " on c.id = i.COMPTEID";
+	public static final String GET_COMPTES_FORM = "select * from TEST_RCU_TABLE_SOURCE c inner  join "
+				+ " (select f1.ID_COMPTE from TEST_RCU_CUSTOMER_MASTER f1 left outer join TEST_RCU_CUSTOMER_MASTER f on f.MASTER_ID = f1.MASTER_ID where f.ID_COMPTE = :compteForm) i"
+				+ " on c.id = i.ID_COMPTE";
     @SuppressWarnings("unchecked")
 	public static Object find (String strEntity, Map<String, Object> params){
         

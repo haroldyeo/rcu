@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TEST_RCU_CUSTOMER_MASTER" ,schema="POCRCU")
+@Table(name="TEST_RCU_CUSTOMER_MASTER" ,schema="IDENTDG")
 public class CustomerMaster  {
 
 	
