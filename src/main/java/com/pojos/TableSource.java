@@ -17,7 +17,7 @@ public class TableSource implements Serializable{
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		private BigDecimal compteId;
+		private String compteId;
 	     private String nom;
 	     private String prenoms;
 	     private String dateNaissance;
@@ -31,6 +31,7 @@ public class TableSource implements Serializable{
 	     private String statut;
 //	     private String systemSourceCode;
 	     private String compteContribuable;
+	 	private String dateCreation;
 	     
 
 	     
@@ -40,7 +41,7 @@ public class TableSource implements Serializable{
 		}
 
 
-		public TableSource(BigDecimal compteId, String nom, String prenoms, String dateNaissance, String lieuNaissance,
+		public TableSource(String compteId, String nom, String prenoms, String dateNaissance, String lieuNaissance,
 				String adresse, String numero, String typeService, String typePiece, String piece, String typeCompte,
 				String statut, String systemSourceCode) {
 			super();
@@ -60,12 +61,12 @@ public class TableSource implements Serializable{
 
 		@Id 
 		@Column(name="ID_COMPTE", unique=true, nullable=false)
-		public BigDecimal getCompteId() {
+		public String getCompteId() {
 			return compteId;
 		}
 
 
-		public void setCompteId(BigDecimal compteId) {
+		public void setCompteId(String compteId) {
 			this.compteId = compteId;
 		}
 
@@ -129,7 +130,7 @@ public class TableSource implements Serializable{
 			this.numero = numero;
 		}
 
-		@Column(name="TYPE_SERVICE", length=40)
+		@Column(name="TYPE_SERVICE")
 		public String getTypeService() {
 			return typeService;
 		}
@@ -197,6 +198,10 @@ public class TableSource implements Serializable{
 
 		public void setCompteContribuable(String compteContribuable) {
 			this.compteContribuable = compteContribuable;
+		}
+		@Column(name="DATE_CREATION")
+		public String getDateCreation() {
+			return dateCreation;
 		}
 		
 		
