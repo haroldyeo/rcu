@@ -66,8 +66,8 @@ public class Home extends HttpServlet {
 		
 		try {
 			List<Compte> list = (List<Compte>) OperationsDb.find("agents", params);
-			if(list.size() > 0)
-				list = getComptesUniques(list);
+//			if(list.size() > 0)
+//				list = getComptesUniques(list);
 			response.setContentType("application/text");
 			PrintWriter out = response.getWriter();
 			out.print(Utils.doMakeJsonAgent(list));
