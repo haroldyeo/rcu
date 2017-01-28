@@ -15,21 +15,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pojos.Compte;
+import com.utils.Log;
 import com.utils.OperationsDb;
 import com.utils.Utils;
 
 @WebServlet("/Home")
-public class Home extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+public class Home extends HttpServlet{
 
-    public Home() {
-        super();
-    }
+	private static final long serialVersionUID = 1L;
+	public Log mylog;
+	
+	
+	public Home() {
+		mylog = new Log(Utils.logFilePath);
+	}
+
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		mylog.logger.info("inside home");
+				
 		// generate schema
 //	    Persistence.generateSchema("rcudemo", null);
 		
@@ -51,6 +56,9 @@ public class Home extends HttpServlet {
 
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		mylog.logger.info("inside Home - doPost");
+		
 		String nom = request.getParameter("nom");
 		String prenoms = request.getParameter("prenoms");
 		String dateNaissance = request.getParameter("dateNaissance");

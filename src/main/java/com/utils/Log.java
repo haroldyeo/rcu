@@ -6,12 +6,12 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-public class Log {
+public class Log{
 	
+
 	public Logger logger;
 	FileHandler handler;
 	
-
 	public Log(String fName){
 		logger = Logger.getLogger("test");
 		File f = new File(fName);
@@ -19,12 +19,11 @@ public class Log {
 			try {
 				f.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		try {
-			handler = new FileHandler(fName,true);
+			handler = new FileHandler(fName,8096,1,true);
 			logger.addHandler(handler);
 			SimpleFormatter formatter = new SimpleFormatter();
 			handler.setFormatter(formatter);
@@ -34,4 +33,4 @@ public class Log {
 
 	}
 
-}
+	}

@@ -10,6 +10,7 @@ import com.pojos.Compte;
 public class Utils {
 	
 //	public static final long countComptes = getCountComptes();
+	public static final String logFilePath = "c://2017//LOGS//rcuLog.log";
 
 	/**
 	 * Fonction qui transforme une liste de comptes en array JSON

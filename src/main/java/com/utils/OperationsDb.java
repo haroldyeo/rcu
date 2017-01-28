@@ -4,6 +4,7 @@ package com.utils;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
@@ -25,11 +26,15 @@ public class OperationsDb {
 	public static final String GET_COMPTES_FORM = "select * from COMPTE c  inner  join "
 				+ " (select f1.COMPTEID from T_FINAL f1 left outer join T_FINAL f on f.master_id = f1.master_id where f.COMPTEID = :compteForm) i"
 				+ " on c.id = i.COMPTEID";
-    @SuppressWarnings("unchecked")
+	
+	@SuppressWarnings("unchecked")
 	public static Object find (String strEntity, Map<String, Object> params){
+		
+		Log mylog = new Log(Utils.logFilePath);
         
         @SuppressWarnings("rawtypes")
 		List returnedList = null;
+        
         
         switch(strEntity){
             
@@ -37,6 +42,8 @@ public class OperationsDb {
                        Criteria criteria = hibSession.createCriteria(Compte.class);
                        criteria.addOrder(Order.asc("id"));
                        		if(params != null){
+                       			
+                       			mylog.logger.info("find - agents - params not null");
                        			
                        		   BigDecimal id = params.get("id") != null ? new BigDecimal((String)params.get("id")) : null; 
                            	   String nom = (String)params.get("nom");
@@ -75,9 +82,13 @@ public class OperationsDb {
                         break;
                     
             case("final"):
+            	            	
                 Criteria criteriaFn = hibSession.createCriteria(FinalTable.class);
                 criteriaFn.addOrder(Order.asc("masterId"));
                 		if(params != null){
+                			
+                			mylog.logger.info("find - final - params not null");
+                			
                 			String masterId = params.get("masterId") != null ? ((String)params.get("masterId")) : null;
                 			String compteId = params.get("compteId") != null ? ((String)params.get("compteId")) : null;
                 			if ( masterId!= null ){
@@ -98,10 +109,19 @@ public class OperationsDb {
 
 	@SuppressWarnings("unchecked")
 	public static List<Compte> getComptesClient(String compteForm) {
+		Log mylog = new Log(Utils.logFilePath);
+		mylog.logger.info("getComptes query executed");
+		
 		SQLQuery q = hibSession.createSQLQuery(GET_COMPTES_FORM);
 		q.addEntity(Compte.class);
 		q.setParameter("compteForm", compteForm);
-		return (List<Compte>)q.list();
+		try {
+			return (List<Compte>)q.list();
+		} catch (Exception e) {
+			mylog.logger.log(Level.SEVERE,"Erreur lors de la requete pour obtenir les comptes",e);
+			throw new RuntimeException(e);
+		}
+		
 	}
     
 }
