@@ -4,6 +4,7 @@ package com.utils;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
@@ -11,8 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import com.pojos.CustomerMaster;
 import com.pojos.TableSource;
-import com.pojos.FinalTable;
 
 /**
  *
@@ -27,6 +28,8 @@ public class OperationsDb {
 				+ " on c.id = i.ID_COMPTE";
     @SuppressWarnings("unchecked")
 	public static Object find (String strEntity, Map<String, Object> params){
+    	
+    	Log rcuLog = new Log(Utils.logFilePath);
         
         @SuppressWarnings("rawtypes")
 		List returnedList = null;
@@ -37,6 +40,8 @@ public class OperationsDb {
                        Criteria criteria = hibSession.createCriteria(TableSource.class);
                        criteria.addOrder(Order.asc("id"));
                        		if(params != null){
+                       			
+                       			rcuLog.logger.log(Level.INFO, "find -> agents -> params not null");
                        			
                        		   BigDecimal id = params.get("id") != null ? new BigDecimal((String)params.get("id")) : null; 
                            	   String nom = (String)params.get("nom");
@@ -75,9 +80,12 @@ public class OperationsDb {
                         break;
                     
             case("final"):
-                Criteria criteriaFn = hibSession.createCriteria(FinalTable.class);
+                Criteria criteriaFn = hibSession.createCriteria(CustomerMaster.class);
                 criteriaFn.addOrder(Order.asc("masterId"));
                 		if(params != null){
+                			
+                			rcuLog.logger.log(Level.INFO, "find -> final -> params not null");
+                			
                 			String masterId = params.get("masterId") != null ? ((String)params.get("masterId")) : null;
                 			String compteId = params.get("compteId") != null ? ((String)params.get("compteId")) : null;
                 			if ( masterId!= null ){
@@ -87,7 +95,7 @@ public class OperationsDb {
                 				criteriaFn.add(Restrictions.eq("compteId", compteId));
                               }
                 			}
-                		returnedList = (List<FinalTable>)criteriaFn.list();
+                		returnedList = (List<CustomerMaster>)criteriaFn.list();
                  break;
           
         }
@@ -98,6 +106,10 @@ public class OperationsDb {
 
 	@SuppressWarnings("unchecked")
 	public static List<TableSource> getComptesClient(String compteForm) {
+		
+		Log rcuLog = new Log(Utils.logFilePath);
+		rcuLog.logger.info("requete getComptes about to be executed");
+		
 		SQLQuery q = hibSession.createSQLQuery(GET_COMPTES_FORM);
 		q.addEntity(TableSource.class);
 		q.setParameter("compteForm", compteForm);

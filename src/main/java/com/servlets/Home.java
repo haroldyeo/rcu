@@ -33,7 +33,7 @@ public class Home extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		rcuLog.logger.info("home servlet get executed");
+		rcuLog.logger.info("inside home servlet GET");
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 		
 	}
@@ -43,7 +43,7 @@ public class Home extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		rcuLog.logger.info("home servlet post executed");
+		rcuLog.logger.info("inside home servlet post POST");
 		
 		String nom = request.getParameter("nom");
 		String prenoms = request.getParameter("prenoms");
