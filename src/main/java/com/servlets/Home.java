@@ -15,34 +15,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pojos.TableSource;
+import com.utils.Log;
 import com.utils.OperationsDb;
 import com.utils.Utils;
 
 @WebServlet("/Home")
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Log rcuLog;
        
 
     public Home() {
-        super();
+    	super();
+    	rcuLog = new Log(Utils.logFilePath);
+        
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// generate schema
-//	    Persistence.generateSchema("rcudemo", null);
-		
-		// Obtenir le nombre de comptes pour affichage dans la vue -> T_FINAL
-//		request.setAttribute("countComptes", Utils.countComptes);
-		
-			
-//		try {
-//			List<TUsers> list = (List<TUsers>) OperationsDb.find("agents", null);
-//			request.setAttribute("dataAgents", Utils.doMakeJsonAgent(list));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		rcuLog.logger.info("home servlet get executed");
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 		
 	}
@@ -51,6 +42,9 @@ public class Home extends HttpServlet {
 
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		rcuLog.logger.info("home servlet post executed");
+		
 		String nom = request.getParameter("nom");
 		String prenoms = request.getParameter("prenoms");
 		String dateNaissance = request.getParameter("dateNaissance");
@@ -66,13 +60,10 @@ public class Home extends HttpServlet {
 		
 		try {
 			List<TableSource> list = (List<TableSource>) OperationsDb.find("agents", params);
-//			if(list.size() > 0)
-//				list = getComptesUniquesByPiece(list);
 			response.setContentType("application/text");
 			PrintWriter out = response.getWriter();
 			out.print(Utils.doMakeJsonAgent(list));
 			out.flush();
-			System.out.println();
 			/*
 			if(list.size()>0) // ==> un seul compte ne doit être affiché à la suite de la recherche
 				uniqueResult = list.get(0); 
