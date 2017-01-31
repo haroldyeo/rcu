@@ -1,5 +1,6 @@
 package com.utils;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -12,7 +13,7 @@ public class Utils {
 //	public static final long countComptes = getCountComptes();
 
 //	public static final String logFilePath = "c://rcudemologs//rculog.log";
-	public static final String logFilePath = "c://2017//LOGS//olala.log";
+	public static final String logFilePath = "c://RCU_LOGS//rculog.log";
 
 	/**
 	 * Fonction qui transforme une liste de comptes en array JSON
@@ -55,6 +56,10 @@ public class Utils {
 //			job.put("systemSourceCode", c.getSystemSourceCode());
 			job.put("compteContri", c.getCompteContribuable());
 		return job;
+	}
+
+	public static void doTakeCareException(Exception e) {
+		
 	}
 
 //	private static long getCountComptes() {

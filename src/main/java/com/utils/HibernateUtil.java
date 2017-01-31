@@ -28,6 +28,7 @@ public class HibernateUtil {
     		return (Session) entityManager.getDelegate();
 		} catch (Exception e) {
 			rcuLog.logger.log(Level.SEVERE, "Erreur build entity manager", e);
+			Utils.doTakeCareException(e);
 			throw new RuntimeException();
 		}
 		
