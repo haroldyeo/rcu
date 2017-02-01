@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +37,11 @@ public class Home extends HttpServlet {
 		rcuLog.logger.info("inside home servlet GET");
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 		
+		List<TableSource> list = (List<TableSource>) OperationsDb.find("agents", null);
+		for(TableSource t : list){
+			rcuLog.logger.log(Level.INFO, t.getCompteId());
+		}
+		
 	}
 
 
@@ -60,6 +66,10 @@ public class Home extends HttpServlet {
 		
 		try {
 			List<TableSource> list = (List<TableSource>) OperationsDb.find("agents", params);
+			if(list != null)
+       			rcuLog.logger.log(Level.INFO, "size retruned list: "+list.size());
+       		else
+       			rcuLog.logger.log(Level.INFO, "returned list is null");
 			response.setContentType("application/text");
 			PrintWriter out = response.getWriter();
 			out.print(Utils.doMakeJsonAgent(list));
@@ -80,7 +90,9 @@ public class Home extends HttpServlet {
 		}
 	}
 
-
+/*  WE DONT GET UNIQUE ACCOUNTS ANYMORE!!!!
+ * 
+ * 
 	private List<TableSource> getComptesUniquesByPiece(List<TableSource> list) {
 		
 		// recenser toutes les pièces d'identités dans une liste 
@@ -133,6 +145,6 @@ private List<TableSource> getComptesUniquesByCompte(List<TableSource> list) {
 		return listToReturn;
 	}
 	
-	
+	*/
 
 }

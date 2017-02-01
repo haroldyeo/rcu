@@ -1,7 +1,6 @@
 package com.pojos;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TEST_RCU_TABLE_SOURCE" ,schema="IDENTDG")
+@Table(name="TEST_RCU_TABLE_SOURCE" ,schema="POCRCU")
 public class TableSource implements Serializable{
 	
 
@@ -140,12 +139,12 @@ public class TableSource implements Serializable{
 			this.typeService = typeService;
 		}
 
-
+		@Column(name="TYPE_PIECE")
 		public String getTypePiece() {
 			return typePiece;
 		}
 
-		@Column(name="TYPE_PIECE")
+		
 		public void setTypePiece(String typePiece) {
 			this.typePiece = typePiece;
 		}
@@ -203,6 +202,13 @@ public class TableSource implements Serializable{
 		public String getDateCreation() {
 			return dateCreation;
 		}
+
+
+		public void setDateCreation(String dateCreation) {
+			this.dateCreation = dateCreation;
+		}
+		
+		
 		
 		
 		

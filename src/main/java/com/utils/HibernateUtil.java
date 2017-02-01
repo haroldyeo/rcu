@@ -12,12 +12,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 public class HibernateUtil {
 
 	public static EntityManagerFactory entityManagerFactory;
 	public static EntityManager entityManager;
+	final static Logger logger = Logger.getLogger(HibernateUtil.class);
     
     public static Session getHibSession(){
     	Log rcuLog = new Log(Utils.logFilePath);
@@ -27,6 +29,7 @@ public class HibernateUtil {
     		entityManager = entityManagerFactory.createEntityManager();
     		return (Session) entityManager.getDelegate();
 		} catch (Exception e) {
+			logger.error("BIG ERRRREUR!!!" , e);
 			rcuLog.logger.log(Level.SEVERE, "Erreur build entity manager", e);
 			Utils.doTakeCareException(e);
 			throw new RuntimeException();
