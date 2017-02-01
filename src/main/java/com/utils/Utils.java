@@ -12,9 +12,6 @@ public class Utils {
 	
 //	public static final long countComptes = getCountComptes();
 
-//	public static final String logFilePath = "c://rcudemologs//rculog.log";
-	public static final String logFilePath = "c://RCU_LOGS//rculog.log";
-
 	/**
 	 * Fonction qui transforme une liste de comptes en array JSON
 	 * @param list liste comptes

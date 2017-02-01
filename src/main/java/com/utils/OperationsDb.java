@@ -29,11 +29,7 @@ public class OperationsDb {
 				+ " (select f1.ID_COMPTE from TEST_RCU_CUSTOMER_MASTER f1 left outer join TEST_RCU_CUSTOMER_MASTER f on f.MASTER_ID = f1.MASTER_ID where f.ID_COMPTE = :compteForm) i"
 				+ " on c.id = i.ID_COMPTE";
     @SuppressWarnings("unchecked")
-	public static Object find (String strEntity, Map<String, Object> params){
-    	
-    	Log rcuLog = new Log(Utils.logFilePath);
-    	
-    	
+	public static Object find (String strEntity, Map<String, Object> params){    	
         
         @SuppressWarnings("rawtypes")
 		List returnedList = null;
@@ -45,7 +41,7 @@ public class OperationsDb {
                        criteria.addOrder(Order.asc("id"));
                        		if(params != null){
                        			
-                       			rcuLog.logger.log(Level.INFO, "find -> agents -> params not null");
+                       			logger.info("find -> agents -> params not null");
                        			
                        		   BigDecimal id = params.get("id") != null ? new BigDecimal((String)params.get("id")) : null; 
                            	   String nom = (String)params.get("nom");
@@ -56,33 +52,33 @@ public class OperationsDb {
 	                          	
                        			if ( id!= null ){
                                          criteria.add(Restrictions.eq("id", id));
-                                         rcuLog.logger.log(Level.INFO, "param id: "+id);
+                                         logger.info( "param id: "+id);
                                      }                    			
 
                                 if (nom != null && !nom.equals("")){
                                      	criteria.add(Restrictions.ilike("nom", "%"+nom+"%"));
-                                     	rcuLog.logger.log(Level.INFO, "param nom: "+nom);
+                                     	logger.info( "param nom: "+nom);
                                 }
 
                                 if (prenoms != null && !prenoms.equals("")){
                                      	criteria.add(Restrictions.ilike("prenoms", "%"+prenoms+"%"));
-                                     	rcuLog.logger.log(Level.INFO, "param prenoms: "+prenoms);
+                                     	logger.info( "param prenoms: "+prenoms);
                                 }
                                 
                                 if (dateNaissance != null && !dateNaissance.equals("")){
                                  	criteria.add(Restrictions.ilike("dateNaissance", "%"+dateNaissance+"%"));
-                                 	rcuLog.logger.log(Level.INFO, "param date Naissance: "+dateNaissance);
+                                 	logger.info( "param date Naissance: "+dateNaissance);
                                 }
                                 
                                 if (piece != null && !piece.equals("")){
                                  	criteria.add(Restrictions.ilike("piece", "%"+piece+"%"));
-                                 	rcuLog.logger.log(Level.INFO, "param piece: "+piece);
+                                 	logger.info( "param piece: "+piece);
                                  	
                                 }
                                 
                                 if (compteContri != null && !compteContri.equals("")){
                                  	criteria.add(Restrictions.ilike("compteContribuable", "%"+compteContri+"%"));
-                                 	rcuLog.logger.log(Level.INFO, "param compte contri: "+compteContri);
+                                 	logger.info( "param compte contri: "+compteContri);
                                 }
                                 
                        		}
@@ -91,14 +87,13 @@ public class OperationsDb {
                        		try {
                        			returnedList = (List<TableSource>)criteria.list();
 							} catch (Exception e) {
-								logger.error("erreur lors de la requete!", e);
-								rcuLog.logger.log(Level.SEVERE, "some error when getting returnedList", e);
+								logger.error("some error when getting returnedList", e);
 							}
                        		
                        		if(returnedList != null)
-                       			rcuLog.logger.log(Level.INFO, "size retruned list: "+returnedList.size());
+                       			logger.info( "size retruned list: "+returnedList.size());
                        		else
-                       			rcuLog.logger.log(Level.INFO, "returned list is null");
+                       			logger.info( "returned list is null");
                         break;
                     
             case("final"):
@@ -106,23 +101,23 @@ public class OperationsDb {
                 criteriaFn.addOrder(Order.asc("masterId"));
                 		if(params != null){
                 			
-                			rcuLog.logger.log(Level.INFO, "find -> final -> params not null");
+                			logger.info( "find -> final -> params not null");
                 			
                 			String masterId = params.get("masterId") != null ? ((String)params.get("masterId")) : null;
                 			String compteId = params.get("compteId") != null ? ((String)params.get("compteId")) : null;
                 			if ( masterId!= null ){
                 				criteriaFn.add(Restrictions.eq("masterId", masterId));
-                				rcuLog.logger.log(Level.INFO, "param masterId: "+masterId);
+                				logger.info( "param masterId: "+masterId);
                               }
                 			if ( compteId!= null ){
                 				criteriaFn.add(Restrictions.eq("compteId", compteId));
-                				rcuLog.logger.log(Level.INFO, "param compteId: "+compteId);
+                				logger.info( "param compteId: "+compteId);
                               }
                 			}
                 		try{
                 			returnedList = (List<CustomerMaster>)criteriaFn.list();
                 		}catch (Exception e) {
-							rcuLog.logger.log(Level.SEVERE, "some error when getting returnedList", e);
+							logger.error("some error when getting returnedList", e);
 						}
                 		
                  break;
@@ -136,8 +131,7 @@ public class OperationsDb {
 	@SuppressWarnings("unchecked")
 	public static List<TableSource> getComptesClient(String compteForm) {
 		
-		Log rcuLog = new Log(Utils.logFilePath);
-		rcuLog.logger.info("requete getComptes about to be executed");
+		logger.info("requete getComptes about to be executed");
 		
 		SQLQuery q = hibSession.createSQLQuery(GET_COMPTES_FORM);
 		q.addEntity(TableSource.class);

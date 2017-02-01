@@ -2,12 +2,9 @@ package com.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,31 +12,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.pojos.TableSource;
-import com.utils.Log;
 import com.utils.OperationsDb;
 import com.utils.Utils;
 
 @WebServlet("/Home")
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Log rcuLog;
+	final static Logger logger = Logger.getLogger(Home.class);
        
 
     public Home() {
-    	super();
-    	rcuLog = new Log(Utils.logFilePath);
-        
+    	super();        
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		rcuLog.logger.info("inside home servlet GET");
+		logger.info("inside home servlet GET");
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 		
 		List<TableSource> list = (List<TableSource>) OperationsDb.find("agents", null);
 		for(TableSource t : list){
-			rcuLog.logger.log(Level.INFO, t.getCompteId());
+			logger.info(t.getCompteId());
 		}
 		
 	}
@@ -49,7 +45,7 @@ public class Home extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		rcuLog.logger.info("inside home servlet post POST");
+		logger.info("inside home servlet post POST");
 		
 		String nom = request.getParameter("nom");
 		String prenoms = request.getParameter("prenoms");
@@ -67,9 +63,9 @@ public class Home extends HttpServlet {
 		try {
 			List<TableSource> list = (List<TableSource>) OperationsDb.find("agents", params);
 			if(list != null)
-       			rcuLog.logger.log(Level.INFO, "size retruned list: "+list.size());
+				logger.info("size retruned list: "+list.size());
        		else
-       			rcuLog.logger.log(Level.INFO, "returned list is null");
+       			logger.info("returned list is null");
 			response.setContentType("application/text");
 			PrintWriter out = response.getWriter();
 			out.print(Utils.doMakeJsonAgent(list));
