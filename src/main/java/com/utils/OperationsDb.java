@@ -4,7 +4,6 @@ package com.utils;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -26,8 +25,8 @@ public class OperationsDb {
 	final static Logger logger = Logger.getLogger(OperationsDb.class);
 	
 	public static final String GET_COMPTES_FORM = "select * from TEST_RCU_TABLE_SOURCE c inner  join "
-				+ " (select f1.ID_COMPTE from TEST_RCU_CUSTOMER_MASTER f1 left outer join TEST_RCU_CUSTOMER_MASTER f on f.MASTER_ID = f1.MASTER_ID where f.ID_COMPTE = :compteForm) i"
-				+ " on c.id = i.ID_COMPTE";
+				+ " (select f1.ID_COMPTE from RCU_CUSTOMER_MASTER f1 left outer join RCU_CUSTOMER_MASTER f on f.MASTER_ID = f1.MASTER_ID where f.ID_COMPTE = :compteForm) i"
+				+ " on c.ID_COMPTE = i.ID_COMPTE";
     @SuppressWarnings("unchecked")
 	public static Object find (String strEntity, Map<String, Object> params){    	
         
@@ -136,7 +135,12 @@ public class OperationsDb {
 		SQLQuery q = hibSession.createSQLQuery(GET_COMPTES_FORM);
 		q.addEntity(TableSource.class);
 		q.setParameter("compteForm", compteForm);
-		return (List<TableSource>)q.list();
+		try {
+			return (List<TableSource>)q.list();
+		} catch (Exception e) {
+			logger.error(" Erreur sur la requete getComptesClients()", e );
+		}
+		return null;
 	}
     
 }

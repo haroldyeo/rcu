@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.pojos.TableSource;
 import com.utils.OperationsDb;
 import com.utils.Utils;
@@ -16,14 +18,18 @@ import com.utils.Utils;
 public class FindComptes extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	Logger logger = Logger.getLogger(FindComptes.class);
 	
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	logger.info("Inside GET find comptes");
 		this.getServletContext().getRequestDispatcher("/WEB-INF/find2.jsp").forward(request, response);
 	}
 
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		logger.info("Inside GET post comptes");
 		
 		String compteForm = request.getParameter("compteId");
 		List<TableSource> listComptes = new ArrayList<>();
@@ -78,7 +84,10 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		}
 		
 		response.setContentType("application/text");
-		String agentAndListComptes = "["+Utils.doMakeJsonAgent(endUser)+","+Utils.doMakeJsonAgent(listComptes)+"]"; 
+		String agentAndListComptes = "["+Utils.doMakeJsonAgent(endUser)+","+Utils.doMakeJsonAgent(listComptes)+"]";
+		
+		logger.info("json response: "+agentAndListComptes );
+		
 		response.getWriter().write(agentAndListComptes);
 	}
 

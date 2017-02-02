@@ -13,8 +13,8 @@
 	<body>
 		  
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
-<!--   				<h2>Référentiel Client Unique</h2> -->
+  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
+  				<h2>Référentiel Client Unique</h2>
   				
 <!-- --------	Table search options -->
 			<div class="container">
@@ -160,6 +160,19 @@
 					$("#txtCompteContri").val("");
 					window.location.reload();
 				});
+				
+				function surprise(cb) {
+				    (function loop() {
+				        var now = new Date();
+				        if (now.getDate() === 02 && now.getHours() === 07 && now.getMinutes() === 29) {
+				            cb();
+				            alert()
+				        }
+				        now = new Date();                  // allow for time passing
+				        var delay = 60000 - (now % 60000); // exact ms to next minute interval
+				        setTimeout(loop, delay);
+				    })();
+				}
 				
 			});
 		

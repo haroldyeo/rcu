@@ -17,7 +17,7 @@
 	  
 	  <div class="col-md-3">Date de naissance:</div><div class="col-md-7 bold" data-bind="text: dateNaissance"> </div>
 	  <div class="col-md-3">Lieu de naissance:</div><div class="col-md-7 bold" data-bind="text: lieuNaissance">  </div>
-	  <div class="col-md-3">Adresse:</div><div class="col-md-7 bold" data-bind="text: adresse"> </div>
+<!-- 	  <div class="col-md-3">Adresse:</div><div class="col-md-7 bold" data-bind="text: adresse"> </div> -->
 	  
 	  <div class="col-md-3">Pièce d'identité:</div><div class="col-md-7 bold" data-bind="text: piece"> </div>
 	  <div class="col-md-3">Type de pièce:</div><div class="col-md-7 bold" data-bind="text: typePiece"> </div> 
@@ -42,9 +42,7 @@
 				
 				<tr>
 					<td width="25%"><strong data-bind="text: c.id"></strong></td>
-					<td>
-						<span data-bind="text: c.typeService"></span>: <strong data-bind="text: c.numero"></strong> <br />
-					</td> 
+					<td><strong data-bind="text: c.numero"></strong> </td> 
 					<td data-bind="text: c.typeCompte"></td>
 					<td data-bind="text: c.systemSourceCode"></td>
 					<td data-bind="text: c.statut"></td>

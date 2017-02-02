@@ -31,13 +31,7 @@ public class Home extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info("inside home servlet GET");
-		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-		
-		List<TableSource> list = (List<TableSource>) OperationsDb.find("agents", null);
-		for(TableSource t : list){
-			logger.info(t.getCompteId());
-		}
-		
+		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);	
 	}
 
 

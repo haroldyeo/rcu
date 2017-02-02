@@ -22,7 +22,7 @@
 					  
 					  <div class="col-md-5">Date de naissance:</div><div class="col-md-7 bold"> ${agent.dateNaissance}</div>
 					  <div class="col-md-5">Lieu de naissance:</div><div class="col-md-7 bold"> ${agent.lieuNaissance} </div>
-					  <div class="col-md-5">Adresse:</div><div class="col-md-7 bold"> ${agent.adresse} </div>
+<%-- 					  <div class="col-md-5">Adresse:</div><div class="col-md-7 bold"> ${agent.adresse} </div> --%>
 					  
 					  <div class="col-md-5">Pièce d'identité:</div><div class="col-md-7 bold">${agent.piece} </div>
 					  <div class="col-md-5">Type de pièce:</div><div class="col-md-7 bold"> ${agent.typePiece} </div>
