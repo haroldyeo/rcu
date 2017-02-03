@@ -46,6 +46,8 @@ public class Home extends HttpServlet {
 		String dateNaissance = request.getParameter("dateNaissance");
 		String piece = request.getParameter("piece");
 		String compteContri = request.getParameter("compteContri");
+		String numero = request.getParameter("numero");
+		String idCompte = request.getParameter("idCompte");
 		
 		Map<String, Object>  params = new HashMap<String, Object>();
 		params.put("nom", nom);
@@ -53,6 +55,8 @@ public class Home extends HttpServlet {
 		params.put("dateNaissance", dateNaissance);
 		params.put("piece", piece);
 		params.put("compteContri", compteContri);
+		params.put("numero", numero);
+		params.put("idCompte", idCompte);
 		
 		try {
 			List<TableSource> list = (List<TableSource>) OperationsDb.find("agents", params);

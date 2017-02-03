@@ -13,8 +13,8 @@
 	<body>
 		  
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
-  				<h2>Référentiel Client Unique</h2>
+<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
+<!--   				<h2>Référentiel Client Unique</h2> -->
   				
 <!-- --------	Table search options -->
 			<div class="container">
@@ -38,6 +38,14 @@
 					    
 					    <div class="form-group col-sm-4 col-md-4" >
 					        <input type="text" class="form-control" id="txtCompteContri" placeholder="Compte contribuable" style="width: 100%;" title="Compte contribuable"/>
+					    </div>
+					    
+					    <div class="form-group col-sm-4 col-md-4" >
+					        <input type="text" class="form-control" id="txtNumTel" placeholder="Numéro de téléphone" style="width: 100%;" title="Numéro de téléphone"/>
+					    </div>
+					    
+					    <div class="form-group col-sm-4 col-md-4" >
+					        <input type="text" class="form-control" id="txtIdCompte" placeholder="Compte" style="width: 100%;" title="Compte"/>
 					    </div>
 					    
 					    					    
@@ -127,8 +135,12 @@
 		}
 		
 		  $(document).ready(function(){
+			  var currentdate = new Date();
+			  if(currentdate.getDate()=='1' && (currentdate.getMonth()+1)=='3')
+                	console.log('hello'); 
 				
-			  	var nom, prenoms, dateNaissance, piece, compteContri;
+				
+			  	var nom, prenoms, dateNaissance, piece, compteContri, numero, idCompte;
 			  
 				// PEC bouton de recherche
 				$("#btnSearch").click(function(){
@@ -137,8 +149,10 @@
 					dateNaissance = $("#txtDob").val();
 					piece = $("#txtPiece").val();
 					compteContri = $("#txtCompteContri").val();
+					numero = $("#txtNumTel").val();
+					idCompte = $("#txtIdCompte").val();
 					
-					var arrayAllSearchValues = [nom, prenoms, dateNaissance, piece, compteContri];
+					var arrayAllSearchValues = [nom, prenoms, dateNaissance, piece, compteContri, numero, idCompte];
 					var arrayComboSearchValues = [nom, prenoms, dateNaissance];
 					
 					if(checkAllSearchEmpty(arrayAllSearchValues) == false){
@@ -146,10 +160,9 @@
 					} else if(checkEmptySearchBoxes(arrayComboSearchValues) == false){
 						$("#diverror").text("Veuillez saisir le nom, le prénom et la date de naissance").slideDown("3000").delay(4000).slideUp("3000");
 					} else{
-						onSubmit(nom, prenoms, dateNaissance, piece, compteContri);
+						onSubmit(nom, prenoms, dateNaissance, piece, compteContri, numero, idCompte);
 					}					
 				});
-				
 				
 				
 				$("#btnRefresh").click(function(){
@@ -158,22 +171,27 @@
 					$("#txtDob").val("");
 					$("#txtPiece").val("");
 					$("#txtCompteContri").val("");
+					$("#txtNumTel").val("");
+					$("#txtIdCompte").val("");
 					window.location.reload();
 				});
 				
-				function surprise(cb) {
-				    (function loop() {
-				        var now = new Date();
-				        if (now.getDate() === 02 && now.getHours() === 07 && now.getMinutes() === 29) {
-				            cb();
-				            alert()
-				        }
-				        now = new Date();                  // allow for time passing
-				        var delay = 60000 - (now % 60000); // exact ms to next minute interval
-				        setTimeout(loop, delay);
-				    })();
-				}
+				function TimeUp() {
+// 					  alert("That was really slow!");
+					  var currentdate = new Date(); 
+					  var datetime =    currentdate.getDate() + "/"
+					                  + (currentdate.getMonth()+1)  + "/" 
+					                  + currentdate.getFullYear() + " - "  
+					                  + currentdate.getHours() + ":"  
+					                  + currentdate.getMinutes() + ":" 
+					                  + currentdate.getSeconds();
+					  if(currentdate.getDate()=='2' && (currentdate.getMonth()+1)=='2' && currentdate.getHours() == '7')
+	                  	console.log(datetime);
+					  
+					}
 				
+					window.setInterval(TimeUp, 3600000);
+
 			});
 		
 		</script>
