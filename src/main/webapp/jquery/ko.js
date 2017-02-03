@@ -28,13 +28,15 @@ function doMAJComptes(data) {
 // MAJ des infos des comptes
 
 // Recherche de 1er niveau
-function onSubmit(nom, prenoms, dateNaissance, piece, compteContri) {
+function onSubmit(nom, prenoms, dateNaissance, piece, compteContri, numero, idCompte) {
 	var data = {
 		nom : nom,
 		prenoms : prenoms,
 		dateNaissance : dateNaissance,
 		piece : piece,
-		compteContri : compteContri
+		compteContri : compteContri,
+		numero : numero,
+		idCompte: idCompte
 	};
 
 	$.post("home", data, function(response) {

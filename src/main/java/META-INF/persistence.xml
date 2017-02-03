@@ -3,23 +3,9 @@
 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="rcudemo">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-<!-- 		<class>com.pojos.CUO</class> -->
-<!-- 		<class>com.pojos.FinalTable</class> -->
-<!-- 		<class>com.pojos.LSS</class> -->
-<!-- 		<class>com.pojos.TUsers</class> -->
-<!-- 		<class>com.pojos.Compte</class> -->
 			<class>com.pojos.TableSource</class>
 			<class>com.pojos.CustomerMaster</class>
 		<properties>
-			<!--
-			
-			<property name="hibernate.ejb.cfgfile" value="/hibernate.cfg.xml"/>
-			
-			
-			
-			-->
-			
-<!-- 			<property name="hibernate.archive.autodetection" value="class, hbm"/> -->
 			
 				<property name="hibernate.hbm2ddl.auto" value="none"/>
 				
@@ -27,16 +13,18 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 				
 				<property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
 								
-				<property name="hibernate.connection.url" value="jdbc:oracle:thin:@10.242.69.158:1521:IDENTDG"/>
+				<property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 				
-				<property name="hibernate.connection.username" value="POCRCU"/>
+				<property name="hibernate.connection.username" value="demo"/>
 				
-				<property name="hibernate.connection.password" value="Password1"/>
+				<property name="hibernate.connection.password" value="demo2016"/>
 				
 				<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
 				
 			
 			</properties>
+			
+			
 			
 			
 					

@@ -48,6 +48,8 @@ public class OperationsDb {
                           	   String dateNaissance = (String)params.get("dateNaissance");
 	                           String piece = (String)params.get("piece");
 	                           String compteContri = (String)params.get("compteContri");
+	                           String numero = (String)params.get("numero");
+	                           String idCompte = (String)params.get("idCompte");
 	                          	
                        			if ( id!= null ){
                                          criteria.add(Restrictions.eq("id", id));
@@ -78,6 +80,17 @@ public class OperationsDb {
                                 if (compteContri != null && !compteContri.equals("")){
                                  	criteria.add(Restrictions.ilike("compteContribuable", "%"+compteContri+"%"));
                                  	logger.info( "param compte contri: "+compteContri);
+                                }
+                                
+                                if (numero != null && !numero.equals("")){
+                                 	criteria.add(Restrictions.ilike("numero", "%"+numero+"%"));
+                                 	logger.info( "param numero: "+numero);
+                                 	
+                                }
+                                
+                                if (idCompte != null && !idCompte.equals("")){
+                                 	criteria.add(Restrictions.ilike("compteId", "%"+idCompte+"%"));
+                                 	logger.info( "param idCompte: "+idCompte);
                                 }
                                 
                        		}
