@@ -8,7 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TEST_RCU_TABLE_SOURCE" ,schema="POCRCU")
+//@Table(name="TEST_RCU_TABLE_SOURCE" ,schema="POCRCU")
+@Table(name="TEST_RCU_TABLE_SOURCE" ,schema="demo")
 public class TableSource implements Serializable{
 	
 

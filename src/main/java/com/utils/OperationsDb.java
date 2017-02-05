@@ -26,7 +26,7 @@ public class OperationsDb {
 	
 	public static final String GET_COMPTES_FORM = "select * from TEST_RCU_TABLE_SOURCE c inner  join "
 				+ " (select f1.ID_COMPTE from RCU_CUSTOMER_MASTER f1 left outer join RCU_CUSTOMER_MASTER f on f.MASTER_ID = f1.MASTER_ID where f.ID_COMPTE = :compteForm) i"
-				+ " on c.ID_COMPTE = i.ID_COMPTE";
+				+ " on c.ID_COMPTE = i.ID_COMPTE where c.STATUTS = 'ACTIF'";
     @SuppressWarnings("unchecked")
 	public static Object find (String strEntity, Map<String, Object> params){    	
         

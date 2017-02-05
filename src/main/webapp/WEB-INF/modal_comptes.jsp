@@ -34,6 +34,7 @@
 					<th>N° de compte</th>
 					<th>Numéro</th>
 					<th>Type de compte</th>
+					<th>Type Service</th>
 					<th>Source</th>
 					<th>Statut</th>
 				</tr>
@@ -44,6 +45,7 @@
 					<td width="25%"><strong data-bind="text: c.id"></strong></td>
 					<td><strong data-bind="text: c.numero"></strong> </td> 
 					<td data-bind="text: c.typeCompte"></td>
+					<td data-bind="text: c.typeService"></td>
 					<td data-bind="text: c.systemSourceCode"></td>
 					<td data-bind="text: c.statut"></td>
 				</tr>

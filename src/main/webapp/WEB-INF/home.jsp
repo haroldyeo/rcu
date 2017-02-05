@@ -63,7 +63,7 @@
 <%-- 		<div>Nombre de clients dans Customer_Master: <span style="color: red; font-weight: bold">${countComptes}</span> client(s) </div> --%>
 <!-- --------	Table data -->
 			<div id="dataDiv">
-				<table class="table table-bordered  table-hover" style="width: 80%; margin: 15px 0px" id="dataTable">
+				<table class="table table-bordered  table-hover" style="width: 100%; margin: 15px 0px" id="dataTable">
 					<thead>	
 						
 						<tr class="success">
@@ -71,6 +71,10 @@
 							<th>Nom</th>
 							<th>Prénoms</th>
 							<th>Date de naissance</th>
+							<th>Pièce</th>
+							<th>Type de pièce</th>
+							<th>Compte contri.</th>
+							<th>Téléphone</th>
 							<th>Détails</th>
 						</tr>
 						
@@ -82,7 +86,12 @@
 						 	  <td data-bind="text: id"></td>
 			                  <td data-bind="text: nom"></td>
 			                  <td data-bind="text: prenoms"></td>
-			                  <td data-bind="text: dateNaissance"></td>
+			                    <td data-bind="text: dateNaissance"></td>
+			                  <td data-bind="text: piece"></td>
+			                  <td data-bind="text: typePiece"></td>
+			                  <td data-bind="text: compteContri"></td>
+			                  <td data-bind="text: numero"></td>
+			                
 			                  <td>
 			                  	<input type="button" data-bind="click: vm.displayModal.bind(id)" id="btnDetails"
 			                  	data-toggle="modal" data-target="#myModal" class="btnDetails" value="Details"/> 
