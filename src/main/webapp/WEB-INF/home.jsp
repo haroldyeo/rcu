@@ -13,8 +13,8 @@
 	<body>
 		  
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
-<!--   				<h2>Référentiel Client Unique</h2> -->
+  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
+  				<h2>Référentiel Client Unique</h2>
   				
 <!-- --------	Table search options -->
 			<div class="container">
@@ -74,6 +74,7 @@
 							<th>Pièce</th>
 							<th>Type de pièce</th>
 							<th>Compte contri.</th>
+							<th>Type Service</th>
 							<th>Téléphone</th>
 							<th>Détails</th>
 						</tr>
@@ -90,8 +91,9 @@
 			                  <td data-bind="text: piece"></td>
 			                  <td data-bind="text: typePiece"></td>
 			                  <td data-bind="text: compteContri"></td>
+			                  <td data-bind="text: typeService"></td>
 			                  <td data-bind="text: numero"></td>
-			                
+			                  			                
 			                  <td>
 			                  	<input type="button" data-bind="click: vm.displayModal.bind(id)" id="btnDetails"
 			                  	data-toggle="modal" data-target="#myModal" class="btnDetails" value="Details"/> 

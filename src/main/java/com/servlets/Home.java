@@ -64,9 +64,28 @@ public class Home extends HttpServlet {
 				logger.info("size retruned list: "+list.size());
        		else
        			logger.info("returned list is null");
+			
+			// make second query and return list of all comptes with same master ID
+			// On considère que tous les éléments de la 1ere requete ont le mm masterID
+			String idCompteSelected = null;
+			if(list != null && list.size() > 0){
+				idCompteSelected = list.get(0).getCompteId();
+			}
+			
+			// On lance la 2eme requete
+			List<TableSource> listSameMasterId = OperationsDb.getComptesClient(idCompteSelected);
+			if(listSameMasterId!=null){
+				logger.info("size liste comptes sur same Master ID: "+listSameMasterId.size());
+			} else{
+				logger.info("liste comptes sur same Master ID is NULL");
+			}
+			
+			
+			
+			
 			response.setContentType("application/text");
 			PrintWriter out = response.getWriter();
-			out.print(Utils.doMakeJsonAgent(list));
+			out.print(Utils.doMakeJsonAgent(listSameMasterId));
 			out.flush();
 			/*
 			if(list.size()>0) // ==> un seul compte ne doit être affiché à la suite de la recherche
