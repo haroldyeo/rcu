@@ -87,77 +87,11 @@ public class Home extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(Utils.doMakeJsonAgent(listSameMasterId));
 			out.flush();
-			/*
-			if(list.size()>0) // ==> un seul compte ne doit être affiché à la suite de la recherche
-				uniqueResult = list.get(0); 
-			if(uniqueResult != null){
-				response.setContentType("application/text");
-				PrintWriter out = response.getWriter();
-				out.print(Utils.doMakeJsonAgent(uniqueResult));
-				out.flush();
-			}
-			*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-/*  WE DONT GET UNIQUE ACCOUNTS ANYMORE!!!!
- * 
- * 
-	private List<TableSource> getComptesUniquesByPiece(List<TableSource> list) {
-		
-		// recenser toutes les pièces d'identités dans une liste 
-		List<String> allPieces = new ArrayList<>();
-		for(TableSource c : list){
-			allPieces.add(c.getPiece());
-		}
-		
-		// get a set of uniques keys
-		LinkedHashSet<String> allPiecesSet = new LinkedHashSet<>();
-		allPiecesSet.addAll(allPieces);
-		
-		// Get the corresponding comptes in the return list
-		List<TableSource> listToReturn = new ArrayList<>();
-		
-		for(String s : allPiecesSet){
-			for(TableSource c : list){
-				if(s.equals(c.getPiece())){
-					listToReturn.add(c);
-					break;
-				}
-			}
-		}
-		return listToReturn;
-	}
-	
-private List<TableSource> getComptesUniquesByCompte(List<TableSource> list) {
-		
-		// recenser toutes les pièces d'identités dans une liste 
-		List<String> allComptes = new ArrayList<>();
-		for(TableSource c : list){
-			allComptes.add(c.getCompteId().toString());
-		}
-		
-		// get a set of uniques keys
-		LinkedHashSet<String> allComptesSet = new LinkedHashSet<>();
-		allComptesSet.addAll(allComptes);
-		
-		// Get the corresponding comptes in the return list
-		List<TableSource> listToReturn = new ArrayList<>();
-		
-		for(String s : allComptesSet){
-			for(TableSource c : list){
-				if(s.equals(c.getCompteId())){
-					listToReturn.add(c);
-					break;
-				}
-			}
-		}
-		return listToReturn;
-	}
-	
-	*/
 
 }

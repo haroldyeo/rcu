@@ -108,7 +108,7 @@
 	</div>
 	
 	<div id="myModal" class="modal fade" role="dialog">
-		<%@include file="modal_comptes.jsp" %>
+		<%@include file="detailsCompte.jsp" %>
 	</div>
 	
 	<div id="wait" style="display:none; text-align: center">

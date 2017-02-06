@@ -60,10 +60,10 @@ function onSubmitDetails(obj) {
 	var data = {
 		compteId : obj.id
 	};
-	$.post("findComptes", data, function(response) {
-		var agentAndComptes = JSON.parse(response);
-		var agent = agentAndComptes[0];  doMajAgentSelected(agent);
-		var comptes = agentAndComptes[1]; doMAJComptes(comptes);
+	$.post("detailsCompte", data, function(response) {
+		var detailCompte = JSON.parse(response);
+		var compte = detailCompte[0]; 
+		doMAJComptes(compte);
 		
 	}).fail(function() {
 		alert('Une Erreur est survenue!');

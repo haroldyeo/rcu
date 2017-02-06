@@ -27,6 +27,15 @@
     <url-pattern>/findComptes</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>detailsCompte</servlet-name>
+    <servlet-class>com.servlets.DetailsCompte</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>detailsCompte</servlet-name>
+    <url-pattern>/detailsCompte</url-pattern>
+  </servlet-mapping>
+  
   
    <servlet>
     <servlet-name>Kojson</servlet-name>
