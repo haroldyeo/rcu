@@ -63,7 +63,7 @@
 <%-- 		<div>Nombre de clients dans Customer_Master: <span style="color: red; font-weight: bold">${countComptes}</span> client(s) </div> --%>
 <!-- --------	Table data -->
 			<div id="dataDiv">
-				<p style="float: left; margin-left: 15px">Master ID: <b data-bind="text: master"></b></p>
+				<p style="float: left; margin-left: 15px; margin-top: 22px;">Master ID: <b data-bind="text: master"></b></p>
 				<table class="table table-bordered  table-hover" style="width: 100%; margin: 15px 0px" id="dataTable">
 					<thead>	
 						

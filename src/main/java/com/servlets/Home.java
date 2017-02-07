@@ -75,6 +75,7 @@ public class Home extends HttpServlet {
 					idCompteSelected = list.get(0).getCompteId();
 					
 				// Obtenir le master id du compte sélectionné
+					params.put("idCompte", idCompteSelected);
 					listMaster = (List<CustomerMaster>) OperationsDb.find("final", params);
 					
 					if(listMaster!=null){

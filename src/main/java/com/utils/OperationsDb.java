@@ -116,7 +116,8 @@ public class OperationsDb {
                 			logger.info( "find -> final -> params not null");
                 			
                 			String masterId = params.get("masterId") != null ? ((String)params.get("masterId")) : null;
-                			String compteId = params.get("compteId") != null ? ((String)params.get("compteId")) : null;
+                			String compteId = params.get("idCompte") != null ? ((String)params.get("idCompte")) : null;
+                			
                 			if ( masterId!= null ){
                 				criteriaFn.add(Restrictions.eq("masterId", masterId));
                 				logger.info( "param masterId: "+masterId);
