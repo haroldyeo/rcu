@@ -2,6 +2,7 @@
 // viewModel object
 var vm = {
 	agents : ko.observable(),
+	master : ko.observable(),
 	agentSelected : ko.observable(),
 	comptes : ko.observableArray(),
 	displayModal : function(data) {
@@ -42,7 +43,12 @@ function onSubmit(nom, prenoms, dateNaissance, piece, compteContri, numero, idCo
 	$.post("home", data, function(response) {
 //		alert(response);
 		if(response.length > 0 && response != '[]'){
-			doMajAgent(JSON.parse(response));
+			var comptesAndMaster = JSON.parse(response); 
+			var comptes = comptesAndMaster[0];
+			doMajAgent(comptes);
+			var masterId = comptesAndMaster[1];
+			vm.master(masterId);
+			
 		}else{
 			doMajAgent('');
 			$("#divNoData").text("Aucune donnée ne correspond aux critères de recherche").slideDown("3000").delay(4000).slideUp("3000");

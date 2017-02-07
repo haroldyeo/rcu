@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 //@Table(name="TEST_RCU_TABLE_SOURCE" ,schema="POCRCU")
@@ -31,7 +32,8 @@ public class TableSource implements Serializable{
 	     private String statut;
 //	     private String systemSourceCode;
 	     private String compteContribuable;
-	 	private String dateCreation;
+	 	 private String dateCreation;
+	 	 private String masterID;
 	     
 
 	     
@@ -207,6 +209,16 @@ public class TableSource implements Serializable{
 
 		public void setDateCreation(String dateCreation) {
 			this.dateCreation = dateCreation;
+		}
+
+		@Transient
+		public String getMasterID() {
+			return masterID;
+		}
+
+
+		public void setMasterID(String masterID) {
+			this.masterID = masterID;
 		}
 		
 		
