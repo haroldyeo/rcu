@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.pojos.TableSource;
+import com.pojos.Agent;
 import com.utils.OperationsDb;
 import com.utils.Utils;
 
@@ -26,9 +26,6 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		
 	}
 
-
-	
-	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		logger.info("Inside  POST details comptes");
@@ -37,12 +34,12 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		
 		Map<String, Object>  params = new HashMap<String, Object>();
 		params.put("idCompte", compteForm);
-		List<TableSource> listComptes  = (List<TableSource>) OperationsDb.find("agents", params);
+		List<Agent> listDetails = OperationsDb.getComptesClient3(compteForm);
 		
-		if(listComptes != null && listComptes.size() > 0){
-			logger.info("ListComptes is not null and contains elements");
+		if(listDetails != null && listDetails.size() > 0){
+			logger.info("listDetails is not null and contains elements");
 			
-			String compte = "["+Utils.doMakeJsonAgent(listComptes)+"]";
+			String compte = "["+Utils.doMakeJsonAgent2(listDetails)+"]";
 			
 			logger.info("json response: "+compte );
 			

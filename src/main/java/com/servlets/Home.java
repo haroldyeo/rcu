@@ -82,6 +82,8 @@ public class Home extends HttpServlet {
 		if(idCompte!=null)
 			listAgents = OperationsDb.getComptesClient2(idCompte);
 		
+		logger.info("LISTE AGENTS SIZE: "+ listAgents != null ? list.size() : "it's null");
+		
 		String rep = ""+Utils.doMakeJsonAgent2(listAgents);
 		logger.info("json response: "+rep);
 		

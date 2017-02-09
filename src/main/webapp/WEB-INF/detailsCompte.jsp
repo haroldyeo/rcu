@@ -14,6 +14,14 @@
 					<tbody class="detailsTable">
 					
 						 <tr>
+						 	<td width="35%">Master ID</td>
+			                <td data-bind="text: masterId"></td>
+			             </tr>
+			             <tr>
+						 	<td width="35%">Compte ID</td>
+			                <td data-bind="text: id"></td>
+			             </tr>
+						 <tr>
 						 	<td width="35%">Nom</td>
 			                <td data-bind="text: nom"></td>
 			             </tr>
@@ -38,6 +46,10 @@
 			                <td data-bind="text: typePiece"></td>
 			             </tr>
 			             <tr>
+						 	<td>Compte contribuable</td>
+			                <td data-bind="text: compteContri"></td>
+			             </tr>
+			             <tr>
 						 	<td>Numéro</td>
 			                <td data-bind="text: numero"></td>
 			             </tr>
@@ -57,6 +69,10 @@
 			             <tr>
 						 	<td>Systeme source code</td>
 			                <td data-bind="text: source"></td>
+			             </tr>
+			             <tr>
+						 	<td>Master ID B2C</td>
+			                <td data-bind="text: masterIdB2C"></td>
 			             </tr>
 					
 					</tbody>

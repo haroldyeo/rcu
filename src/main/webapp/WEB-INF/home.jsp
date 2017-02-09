@@ -13,8 +13,8 @@
 	<body>
 		  
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
-<!--   				<h2>Référentiel Client Unique</h2> -->
+  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
+  				<h2>Référentiel Client Unique</h2>
   				
 <!-- --------	Table search options -->
 			<div class="container">
@@ -70,7 +70,6 @@
 							<th>Master ID</th>
 							<th>Compte</th>
 							<th>ID niv. sup.</th>
-							<th>Master ID B2C</th>
 							<th>Nom</th>
 							<th>Prénoms</th>
 							<th>Date de naissance</th>
@@ -91,7 +90,6 @@
 						 	  <td data-bind="text: masterId"></td>
 						 	  <td data-bind="text: id"></td>
 						 	  <td data-bind="text: idNiveauSup"></td>
-						 	  <td data-bind="text: masterIdB2C"></td>
 			                  <td data-bind="text: nom"></td>
 			                  <td data-bind="text: prenoms"></td>
 		                    <td data-bind="text: dateNaissance"></td>
