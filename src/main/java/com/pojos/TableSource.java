@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 //@Table(name="TEST_RCU_TABLE_SOURCE" ,schema="POCRCU")
@@ -30,10 +29,10 @@ public class TableSource implements Serializable{
 	     private String piece;
 	     private String typeCompte;
 	     private String statut;
-//	     private String systemSourceCode;
+	     private String systemSourceCode;
 	     private String compteContribuable;
 	 	 private String dateCreation;
-	 	 private String masterID;
+	 	 private String idNiveauSuperieur;
 	     
 
 	     
@@ -182,15 +181,15 @@ public class TableSource implements Serializable{
 			this.statut = statut;
 		}
 
-//		@Column(name="SYSTEM_SOURCE_CODE")
-//		public String getSystemSourceCode() {
-//			return systemSourceCode;
-//		}
-//
-//
-//		public void setSystemSourceCode(String systemSourceCode) {
-//			this.systemSourceCode = systemSourceCode;
-//		}
+		@Column(name="SYSTEME_SOURCE_CD")
+		public String getSystemSourceCode() {
+			return systemSourceCode;
+		}
+
+
+		public void setSystemSourceCode(String systemSourceCode) {
+			this.systemSourceCode = systemSourceCode;
+		}
 
 		@Column(name="COMPTE_CONTRIBUABLE")
 		public String getCompteContribuable() {
@@ -211,18 +210,15 @@ public class TableSource implements Serializable{
 			this.dateCreation = dateCreation;
 		}
 
-		@Transient
-		public String getMasterID() {
-			return masterID;
+		@Column(name="ID_NIVEAU_SUPERIEUR")
+		public String getIdNiveauSuperieur() {
+			return idNiveauSuperieur;
 		}
 
 
-		public void setMasterID(String masterID) {
-			this.masterID = masterID;
+		public void setIdNiveauSuperieur(String idNiveauSuperieur) {
+			this.idNiveauSuperieur = idNiveauSuperieur;
 		}
-		
-		
-		
 		
 		
 	    

@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import com.pojos.Agent;
 import com.pojos.CustomerMaster;
 import com.pojos.TableSource;
 
@@ -27,6 +28,11 @@ public class OperationsDb {
 	public static final String GET_COMPTES_FORM = "select * from TEST_RCU_TABLE_SOURCE c inner  join "
 				+ " (select f1.ID_COMPTE from RCU_CUSTOMER_MASTER f1 left outer join RCU_CUSTOMER_MASTER f on f.MASTER_ID = f1.MASTER_ID where f.ID_COMPTE = :compteForm) i"
 				+ " on c.ID_COMPTE = i.ID_COMPTE";
+	public static final String GET_COMPTES_FORM_NEW = "select  B.MASTER_ID, B.MASTER_ID_B2C, B.TYPE_MATCH_CD, B.TYPE_SERVICE_ID, B.DATE_CESSATION_MID, B.DATE_CREATION_MID,  A.* from TEST_RCU_TABLE_SOURCE A, Rcu_customer_master B"
+												+ " where A.id_compte = b.id_compte"
+												+ " and B.master_id in ("
+												+ " select master_id from rcu_customer_master where  id_compte like :compteForm)"
+												+ " order by master_id";
     @SuppressWarnings("unchecked")
 	public static Object find (String strEntity, Map<String, Object> params){    	
         
@@ -116,15 +122,15 @@ public class OperationsDb {
                 			logger.info( "find -> final -> params not null");
                 			
                 			String masterId = params.get("masterId") != null ? ((String)params.get("masterId")) : null;
-                			String compteId = params.get("idCompte") != null ? ((String)params.get("idCompte")) : null;
+                			String idCompte = params.get("idCompte") != null ? ((String)params.get("idCompte")) : null;
                 			
                 			if ( masterId!= null ){
                 				criteriaFn.add(Restrictions.eq("masterId", masterId));
                 				logger.info( "param masterId: "+masterId);
                               }
-                			if ( compteId!= null ){
-                				criteriaFn.add(Restrictions.eq("compteId", compteId));
-                				logger.info( "param compteId: "+compteId);
+                			if ( idCompte!= null ){
+                				criteriaFn.add(Restrictions.eq("compteId", idCompte));
+                				logger.info( "param compteId: "+idCompte);
                               }
                 			}
                 		try{
@@ -151,6 +157,24 @@ public class OperationsDb {
 		q.setParameter("compteForm", compteForm);
 		try {
 			return (List<TableSource>)q.list();
+		} catch (Exception e) {
+			logger.error(" Erreur sur la requete getComptesClients()", e );
+		}
+		return null;
+	}
+	
+@SuppressWarnings("unchecked")
+public static List<Agent> getComptesClient2(String compteForm) {
+		
+		logger.info("requete getComptes about to be executed");
+		
+		SQLQuery q = hibSession.createSQLQuery(GET_COMPTES_FORM_NEW) ;
+
+		q.setParameter("compteForm", "%"+compteForm+"%");
+		try {
+			List<Object[]> rows = q.list();
+			
+			return Utils.doSetAgents(rows);
 		} catch (Exception e) {
 			logger.error(" Erreur sur la requete getComptesClients()", e );
 		}

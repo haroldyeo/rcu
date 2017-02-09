@@ -6,13 +6,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-//@Table(name="RCU_CUSTOMER_MASTER" ,schema="PORCU")
+//@Table(name="RCU_CUSTOMER_MASTER" ,schema="POCRCU")
 @Table(name="RCU_CUSTOMER_MASTER" ,schema="demo")
 public class CustomerMaster  {
 
 	
 	
-	private long id;
+//	private long id;
 	private String masterId;
 	private String compteId;
 	private String masterIdB2C;
@@ -22,15 +22,15 @@ public class CustomerMaster  {
 	private String dateCreation;
 	private String dateCessation;
 	
-	@Id
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	
-	@Column(name="MASTER_ID", nullable=false)
+//	public long getId() {
+//		return id;
+//	}
+//	public void setId(long id) {
+//		this.id = id;
+//	}
+	@Id
+	@Column(name="MASTER_ID")
 	public String getMasterId() {
 		return masterId;
 	}
@@ -80,7 +80,7 @@ public class CustomerMaster  {
 	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-	@Column(name="DATE_CESSSATION_MID")
+	@Column(name="DATE_CESSATION_MID")
 	public String getDateCessation() {
 		return dateCessation;
 	}

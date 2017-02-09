@@ -13,8 +13,8 @@
 	<body>
 		  
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
-  				<h2>Référentiel Client Unique</h2>
+<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
+<!--   				<h2>Référentiel Client Unique</h2> -->
   				
 <!-- --------	Table search options -->
 			<div class="container">
@@ -63,15 +63,18 @@
 <%-- 		<div>Nombre de clients dans Customer_Master: <span style="color: red; font-weight: bold">${countComptes}</span> client(s) </div> --%>
 <!-- --------	Table data -->
 			<div id="dataDiv">
-				<p style="float: left; margin-left: 15px; margin-top: 22px;">Master ID: <b data-bind="text: master"></b></p>
 				<table class="table table-bordered  table-hover" style="width: 100%; margin: 15px 0px" id="dataTable">
 					<thead>	
 						
 						<tr class="success">
+							<th>Master ID</th>
 							<th>Compte</th>
+							<th>ID niv. sup.</th>
+							<th>Master ID B2C</th>
 							<th>Nom</th>
 							<th>Prénoms</th>
 							<th>Date de naissance</th>
+							<th>Lieu de naissance</th>
 							<th>Pièce</th>
 							<th>Type de pièce</th>
 							<th>Compte contri.</th>
@@ -85,15 +88,20 @@
 					<tbody data-bind="foreach: vm.agents">
 					
 						 <tr>
+						 	  <td data-bind="text: masterId"></td>
 						 	  <td data-bind="text: id"></td>
+						 	  <td data-bind="text: idNiveauSup"></td>
+						 	  <td data-bind="text: masterIdB2C"></td>
 			                  <td data-bind="text: nom"></td>
 			                  <td data-bind="text: prenoms"></td>
-			                    <td data-bind="text: dateNaissance"></td>
+		                    <td data-bind="text: dateNaissance"></td>
+		                    <td data-bind="text: lieuNaissance"></td>
 			                  <td data-bind="text: piece"></td>
 			                  <td data-bind="text: typePiece"></td>
 			                  <td data-bind="text: compteContri"></td>
 			                  <td data-bind="text: typeService"></td>
 			                  <td data-bind="text: numero"></td>
+			                  
 			                  			                
 			                  <td>
 			                  	<input type="button" data-bind="click: vm.displayModal.bind(id)" id="btnDetails"
@@ -112,7 +120,7 @@
 		<%@include file="detailsCompte.jsp" %>
 	</div>
 	
-	<div id="wait" style="display:none; text-align: center">
+	<div id="wait" style="display:none; text-align: center; position: absolute; right: 0;left: 0;z-index: 13; text-align: center">
 		<img src='/rcudemo/images/loading4.gif' width="128" height="128" />
 		<br>Chargement...
 	</div>

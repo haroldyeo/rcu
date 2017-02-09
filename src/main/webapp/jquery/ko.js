@@ -44,10 +44,10 @@ function onSubmit(nom, prenoms, dateNaissance, piece, compteContri, numero, idCo
 //		alert(response);
 		if(response.length > 0 && response != '[]'){
 			var comptesAndMaster = JSON.parse(response); 
-			var comptes = comptesAndMaster[0];
-			doMajAgent(comptes);
-			var masterId = comptesAndMaster[1];
-			vm.master(masterId);
+//			var comptes = comptesAndMaster[0];
+			doMajAgent(comptesAndMaster);
+//			var masterId = comptesAndMaster[1];
+//			vm.master(masterId);
 			
 		}else{
 			doMajAgent('');

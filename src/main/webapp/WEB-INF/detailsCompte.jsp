@@ -53,6 +53,11 @@
 						 	<td>Statut</td>
 			                <td data-bind="text: statut"></td>
 			             </tr>
+			             
+			             <tr>
+						 	<td>Systeme source code</td>
+			                <td data-bind="text: source"></td>
+			             </tr>
 					
 					</tbody>
 				</table>
