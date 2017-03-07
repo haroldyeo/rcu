@@ -64,7 +64,8 @@ function onSubmit(nom, prenoms, dateNaissance, piece, compteContri, numero, idCo
 // Recherche par id pour faire afficher le popup des comptes
 function onSubmitDetails(obj) {
 	var data = {
-		compteId : obj.id
+		compteId : obj.id,
+		phone: obj.numero
 	};
 	$.post("detailsCompte", data, function(response) {
 		var detailCompte = JSON.parse(response);

@@ -7,7 +7,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 			<class>com.pojos.CustomerMaster</class>
 		<properties>
 					
-				<property name="hibernate.hbm2ddl.auto" value="update"/>
+				<property name="hibernate.hbm2ddl.auto" value="none"/>
 				
 				<property name="hibernate.show_sql" value="true"/>
 				
@@ -30,6 +30,13 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 				<property name="hibernate.connection.username" value="demo"/>
 				
 				<property name="hibernate.connection.password" value="demo2016"/>
+
+
+<!-- 				<property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:xe"/> -->
+				
+<!-- 				<property name="hibernate.connection.username" value="system"/> -->
+				
+<!-- 				<property name="hibernate.connection.password" value="password"/> -->
 				
 							
 			</properties>

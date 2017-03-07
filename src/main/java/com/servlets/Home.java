@@ -61,9 +61,10 @@ public class Home extends HttpServlet {
 		params.put("idCompte", idCompte);
 					
 			if(params.get("idCompte") != null && (String)params.get("idCompte") != ""){
+				// recherche par le compteId seulement
 				doGetResults(response, (String) params.get("idCompte"), null);
 			}else {
-				// liste des comptes sur la base de la recherche
+				// recherche par les autres critères
 				List<TableSource> list = (List<TableSource>) OperationsDb.find("agents", params);
 				if(list != null){
 					doGetResults(response, null, list);
@@ -77,12 +78,12 @@ public class Home extends HttpServlet {
 
 	private void doGetResults(HttpServletResponse response, String idCompte, List<TableSource> list) {
 		List<Agent> listAgents = new ArrayList<Agent>(); 
-		if(list!=null)
+		if(list!=null && list.size() > 0)
 			listAgents = OperationsDb.getComptesClient2(list.get(0).getCompteId());
 		if(idCompte!=null)
 			listAgents = OperationsDb.getComptesClient2(idCompte);
 		
-		logger.info("LISTE AGENTS SIZE: "+ listAgents != null ? list.size() : "it's null");
+//		logger.info("LISTE AGENTS SIZE: "+ listAgents != null ? list.size() : "it's null");
 		
 		String rep = ""+Utils.doMakeJsonAgent2(listAgents);
 		logger.info("json response: "+rep);

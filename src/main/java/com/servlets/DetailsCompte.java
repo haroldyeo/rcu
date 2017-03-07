@@ -31,10 +31,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		logger.info("Inside  POST details comptes");
 		
 		String compteForm = request.getParameter("compteId");
+		String phone = request.getParameter("phone");
 		
 		Map<String, Object>  params = new HashMap<String, Object>();
 		params.put("idCompte", compteForm);
-		List<Agent> listDetails = OperationsDb.getComptesClient3(compteForm);
+		List<Agent> listDetails = OperationsDb.getComptesClient3(compteForm, phone);
 		
 		if(listDetails != null && listDetails.size() > 0){
 			logger.info("listDetails is not null and contains elements");

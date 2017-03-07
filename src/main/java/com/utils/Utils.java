@@ -104,6 +104,11 @@ public class Utils {
 		return jsonArray;
 	}
 
+	/**
+	 * Méthode de récupération des données brutes de la requete et assignation à l'entité "Agent"
+	 * @param rows
+	 * @return
+	 */
 	public static List<Agent> doSetAgents(List<Object[]> rows) {
 		
 		
@@ -121,23 +126,24 @@ public class Utils {
 			cm.setDateCreation(row[5] != null ? row[5].toString() : "");
 			
 			ts.setCompteId(row[6] != null ? row[6].toString() : "");
-			ts.setCompteContribuable(row[7] != null ? row[7].toString() : "");
+			ts.setIdNiveauSuperieur(row[7] != null ? row[7].toString() : "");
 			
-			ts.setDateCreation(row[8] != null ? row[8].toString() : "");
-			ts.setDateNaissance(row[9] != null ? row[9].toString() : "");
-			ts.setLieuNaissance(row[10] != null ? row[10].toString() : "");
-			ts.setNom(row[11] != null ? row[11].toString() : "");
-			ts.setNumero(row[12] != null ? row[12].toString() : "");
-			
+			ts.setSystemSourceCode(row[8] != null ? row[8].toString() : "");
+			ts.setNom(row[9] != null ? row[9].toString() : "");
+			ts.setPrenoms(row[10] != null ? row[10].toString() : "");
+			ts.setDateNaissance(row[11] != null ? row[11].toString() : "");
+			ts.setLieuNaissance(row[12] != null ? row[12].toString() : "");
 			ts.setPiece(row[13] != null ? row[13].toString() : "");
-			ts.setPrenoms(row[14] != null ? row[14].toString() : "");
-		
-			ts.setStatut(row[15] != null ? row[15].toString() : "");
-			ts.setTypeCompte(row[16] != null ? row[16].toString() : "");
-			ts.setTypePiece(row[17] != null ? row[17].toString() : "");
-			ts.setTypeService(row[18] != null ? row[18].toString() : "");
-			ts.setSystemSourceCode(row[19] != null ? row[19].toString() : "");
-			ts.setIdNiveauSuperieur(row[20] != null ? row[20].toString() : "");
+			ts.setTypePiece(row[14] != null ? row[14].toString() : "");
+			ts.setDateCreation(row[15] != null ? row[15].toString() : "");
+			ts.setNumero(row[16] != null ? row[16].toString() : "");
+			ts.setStatut(row[17] != null ? row[17].toString() : "");
+			ts.setTypeCompte(row[18] != null ? row[18].toString() : "");
+			ts.setCompteContribuable(row[19] != null ? row[19].toString() : "");
+			ts.setTypeService(row[20] != null ? row[20].toString() : "");
+			if(ts.getTypeService()!=null){
+				ts.setTypeService(getValueTypeService(ts.getTypeService()));
+			}
 			
 			listAgents.add(new Agent(ts, cm));
 			
@@ -145,6 +151,18 @@ public class Utils {
 		
 		return listAgents;
 		
+	}
+
+	private static String getValueTypeService(String typeService) {
+		switch (typeService) {
+		case "1": return "Mobile";
+		case "2": return "Fixe";
+		case "3": return "Aviso";
+		case "4": return "Orange Money";
+		case "5": return "Wimax";
+		default: break;
+		}
+		return "";
 	}
 
 

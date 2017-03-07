@@ -75,11 +75,11 @@
 							<th>Date de naissance</th>
 							<th>Lieu de naissance</th>
 							<th>Pièce</th>
-							<th>Type de pièce</th>
+							<th>Master ID B2C</th>
 							<th>Compte contri.</th>
 							<th>Type Service</th>
 							<th>Téléphone</th>
-							<th>Détails</th>
+							<th>Type de Match</th>
 						</tr>
 						
 					</thead>
@@ -95,16 +95,17 @@
 		                    <td data-bind="text: dateNaissance"></td>
 		                    <td data-bind="text: lieuNaissance"></td>
 			                  <td data-bind="text: piece"></td>
-			                  <td data-bind="text: typePiece"></td>
+			                  <td data-bind="text: masterIdB2C"></td>
 			                  <td data-bind="text: compteContri"></td>
 			                  <td data-bind="text: typeService"></td>
 			                  <td data-bind="text: numero"></td>
+			                  <td data-bind="text: typeMatch"></td>
 			                  
 			                  			                
-			                  <td>
-			                  	<input type="button" data-bind="click: vm.displayModal.bind(id)" id="btnDetails"
-			                  	data-toggle="modal" data-target="#myModal" class="btnDetails" value="Details"/> 
-			                  </td>
+<!-- 			                  <td> -->
+<!-- 			                  	<input type="button" data-bind="click: vm.displayModal.bind(id)" id="btnDetails" -->
+<!-- 			                  	data-toggle="modal" data-target="#myModal" class="btnDetails" value="Details"/>  -->
+<!-- 			                  </td> -->
 			             </tr>
 					
 					</tbody>
@@ -118,9 +119,8 @@
 		<%@include file="detailsCompte.jsp" %>
 	</div>
 	
-	<div id="wait" style="display:none; text-align: center; position: absolute; right: 0;left: 0;z-index: 13; text-align: center">
+	<div id="wait" style="display:none; text-align: center; position: absolute; left: 50%; top:40%; z-index: 13; text-align: center;">
 		<img src='/rcudemo/images/loading4.gif' width="128" height="128" />
-		<br>Chargement...
 	</div>
   	
   	 	<script src="jquery/knockout-3.4.1.js"></script>
@@ -203,7 +203,8 @@
 					                  + currentdate.getHours() + ":"  
 					                  + currentdate.getMinutes() + ":" 
 					                  + currentdate.getSeconds();
-					  if(currentdate.getDate()=='2' && (currentdate.getMonth()+1)=='2' && currentdate.getHours() == '7')
+					                  console.log(datetime);
+					  if(currentdate.getDate()=='10' && (currentdate.getMonth()+1)=='4' && currentdate.getHours() == '7')
 	                  	console.log(datetime);
 					  
 					}
