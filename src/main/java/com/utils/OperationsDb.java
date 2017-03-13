@@ -29,14 +29,16 @@ public class OperationsDb {
 				+ " (select f1.ID_COMPTE from RCU_CUSTOMER_MASTER f1 left outer join RCU_CUSTOMER_MASTER f on f.MASTER_ID = f1.MASTER_ID where f.ID_COMPTE = :compteForm) i"
 				+ " on c.ID_COMPTE = i.ID_COMPTE";
 	
-	public static final String GET_COMPTES_FORM_NEW = "select"  
-												+ "  B.MASTER_ID, B.MASTER_ID_B2C,  B.TYPE_MATCH_CD, B.TYPE_SERVICE_ID, B.DATE_CESSATION_MID, B.DATE_CREATION_MID,"  
-												+ "  A.ID_COMPTE, A.ID_NIVEAU_SUPERIEUR,  A.SYSTEME_SOURCE_CD, A.NOM, A.PRENOM, A.DATE_NAISSANCE, A.LIEU_NAISSANCE, A.ID_PIECE, A.TYPE_PIECE, A.DATE_CREATION, A.PHONE_NUM, A.STATUTS, A.TYPE_COMPTE, A.COMPTE_CONTRIBUABLE, A.TYPE_SERVICE "
-												+ "	 from TEST_RCU_TABLE_SOURCE A, Rcu_customer_master B"
-												+ " where A.id_compte = b.id_compte"
-												+ " and B.master_id in ("
-												+ " select master_id from rcu_customer_master where  id_compte like :compteForm)"
-												+ " order by master_id";
+	public static final String GET_COMPTES_FORM_NEW = "  select  "
+								  + " B.MASTER_ID, B.MASTER_ID_B2C,  B.TYPE_MATCH_CD, B.TYPE_SERVICE_ID, B.DATE_CESSATION_MID, B.DATE_CREATION_MID,  "
+								  + " A.ID_COMPTE, A.ID_NIVEAU_SUPERIEUR,  A.SYSTEME_SOURCE_CD, A.NOM, A.PRENOM, A.DATE_NAISSANCE, A.LIEU_NAISSANCE,"
+								  + " A.ID_PIECE, A.TYPE_PIECE, A.DATE_CREATION, A.PHONE_NUM, A.STATUTS, A.TYPE_COMPTE, A.COMPTE_CONTRIBUABLE, ts.LIBELLE_TYPESERVICE "
+								  + " from Rcu_customer_master B, TEST_RCU_TABLE_SOURCE A"
+								  + " left join REFERENCE_TYPESERVICE ts on A.TYPE_SERVICE = ts.CODE_TYPESERVICE"
+								  + " where A.id_compte = b.id_compte"
+								  + " and B.master_id in ("
+								  + " select master_id from rcu_customer_master where  id_compte like :compteForm)"
+								  + " order by master_id";
 	
 	public static final String GET_COMPTE_DETAILS = "select"  
 				+ "  B.MASTER_ID, B.MASTER_ID_B2C,  B.TYPE_MATCH_CD, B.TYPE_SERVICE_ID, B.DATE_CESSATION_MID, B.DATE_CREATION_MID,"  

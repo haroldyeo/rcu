@@ -7,14 +7,15 @@
 		<title>Bienvenue</title>
 		<%@ include file="links.jsp" %>
 		<link href="/rcudemo/css/style.css" rel="stylesheet" type="text/css">
-		
+		<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" />
+				
 	</head>
 	
 	<body>
 		  
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
-  				<h2>Référentiel Client Unique</h2>
+<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
+<!--   				<h2>Référentiel Client Unique</h2> -->
   				
 <!-- --------	Table search options -->
 			<div class="container">
@@ -63,7 +64,13 @@
 <%-- 		<div>Nombre de clients dans Customer_Master: <span style="color: red; font-weight: bold">${countComptes}</span> client(s) </div> --%>
 <!-- --------	Table data -->
 			<div id="dataDiv">
-				<table class="table table-bordered  table-hover" style="width: 100%; margin: 15px 0px" id="dataTable">
+				<table class="table table-bordered  table-hover" style="width: 100%; margin: 15px 0px" id="myTable"
+					  data-toggle="table"
+				      data-url="https://api.github.com/users/wenzhixin/repos"
+				      data-query-params="queryParams"
+				      data-pagination="true"
+				      data-search="true"
+				      data-height="300">
 					<thead>	
 						
 						<tr class="success">
@@ -110,6 +117,11 @@
 					
 					</tbody>
 				</table>
+				
+				<div class="col-md-12 text-center">
+				      <ul class="pagination pagination-lg pager" id="myPager"></ul>
+			      </div>
+				
 			</div> <!--  end data div   -->	
 		</div>
 			
@@ -153,6 +165,7 @@
 		}
 		
 		  $(document).ready(function(){
+			  
 			  var currentdate = new Date();
 			  if(currentdate.getDate()=='1' && (currentdate.getMonth()+1)=='3')
                 	console.log('hello'); 
@@ -181,6 +194,16 @@
 						onSubmit(nom, prenoms, dateNaissance, piece, compteContri, numero, idCompte);
 					}					
 				});
+				
+				function queryParams() {
+				    return {
+				        type: 'owner',
+				        sort: 'updated',
+				        direction: 'desc',
+				        per_page: 2,
+				        page: 1
+				    };
+				}
 				
 				
 				$("#btnRefresh").click(function(){
@@ -212,7 +235,8 @@
 					window.setInterval(TimeUp, 3600000);
 
 			});
-		
+		  
+		 		
 		</script>
 		
 		<script>

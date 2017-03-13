@@ -1,3 +1,10 @@
+var js = document.createElement("script");
+
+js.type = "text/javascript";
+js.src = 'http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js';
+
+document.body.appendChild(js);
+
 
 // viewModel object
 var vm = {

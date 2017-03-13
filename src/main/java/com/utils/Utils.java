@@ -141,9 +141,6 @@ public class Utils {
 			ts.setTypeCompte(row[18] != null ? row[18].toString() : "");
 			ts.setCompteContribuable(row[19] != null ? row[19].toString() : "");
 			ts.setTypeService(row[20] != null ? row[20].toString() : "");
-			if(ts.getTypeService()!=null){
-				ts.setTypeService(getValueTypeService(ts.getTypeService()));
-			}
 			
 			listAgents.add(new Agent(ts, cm));
 			
@@ -151,18 +148,6 @@ public class Utils {
 		
 		return listAgents;
 		
-	}
-
-	private static String getValueTypeService(String typeService) {
-		switch (typeService) {
-		case "1": return "Mobile";
-		case "2": return "Fixe";
-		case "3": return "Aviso";
-		case "4": return "Orange Money";
-		case "5": return "Wimax";
-		default: break;
-		}
-		return "";
 	}
 
 
