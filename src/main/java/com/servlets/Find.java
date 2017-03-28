@@ -53,7 +53,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		params.put("lieuNaissance", lieuNaissance);
 		
 		try {
-			request.setAttribute("dataAgents", OperationsDb.find("agents", params));
+			request.setAttribute("dataAgents", "");
+//					OperationsDb.find("agents", params));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

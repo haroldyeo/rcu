@@ -8,14 +8,14 @@
 		<%@ include file="links.jsp" %>
 		<link href="/rcudemo/css/style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" />
-				
+						
 	</head>
 	
 	<body>
 		  
   		<div align="center" id="mainDiv" class="container-fluid" style="border: 1px solid #eee; width: 90%">
-<!--   				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px"> -->
-<!--   				<h2>Référentiel Client Unique</h2> -->
+  				<img alt="orange_logo" src="/rcudemo/images/orange_logo.PNG" height="60px">
+  				<h2>Référentiel Client Unique</h2>
   				
 <!-- --------	Table search options -->
 			<div class="container">
@@ -57,20 +57,15 @@
 					</form>
 					
 			
-			<div id="diverror" style="float: left; width: 100%"></div>
-			<div id="divNoData" style="float: left; width: 100%"></div>
-		</div>	
-		
+					<div id="diverror" style="float: left; width: 100%"></div>
+					<div id="divNoData" style="float: left; width: 100%"></div>
+				</div>	
+			</div>
+</div>
 <%-- 		<div>Nombre de clients dans Customer_Master: <span style="color: red; font-weight: bold">${countComptes}</span> client(s) </div> --%>
 <!-- --------	Table data -->
 			<div id="dataDiv">
-				<table class="table table-bordered  table-hover" style="width: 100%; margin: 15px 0px" id="myTable"
-					  data-toggle="table"
-				      data-url="https://api.github.com/users/wenzhixin/repos"
-				      data-query-params="queryParams"
-				      data-pagination="true"
-				      data-search="true"
-				      data-height="300">
+				<table class="table table-bordered  table-hover" style="width: 80%; margin: 15px auto" >
 					<thead>	
 						
 						<tr class="success">
@@ -123,9 +118,9 @@
 			      </div>
 				
 			</div> <!--  end data div   -->	
-		</div>
+		
 			
-	</div>
+
 	
 	<div id="myModal" class="modal fade" role="dialog">
 		<%@include file="detailsCompte.jsp" %>
@@ -195,17 +190,7 @@
 					}					
 				});
 				
-				function queryParams() {
-				    return {
-				        type: 'owner',
-				        sort: 'updated',
-				        direction: 'desc',
-				        per_page: 2,
-				        page: 1
-				    };
-				}
-				
-				
+							
 				$("#btnRefresh").click(function(){
 					$("#txtNom").val("");
 					$("#txtPrenom").val("");

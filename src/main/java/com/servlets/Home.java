@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +25,9 @@ import com.utils.Utils;
 @WebServlet("/Home")
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = Logger.getLogger(Home.class);
-       
+	final Logger logger = Logger.getLogger(Home.class);
+	private Utils utils= new Utils();
+	private OperationsDb odb= new OperationsDb();
 
     public Home() {
     	super();        
@@ -37,8 +40,6 @@ public class Home extends HttpServlet {
 	}
 
 
-
-	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		logger.info("inside home servlet post POST");
@@ -61,13 +62,29 @@ public class Home extends HttpServlet {
 		params.put("idCompte", idCompte);
 					
 			if(params.get("idCompte") != null && (String)params.get("idCompte") != ""){
-				// recherche par le compteId seulement
-				doGetResults(response, (String) params.get("idCompte"), null);
+				logger.info("Recherche par le compteId seulement");
+				try {
+					doGetResults(response, (String) params.get("idCompte"), null);
+				} catch ( Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}else {
-				// recherche par les autres critères
-				List<TableSource> list = (List<TableSource>) OperationsDb.find("agents", params);
+				logger.info("Recherche par autres critères"); 
+				List<TableSource> list = null;
+				try {
+					list = (List<TableSource>) odb.getTableSources(params);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				if(list != null){
-					doGetResults(response, null, list);
+					try {
+						doGetResults(response, null, list);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}else{
 					logger.info("Après 1ere requête, liste de comptes is null");
 				}
@@ -76,16 +93,27 @@ public class Home extends HttpServlet {
 	}
 
 
-	private void doGetResults(HttpServletResponse response, String idCompte, List<TableSource> list) {
-		List<Agent> listAgents = new ArrayList<Agent>(); 
+	private void doGetResults(HttpServletResponse response, String idCompte, List<TableSource> list) throws Exception {
+		List<Agent> listAgents = new ArrayList<Agent>();
+		Set<String> listMasterIds = new HashSet<String>();
 		if(list!=null && list.size() > 0)
-			listAgents = OperationsDb.getComptesClient2(list.get(0).getCompteId());
+			for(TableSource tb : list){
+				// get the master ID
+				String mid = odb.getMasterId(tb.getCompteId());
+				if(!listMasterIds.contains(mid)){
+					listMasterIds.add(mid);
+					listAgents.addAll(odb.getComptesClient2(tb.getCompteId()));
+				} else{
+					logger.info("Le master ID : "+mid+" est deja pris en compte!");
+				}
+				
+			}
 		if(idCompte!=null)
-			listAgents = OperationsDb.getComptesClient2(idCompte);
+			listAgents = odb.getComptesClient2(idCompte);
 		
 //		logger.info("LISTE AGENTS SIZE: "+ listAgents != null ? list.size() : "it's null");
 		
-		String rep = ""+Utils.doMakeJsonAgent2(listAgents);
+		String rep = ""+utils.doMakeJsonAgent2(listAgents);
 		logger.info("json response: "+rep);
 		
 		response.setContentType("application/text");

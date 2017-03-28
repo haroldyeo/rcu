@@ -40,7 +40,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		 * 2. Obtenir la liste des master/comptes where masterId = masterCompteForm.masterId
 		 * 3. Obtenir la liste des comptes depuis la liste précédente
 		 */
-		listComptes  = OperationsDb.getComptesClient(compteForm);
+		listComptes  = null;
+//				OperationsDb.getComptesClient(compteForm);
 		
 		//Compiler les informations du user:  MAJ des informations autres que les comptes
 		doCompileCompteClient(listComptes,  response);
@@ -84,7 +85,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		}
 		
 		response.setContentType("application/text");
-		String agentAndListComptes = "["+Utils.doMakeJsonAgent(endUser)+","+Utils.doMakeJsonAgent(listComptes)+"]";
+		String agentAndListComptes = ""; 
+//				"["+Utils.doMakeJsonAgent(endUser)+","+Utils.doMakeJsonAgent(listComptes)+"]";
 		
 		logger.info("json response: "+agentAndListComptes );
 		

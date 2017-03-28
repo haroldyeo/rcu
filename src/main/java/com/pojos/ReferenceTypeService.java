@@ -2,15 +2,7 @@ package com.pojos;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-//@Table(name="REFERENCE_TYPESERVICE" ,schema="POCRCU")
-@Table(name="REFERENCE_TYPESERVICE" ,schema="demo")
-//@Table(name="REFERENCE_TYPESERVICE" ,schema="system")
 public class ReferenceTypeService implements Serializable{
 	     /**
 		 * 
@@ -20,8 +12,6 @@ public class ReferenceTypeService implements Serializable{
 		private String codeTypeService;
 		private String libelleTypeService;
 
-		@Id 
-		@Column(name="ID_TYPESERVICE", unique=true, nullable=false)
 		public String getIdTypeservice() {
 			return idTypeservice;
 		}
@@ -30,7 +20,6 @@ public class ReferenceTypeService implements Serializable{
 			this.idTypeservice = idTypeservice;
 		}
 
-		@Column(name="CODE_TYPESERVICE")
 		public String getCodeTypeService() {
 			return codeTypeService;
 		}
@@ -39,7 +28,6 @@ public class ReferenceTypeService implements Serializable{
 			this.codeTypeService = codeTypeService;
 		}
 
-		@Column(name="LIBELLE_TYPESERVICE")
 		public String getLibelleTypeService() {
 			return libelleTypeService;
 		}

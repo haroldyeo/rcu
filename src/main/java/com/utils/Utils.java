@@ -1,8 +1,11 @@
 package com.utils;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -14,13 +17,15 @@ public class Utils {
 	
 //	public static final long countComptes = getCountComptes();
 
+	final Logger logger = Logger.getLogger(Utils.class);
+
 	/**
 	 * Fonction qui transforme une liste de comptes en array JSON
 	 * @param list liste comptes
 	 * @return JsonArray
 	 */
 	@SuppressWarnings("unchecked")
-	public static JSONArray doMakeJsonAgent(List<TableSource> list){
+	public  JSONArray doMakeJsonAgent(List<TableSource> list){
 		JSONArray jsonArray = new JSONArray();
 		for (TableSource c : list){			
 			jsonArray.add(doMakeJsonAgent(c));
@@ -34,7 +39,7 @@ public class Utils {
 	 * @return JsonObject
 	 */
 	@SuppressWarnings("unchecked")
-	public static JSONObject doMakeJsonAgent(TableSource c){
+	public  JSONObject doMakeJsonAgent(TableSource c){
 			JSONObject job = new JSONObject();
 			
 			job.put("id", c.getCompteId());
@@ -59,7 +64,7 @@ public class Utils {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static JSONObject doMakeJsonAgent2(Agent c){
+	public  JSONObject doMakeJsonAgent2(Agent c){
 			JSONObject job = new JSONObject();
 			
 			job.put("id", c.getTableSource().getCompteId());
@@ -91,12 +96,12 @@ public class Utils {
 		return job;
 	}
 
-	public static void doTakeCareException(Exception e) {
+	public  void doTakeCareException(Exception e) {
 		
 	}
 
 	@SuppressWarnings("unchecked")
-	public static JSONArray doMakeJsonAgent2(List<Agent> listAgents) {
+	public  JSONArray doMakeJsonAgent2(List<Agent> listAgents) {
 		JSONArray jsonArray = new JSONArray();
 		for (Agent c : listAgents){			
 			jsonArray.add(doMakeJsonAgent2(c));
@@ -104,43 +109,38 @@ public class Utils {
 		return jsonArray;
 	}
 
-	/**
-	 * Méthode de récupération des données brutes de la requete et assignation à l'entité "Agent"
-	 * @param rows
-	 * @return
-	 */
-	public static List<Agent> doSetAgents(List<Object[]> rows) {
-		
-		
+	
+	public  List<Agent> doSetAgents2(ResultSet rs) throws SQLException {
 		List<Agent> listAgents = new ArrayList<>();
 		
-		for(Object[] row : rows){
+		while(rs.next()){
+			
 			TableSource ts = new TableSource();
 			CustomerMaster cm = new CustomerMaster();
 			
-			cm.setMasterId((row[0] != null ? row[0].toString() : ""));
-			cm.setMasterIdB2C(row[1] != null ? row[1].toString() : "");
-			cm.setTypeMatch(row[2] != null ? row[2].toString() : "");
-			cm.setTyperService(row[3] != null ? row[3].toString() : "");
-			cm.setDateCessation(row[4] != null ? row[4].toString() : "");
-			cm.setDateCreation(row[5] != null ? row[5].toString() : "");
+			cm.setMasterId(rs.getString("MASTER_ID"));
+			cm.setMasterIdB2C(rs.getString("MASTER_ID_B2C"));
+			cm.setTypeMatch(rs.getString("TYPE_MATCH_CD"));
+			cm.setTyperService(rs.getString("TYPE_SERVICE_ID"));
+			cm.setDateCessation(rs.getString("DATE_CESSATION_MID"));
+			cm.setDateCreation(rs.getString("DATE_CREATION_MID"));
 			
-			ts.setCompteId(row[6] != null ? row[6].toString() : "");
-			ts.setIdNiveauSuperieur(row[7] != null ? row[7].toString() : "");
+			ts.setCompteId(rs.getString("ID_COMPTE"));
+			ts.setIdNiveauSuperieur(rs.getString("ID_NIVEAU_SUPERIEUR"));
 			
-			ts.setSystemSourceCode(row[8] != null ? row[8].toString() : "");
-			ts.setNom(row[9] != null ? row[9].toString() : "");
-			ts.setPrenoms(row[10] != null ? row[10].toString() : "");
-			ts.setDateNaissance(row[11] != null ? row[11].toString() : "");
-			ts.setLieuNaissance(row[12] != null ? row[12].toString() : "");
-			ts.setPiece(row[13] != null ? row[13].toString() : "");
-			ts.setTypePiece(row[14] != null ? row[14].toString() : "");
-			ts.setDateCreation(row[15] != null ? row[15].toString() : "");
-			ts.setNumero(row[16] != null ? row[16].toString() : "");
-			ts.setStatut(row[17] != null ? row[17].toString() : "");
-			ts.setTypeCompte(row[18] != null ? row[18].toString() : "");
-			ts.setCompteContribuable(row[19] != null ? row[19].toString() : "");
-			ts.setTypeService(row[20] != null ? row[20].toString() : "");
+			ts.setSystemSourceCode(rs.getString("SYSTEME_SOURCE_CD"));
+			ts.setNom(rs.getString("NOM"));
+			ts.setPrenoms(rs.getString("PRENOM"));
+			ts.setDateNaissance(rs.getString("DATE_NAISSANCE"));
+			ts.setLieuNaissance(rs.getString("LIEU_NAISSANCE"));
+			ts.setPiece(rs.getString("ID_PIECE"));
+			ts.setTypePiece(rs.getString("TYPE_PIECE"));
+			ts.setDateCreation(rs.getString("DATE_CREATION"));
+			ts.setNumero(rs.getString("PHONE_NUM"));
+			ts.setStatut(rs.getString("STATUTS"));
+			ts.setTypeCompte(rs.getString("TYPE_COMPTE"));
+			ts.setCompteContribuable(rs.getString("COMPTE_CONTRIBUABLE"));
+			ts.setTypeService(rs.getString("LIBELLE_TYPESERVICE"));
 			
 			listAgents.add(new Agent(ts, cm));
 			
@@ -149,11 +149,22 @@ public class Utils {
 		return listAgents;
 		
 	}
+	
+	
+	public List<TableSource> doSetTabeSource (ResultSet rs) throws SQLException {
+		List<TableSource> list = new ArrayList<>();
+		while(rs.next()){
+			TableSource tb = new TableSource();
+			
+			tb.setCompteId(rs.getString("ID_COMPTE"));
+			list.add(tb);	
+		}
+		logger.info("--------   comptes --------");
+		for(TableSource s : list){
+			logger.info(s.getCompteId());
+		}
+		return list;
+	}
 
 
-//	private static long getCountComptes() {
-//		@SuppressWarnings("unchecked")
-//		List<FinalTable> list = (List<FinalTable>) OperationsDb.find("final", null);
-//		return list.size();
-//	}
 }

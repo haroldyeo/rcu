@@ -1,4 +1,4 @@
-package com.servlets;
+/*package com.servlets;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -35,7 +35,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		
 		Map<String, Object>  params = new HashMap<String, Object>();
 		params.put("idCompte", compteForm);
-		List<Agent> listDetails = OperationsDb.getComptesClient3(compteForm, phone);
+		List<Agent> listDetails = null; 
+//				OperationsDb.getComptesClient3(compteForm, phone);
 		
 		if(listDetails != null && listDetails.size() > 0){
 			logger.info("listDetails is not null and contains elements");
@@ -56,3 +57,4 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 
 }
 
+*/

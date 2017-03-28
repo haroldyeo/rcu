@@ -57,3 +57,7 @@ h2{
 	font-weight: bold;
 }
 
+table td{
+    word-wrap:break-word;
+}
+

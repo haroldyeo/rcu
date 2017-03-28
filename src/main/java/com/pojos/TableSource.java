@@ -2,15 +2,8 @@ package com.pojos;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-//@Table(name="TEST_RCU_TABLE_SOURCE" ,schema="POCRCU")
-@Table(name="TEST_RCU_TABLE_SOURCE" ,schema="demo")
-//@Table(name="TEST_RCU_TABLE_SOURCE" ,schema="system")
+
 public class TableSource implements Serializable{
 	
 
@@ -60,9 +53,6 @@ public class TableSource implements Serializable{
 			this.statut = statut;
 		}
 
-
-		@Id 
-		@Column(name="ID_COMPTE", unique=true, nullable=false)
 		public String getCompteId() {
 			return compteId;
 		}
@@ -72,7 +62,6 @@ public class TableSource implements Serializable{
 			this.compteId = compteId;
 		}
 
-		@Column(name="NOM")
 		public String getNom() {
 			return nom;
 		}
@@ -82,7 +71,6 @@ public class TableSource implements Serializable{
 			this.nom = nom;
 		}
 
-		@Column(name="PRENOM")
 		public String getPrenoms() {
 			return prenoms;
 		}
@@ -92,7 +80,6 @@ public class TableSource implements Serializable{
 			this.prenoms = prenoms;
 		}
 
-		@Column(name="DATE_NAISSANCE")
 		public String getDateNaissance() {
 			return dateNaissance;
 		}
@@ -102,7 +89,6 @@ public class TableSource implements Serializable{
 			this.dateNaissance = dateNaissance;
 		}
 
-		@Column(name="LIEU_NAISSANCE")
 		public String getLieuNaissance() {
 			return lieuNaissance;
 		}
@@ -122,7 +108,6 @@ public class TableSource implements Serializable{
 //			this.adresse = adresse;
 //		}
 
-		@Column(name="PHONE_NUM")
 		public String getNumero() {
 			return numero;
 		}
@@ -132,7 +117,6 @@ public class TableSource implements Serializable{
 			this.numero = numero;
 		}
 
-		@Column(name="TYPE_SERVICE")
 		public String getTypeService() {
 			return typeService;
 		}
@@ -142,7 +126,6 @@ public class TableSource implements Serializable{
 			this.typeService = typeService;
 		}
 
-		@Column(name="TYPE_PIECE")
 		public String getTypePiece() {
 			return typePiece;
 		}
@@ -152,7 +135,6 @@ public class TableSource implements Serializable{
 			this.typePiece = typePiece;
 		}
 
-		@Column(name="ID_PIECE")
 		public String getPiece() {
 			return piece;
 		}
@@ -162,7 +144,6 @@ public class TableSource implements Serializable{
 			this.piece = piece;
 		}
 
-		@Column(name="TYPE_COMPTE")
 		public String getTypeCompte() {
 			return typeCompte;
 		}
@@ -172,7 +153,6 @@ public class TableSource implements Serializable{
 			this.typeCompte = typeCompte;
 		}
 
-		@Column(name="STATUTS")
 		public String getStatut() {
 			return statut;
 		}
@@ -182,7 +162,6 @@ public class TableSource implements Serializable{
 			this.statut = statut;
 		}
 
-		@Column(name="SYSTEME_SOURCE_CD")
 		public String getSystemSourceCode() {
 			return systemSourceCode;
 		}
@@ -192,7 +171,6 @@ public class TableSource implements Serializable{
 			this.systemSourceCode = systemSourceCode;
 		}
 
-		@Column(name="COMPTE_CONTRIBUABLE")
 		public String getCompteContribuable() {
 			return compteContribuable;
 		}
@@ -201,7 +179,6 @@ public class TableSource implements Serializable{
 		public void setCompteContribuable(String compteContribuable) {
 			this.compteContribuable = compteContribuable;
 		}
-		@Column(name="DATE_CREATION")
 		public String getDateCreation() {
 			return dateCreation;
 		}
@@ -211,7 +188,6 @@ public class TableSource implements Serializable{
 			this.dateCreation = dateCreation;
 		}
 
-		@Column(name="ID_NIVEAU_SUPERIEUR")
 		public String getIdNiveauSuperieur() {
 			return idNiveauSuperieur;
 		}
