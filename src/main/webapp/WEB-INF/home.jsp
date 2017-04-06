@@ -82,6 +82,7 @@
 							<th>Type Service</th>
 							<th>Téléphone</th>
 							<th>Type de Match</th>
+							<th>Type de compte</th>
 						</tr>
 						
 					</thead>
@@ -90,7 +91,7 @@
 					
 						 <tr>
 						 	  <td data-bind="text: masterId"></td>
-						 	  <td data-bind="text: id"></td>
+						 	  <td data-bind="text: 	id"></td>
 						 	  <td data-bind="text: idNiveauSup"></td>
 			                  <td data-bind="text: nom"></td>
 			                  <td data-bind="text: prenoms"></td>
@@ -102,6 +103,7 @@
 			                  <td data-bind="text: typeService"></td>
 			                  <td data-bind="text: numero"></td>
 			                  <td data-bind="text: typeMatch"></td>
+			                  <td data-bind="text: typeCompte"></td>
 			                  
 			                  			                
 <!-- 			                  <td> -->

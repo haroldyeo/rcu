@@ -60,58 +60,15 @@ public class Home extends HttpServlet {
 		params.put("compteContri", compteContri);
 		params.put("numero", numero);
 		params.put("idCompte", idCompte);
-					
-			if(params.get("idCompte") != null && (String)params.get("idCompte") != ""){
-				logger.info("Recherche par le compteId seulement");
-				try {
-					doGetResults(response, (String) params.get("idCompte"), null);
-				} catch ( Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}else {
-				logger.info("Recherche par autres critères"); 
-				List<TableSource> list = null;
-				try {
-					list = (List<TableSource>) odb.getTableSources(params);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				if(list != null){
-					try {
-						doGetResults(response, null, list);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}else{
-					logger.info("Après 1ere requête, liste de comptes is null");
-				}
-			}	
 		
-	}
-
-
-	private void doGetResults(HttpServletResponse response, String idCompte, List<TableSource> list) throws Exception {
-		List<Agent> listAgents = new ArrayList<Agent>();
-		Set<String> listMasterIds = new HashSet<String>();
-		if(list!=null && list.size() > 0)
-			for(TableSource tb : list){
-				// get the master ID
-				String mid = odb.getMasterId(tb.getCompteId());
-				if(!listMasterIds.contains(mid)){
-					listMasterIds.add(mid);
-					listAgents.addAll(odb.getComptesClient2(tb.getCompteId()));
-				} else{
-					logger.info("Le master ID : "+mid+" est deja pris en compte!");
-				}
-				
-			}
-		if(idCompte!=null)
-			listAgents = odb.getComptesClient2(idCompte);
+		List<Agent> listAgents = new ArrayList<>();
 		
-//		logger.info("LISTE AGENTS SIZE: "+ listAgents != null ? list.size() : "it's null");
+		try {
+			 listAgents = odb.getDataToDisplay(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
 		
 		String rep = ""+utils.doMakeJsonAgent2(listAgents);
 		logger.info("json response: "+rep);
@@ -126,7 +83,7 @@ public class Home extends HttpServlet {
 		} catch (IOException e) {
 			logger.error("erreur lors de l'ecriture de la reponse", e);
 		}
-		
+					
 		
 	}
 

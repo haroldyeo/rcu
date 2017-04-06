@@ -103,8 +103,10 @@ public class Utils {
 	@SuppressWarnings("unchecked")
 	public  JSONArray doMakeJsonAgent2(List<Agent> listAgents) {
 		JSONArray jsonArray = new JSONArray();
-		for (Agent c : listAgents){			
-			jsonArray.add(doMakeJsonAgent2(c));
+		if(listAgents !=null && listAgents.size() > 0){			
+			for (Agent c : listAgents){			
+				jsonArray.add(doMakeJsonAgent2(c));
+			}
 		}
 		return jsonArray;
 	}
