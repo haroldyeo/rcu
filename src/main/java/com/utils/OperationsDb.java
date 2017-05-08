@@ -29,14 +29,19 @@ public class OperationsDb {
 	
 	public static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
 //-------------------	 PROD ----------------------------------//
-	public static final String DB_CONNECTION = "jdbc:oracle:thin@10.242.69.158:1521:IDENTDG";
-	public static final String DB_USER = "POCRCU";
-	public static final String DB_PASSWORD = "Password1";
+//	public static final String DB_CONNECTION = "jdbc:oracle:thin:@10.242.69.158:1521:IDENTDG";
+//	public static final String DB_USER = "POCRCU";
+//	public static final String DB_PASSWORD = "Password1";
 	
+	//-------------------	 PROD2 ----------------------------------//
+//		public static final String DB_CONNECTION = "jdbc:oracle:thin:@10.242.79.36:1521:RCUBD";
+//		public static final String DB_USER = "RCU";
+//		public static final String DB_PASSWORD = "RCU";
+//	
 	//-------------------	Local Connection ----------------------------------//
-//	public static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:xe";
-//	public static final String DB_USER = "demo";
-//	public static final String DB_PASSWORD = "demo2016";
+	public static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:xe";
+	public static final String DB_USER = "demo";
+	public static final String DB_PASSWORD = "demo2016";
 		
 	public static String GET_AGENTS = "select trts.ID_COMPTE from TEST_RCU_TABLE_SOURCE trts where 1=1";
 	
@@ -62,20 +67,21 @@ public class OperationsDb {
         if(prenoms!=null && !prenoms.isEmpty())
         	INNER_SELECT += " and LOWER(tt.PRENOM) like '%"+prenoms.toLowerCase()+"%' ";
         if(dateNaissance!=null && !dateNaissance.isEmpty())
-        	INNER_SELECT += " and LOWER(tt.DATE_NAISSANCE) like '%"+dateNaissance.toLowerCase()+"%' ";
+        	INNER_SELECT += " and LOWER(tt.DATE_NAISSANCE) = to_date('"+dateNaissance+"') ";
         if(piece!=null && !piece.isEmpty())
-        	INNER_SELECT += " and LOWER(tt.ID_PIECE) like '"+piece.toLowerCase()+"' ";
+        	INNER_SELECT += " and LOWER(tt.ID_PIECE) = '"+piece.toLowerCase()+"' ";
         if(compteContri!=null && !compteContri.isEmpty())
         	INNER_SELECT += " and LOWER(tt.COMPTE_CONTRIBUABLE) = '"+compteContri.toLowerCase()+"' ";
         if(numero!=null && !numero.isEmpty())
-        	INNER_SELECT += " and LOWER(tt.PHONE_NUM) like '"+numero.toLowerCase()+"' ";
+        	INNER_SELECT += " and LOWER(tt.PHONE_NUM) = '"+numero.toLowerCase()+"' ";
         if(idCompte!=null && !idCompte.isEmpty())
         	INNER_SELECT += " and LOWER(tt.ID_COMPTE) = '"+idCompte.toLowerCase()+"' ";
         
         String GET_COMPTES_FORM_NEW = "  select  "
 			    + " rcm.MASTER_ID, rcm.MASTER_ID_B2C,  rcm.TYPE_MATCH_CD, rcm.TYPE_SERVICE_ID, rcm.DATE_CESSATION_MID, rcm.DATE_CREATION_MID,  "
-			    + " trts.ID_COMPTE, trts.ID_NIVEAU_SUPERIEUR,  trts.SYSTEME_SOURCE_CD, trts.NOM, trts.PRENOM, trts.DATE_NAISSANCE, trts.LIEU_NAISSANCE, trts.TYPE_COMPTE"
-			    + " trts.ID_PIECE, trts.TYPE_PIECE, trts.DATE_CREATION, trts.PHONE_NUM, trts.STATUTS, trts.TYPE_COMPTE, trts.COMPTE_CONTRIBUABLE, ts.LIBELLE_TYPESERVICE "
+			    + " trts.ID_COMPTE, trts.ID_NIVEAU_SUPERIEUR,  trts.SYSTEME_SOURCE_CD, trts.NOM, trts.PRENOM, trts.DATE_NAISSANCE, trts.LIEU_NAISSANCE, trts.TYPE_COMPTE,"
+			    + " trts.ID_PIECE, trts.TYPE_PIECE, trts.DATE_CREATION, trts.PHONE_NUM, trts.STATUTS, trts.TYPE_COMPTE, trts.COMPTE_CONTRIBUABLE, ts.LIBELLE_TYPESERVICE,"
+			    + "  trts.RES_ID"
 			    + " from Rcu_customer_master rcm, TEST_RCU_TABLE_SOURCE trts"
 			    + " left join REFERENCE_TYPESERVICE ts on trts.TYPE_SERVICE = ts.CODE_TYPESERVICE"
 			    + " where trts.id_compte = rcm.id_compte"
@@ -95,7 +101,7 @@ public class OperationsDb {
     		list = utils.doSetAgents2(rs);
             
         } catch (Exception e) {
-			logger.error("Error pendant l'exécution de getCompteClient2: "+e.getMessage());
+			logger.error("Error pendant l'exécution de getDataToDisplay: "+e.getMessage());
 			throw new Exception("Une erreur est survenue");
 		} finally{
 			if(pst!=null){
@@ -117,57 +123,58 @@ public class OperationsDb {
 	public  List<TableSource> getTableSources (Map<String, Object> params) throws Exception{  
 		
 //		BigDecimal id = params.get("id") != null ? new BigDecimal((String)params.get("id")) : null; 
-    	String nom = (String)params.get("nom");
-   	    String prenoms = (String)params.get("prenoms");
-   	    String dateNaissance = (String)params.get("dateNaissance");
-        String piece = (String)params.get("piece");
-        String compteContri = (String)params.get("compteContri");
-        String numero = (String)params.get("numero");
-        String idCompte = (String)params.get("idCompte");
-        
-        if(nom!=null && !nom.isEmpty())
-        	GET_AGENTS += " and LOWER(trts.NOM) = '%"+nom.toLowerCase()+"%' ";
-        if(prenoms!=null && !prenoms.isEmpty())
-        	GET_AGENTS += " and LOWER(trts.PRENOM) like '%"+prenoms.toLowerCase()+"%' ";
-        if(dateNaissance!=null && !dateNaissance.isEmpty())
-        	GET_AGENTS += " and LOWER(trts.DATE_NAISSANCE) like '%"+dateNaissance.toLowerCase()+"%' ";
-        if(piece!=null && !piece.isEmpty())
-        	GET_AGENTS += " and LOWER(trts.ID_PIECE) = '"+piece.toLowerCase()+"' ";
-        if(compteContri!=null && !compteContri.isEmpty())
-        	GET_AGENTS += " and LOWER(trts.COMPTE_CONTRIBUABLE) = '"+compteContri.toLowerCase()+"' ";
-        if(numero!=null && !numero.isEmpty())
-        	GET_AGENTS += " and LOWER(trts.PHONE_NUM) = '"+numero.toLowerCase()+"' ";
-        if(idCompte!=null && !idCompte.isEmpty())
-        	GET_AGENTS += " and LOWER(trts.ID_COMPTE) = '"+idCompte.toLowerCase()+"' ";
-        
-        logger.info("La requête suivante sera exécutée pour obtenir la liste des comptes en fonction des critères de recherche: ");
-		logger.info(GET_AGENTS);
-                
-            List<TableSource> list= new ArrayList<TableSource>();
-            
-            try {
-	            con = getConnection();
-	            pst = con.prepareStatement(GET_AGENTS);
-	         // execute statement
-	    		ResultSet rs = pst.executeQuery();
-	    		list = utils.doSetTabeSource(rs);
-	            
-            } catch (SQLException e) {
-    			logger.error("Error pendant l'exécution de getCompteClient2: "+e.getMessage());
-    			throw new Exception("Une erreur est survenue");
-    		} finally{
-    			if(pst!=null){
-    				logger.info("Statement closed");
-    				pst.close();
-    			}				
-    			if(con != null){
-    				logger.info("Connection closed");
-    				con.close();
-    			}
-    				
-    		}
-            
-        return list.size()>0 ? list : null;
+//    	String nom = (String)params.get("nom");
+//   	    String prenoms = (String)params.get("prenoms");
+//   	    String dateNaissance = (String)params.get("dateNaissance");
+//        String piece = (String)params.get("piece");
+//        String compteContri = (String)params.get("compteContri");
+//        String numero = (String)params.get("numero");
+//        String idCompte = (String)params.get("idCompte");
+//        
+//        if(nom!=null && !nom.isEmpty())
+//        	GET_AGENTS += " and LOWER(trts.NOM) = '%"+nom.toLowerCase()+"%' ";
+//        if(prenoms!=null && !prenoms.isEmpty())
+//        	GET_AGENTS += " and LOWER(trts.PRENOM) like '%"+prenoms.toLowerCase()+"%' ";
+//        if(dateNaissance!=null && !dateNaissance.isEmpty())
+//        	GET_AGENTS += " and LOWER(trts.DATE_NAISSANCE) like '%"+dateNaissance.toLowerCase()+"%' ";
+//        if(piece!=null && !piece.isEmpty())
+//        	GET_AGENTS += " and LOWER(trts.ID_PIECE) = '"+piece.toLowerCase()+"' ";
+//        if(compteContri!=null && !compteContri.isEmpty())
+//        	GET_AGENTS += " and LOWER(trts.COMPTE_CONTRIBUABLE) = '"+compteContri.toLowerCase()+"' ";
+//        if(numero!=null && !numero.isEmpty())
+//        	GET_AGENTS += " and LOWER(trts.PHONE_NUM) = '"+numero.toLowerCase()+"' ";
+//        if(idCompte!=null && !idCompte.isEmpty())
+//        	GET_AGENTS += " and LOWER(trts.ID_COMPTE) = '"+idCompte.toLowerCase()+"' ";
+//        
+//        logger.info("La requête suivante sera exécutée pour obtenir la liste des comptes en fonction des critères de recherche: ");
+//		logger.info(GET_AGENTS);
+//                
+//            List<TableSource> list= new ArrayList<TableSource>();
+//            
+//            try {
+//	            con = getConnection();
+//	            pst = con.prepareStatement(GET_AGENTS);
+//	         // execute statement
+//	    		ResultSet rs = pst.executeQuery();
+//	    		list = utils.doSetTabeSource(rs);
+//	            
+//            } catch (SQLException e) {
+//    			logger.error("Error pendant l'exécution de getCompteClient2: "+e.getMessage());
+//    			throw new Exception("Une erreur est survenue");
+//    		} finally{
+//    			if(pst!=null){
+//    				logger.info("Statement closed");
+//    				pst.close();
+//    			}				
+//    			if(con != null){
+//    				logger.info("Connection closed");
+//    				con.close();
+//    			}
+//    				
+//    		}
+//            
+//        return list.size()>0 ? list : null;
+		return null;
     }
 	
 	

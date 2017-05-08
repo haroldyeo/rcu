@@ -27,6 +27,7 @@ public class TableSource implements Serializable{
 	     private String compteContribuable;
 	 	 private String dateCreation;
 	 	 private String idNiveauSuperieur;
+	 	 private String resId;
 	     
 
 	     
@@ -195,6 +196,16 @@ public class TableSource implements Serializable{
 
 		public void setIdNiveauSuperieur(String idNiveauSuperieur) {
 			this.idNiveauSuperieur = idNiveauSuperieur;
+		}
+
+
+		public String getResId() {
+			return resId;
+		}
+
+
+		public void setResId(String resId) {
+			this.resId = resId;
 		}
 		
 		

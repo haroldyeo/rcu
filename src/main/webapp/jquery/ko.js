@@ -40,14 +40,18 @@ function onSubmit(nom, prenoms, dateNaissance, piece, compteContri, numero, idCo
 	};
 
 	$.post("home", data, function(response) {
-//		alert(response);
+		
 		if(response.length > 0 && response != '[]'){
-			var comptesAndMaster = JSON.parse(response); 
-//			var comptes = comptesAndMaster[0];
-			doMajAgent(comptesAndMaster);
-//			var masterId = comptesAndMaster[1];
-//			vm.master(masterId);
-			
+			var r = JSON.parse(response);
+			if(r["limit"]==true){
+				$("#divNoData").text("La période d'essai de cette application a expiré, veuillez contacter l'administrateur").slideDown("3000").delay(4000).slideUp("3000");
+			} else{
+				var comptesAndMaster = JSON.parse(response); 
+////			var comptes = comptesAndMaster[0];
+				doMajAgent(comptesAndMaster);
+	//			var masterId = comptesAndMaster[1];
+	//			vm.master(masterId);
+			}			
 		}else{
 			doMajAgent('');
 			$("#divNoData").text("Aucune donnée ne correspond aux critères de recherche").slideDown("3000").delay(4000).slideUp("3000");

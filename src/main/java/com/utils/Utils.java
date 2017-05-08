@@ -82,6 +82,7 @@ public class Utils {
 			job.put("statut", c.getTableSource().getStatut());
 			job.put("source", c.getTableSource().getSystemSourceCode());
 			job.put("compteContri", c.getTableSource().getCompteContribuable());
+			job.put("resId", c.getTableSource().getResId());
 			
 			job.put("masterId", c.getMaster().getMasterId());
 			job.put("compteId", c.getMaster().getCompteId());
@@ -143,6 +144,7 @@ public class Utils {
 			ts.setTypeCompte(rs.getString("TYPE_COMPTE"));
 			ts.setCompteContribuable(rs.getString("COMPTE_CONTRIBUABLE"));
 			ts.setTypeService(rs.getString("LIBELLE_TYPESERVICE"));
+			ts.setResId(rs.getString("RES_ID"));
 			
 			listAgents.add(new Agent(ts, cm));
 			
