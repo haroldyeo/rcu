@@ -55,8 +55,8 @@
 					    </div>
 					</form>
 					
-					<div id="#" style="float: left; text-align:left; width: 100%">
-						<span style="text-align: center"><strong>Critères de rapprochement</strong> </span><br/>
+					<div id="#" style="float: left; text-align:left; width: 100%; margin-top: 15px">
+						<span style="position:relative; left:35%"><strong>Critères de rapprochement</strong> </span><br/>
 						<div style="width: 50%; float: left">
 								A = NOM,PRÉNOM,DATE NAISSANCE, LIEU NAISSANCE <br/>
 								B = NOM,PRÉNOM, PIÈCE IDENTITÉ <br/>
