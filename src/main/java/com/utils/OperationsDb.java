@@ -29,9 +29,9 @@ public class OperationsDb {
 	
 	public static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
 //-------------------	 PROD ----------------------------------//
-//	public static final String DB_CONNECTION = "jdbc:oracle:thin:@10.242.69.158:1521:IDENTDG";
-//	public static final String DB_USER = "POCRCU";
-//	public static final String DB_PASSWORD = "Password1";
+	public static final String DB_CONNECTION = "jdbc:oracle:thin:@10.242.69.158:1521:IDENTDG";
+	public static final String DB_USER = "POCRCU";
+	public static final String DB_PASSWORD = "Password1";
 	
 	//-------------------	 PROD2 ----------------------------------//
 //		public static final String DB_CONNECTION = "jdbc:oracle:thin:@10.242.79.36:1521:RCUBD";
@@ -39,9 +39,9 @@ public class OperationsDb {
 //		public static final String DB_PASSWORD = "RCU";
 //	
 	//-------------------	Local Connection ----------------------------------//
-	public static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:xe";
-	public static final String DB_USER = "demo";
-	public static final String DB_PASSWORD = "demo2016";
+//	public static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:xe";
+//	public static final String DB_USER = "demo";
+//	public static final String DB_PASSWORD = "demo2016";
 		
 	public static String GET_AGENTS = "select trts.ID_COMPTE from TEST_RCU_TABLE_SOURCE trts where 1=1";
 	
@@ -52,7 +52,7 @@ public class OperationsDb {
 	
 	public List<Agent> getDataToDisplay(Map<String, Object> params) throws Exception{
 		
-		String INNER_SELECT = "select distinct master_id from rcu_customer_master rcm left join TEST_RCU_TABLE_SOURCE tt on rcm.ID_COMPTE = tt.ID_COMPTE where 1=1 ";
+		String INNER_SELECT = "select distinct vv.master_id from V_RCU_CUSTOMER_MASTER_CS vv where 1=1";
 				
 		String nom = (String)params.get("nom");
    	    String prenoms = (String)params.get("prenoms");
@@ -63,30 +63,48 @@ public class OperationsDb {
         String idCompte = (String)params.get("idCompte");
         
         if(nom!=null && !nom.isEmpty())
-        	INNER_SELECT += " and LOWER(tt.NOM) like '%"+nom.toLowerCase()+"%' ";
+        	INNER_SELECT += " and LOWER(vv.NOM) like '%"+nom.toLowerCase()+"%' ";
         if(prenoms!=null && !prenoms.isEmpty())
-        	INNER_SELECT += " and LOWER(tt.PRENOM) like '%"+prenoms.toLowerCase()+"%' ";
+        	INNER_SELECT += " and LOWER(vv.PRENOM) like '%"+prenoms.toLowerCase()+"%' ";
         if(dateNaissance!=null && !dateNaissance.isEmpty())
-        	INNER_SELECT += " and LOWER(tt.DATE_NAISSANCE) = to_date('"+dateNaissance+"') ";
+        	INNER_SELECT += " and LOWER(vv.DATE_NAISSANCE) = to_date('"+dateNaissance+"') ";
         if(piece!=null && !piece.isEmpty())
-        	INNER_SELECT += " and LOWER(tt.ID_PIECE) = '"+piece.toLowerCase()+"' ";
+        	INNER_SELECT += " and LOWER(vv.ID_PIECE) = '"+piece.toLowerCase()+"' ";
         if(compteContri!=null && !compteContri.isEmpty())
-        	INNER_SELECT += " and LOWER(tt.COMPTE_CONTRIBUABLE) = '"+compteContri.toLowerCase()+"' ";
+        	INNER_SELECT += " and LOWER(vv.COMPTE_CONTRIBUABLE) = '"+compteContri.toLowerCase()+"' ";
         if(numero!=null && !numero.isEmpty())
-        	INNER_SELECT += " and LOWER(tt.PHONE_NUM) = '"+numero.toLowerCase()+"' ";
+        	INNER_SELECT += " and LOWER(vv.PHONE_NUM) = '"+numero.toLowerCase()+"' ";
         if(idCompte!=null && !idCompte.isEmpty())
-        	INNER_SELECT += " and LOWER(tt.ID_COMPTE) = '"+idCompte.toLowerCase()+"' ";
+        	INNER_SELECT += " and LOWER(vv.ID_COMPTE) = '"+idCompte.toLowerCase()+"' ";
         
-        String GET_COMPTES_FORM_NEW = "  select  "
-			    + " rcm.MASTER_ID, rcm.MASTER_ID_B2C,  rcm.TYPE_MATCH_CD, rcm.TYPE_SERVICE_ID, rcm.DATE_CESSATION_MID, rcm.DATE_CREATION_MID,  "
-			    + " trts.ID_COMPTE, trts.ID_NIVEAU_SUPERIEUR,  trts.SYSTEME_SOURCE_CD, trts.NOM, trts.PRENOM, trts.DATE_NAISSANCE, trts.LIEU_NAISSANCE, trts.TYPE_COMPTE,"
-			    + " trts.ID_PIECE, trts.TYPE_PIECE, trts.DATE_CREATION, trts.PHONE_NUM, trts.STATUTS, trts.TYPE_COMPTE, trts.COMPTE_CONTRIBUABLE, ts.LIBELLE_TYPESERVICE,"
-			    + "  trts.RES_ID"
-			    + " from Rcu_customer_master rcm, TEST_RCU_TABLE_SOURCE trts"
-			    + " left join REFERENCE_TYPESERVICE ts on trts.TYPE_SERVICE = ts.CODE_TYPESERVICE"
-			    + " where trts.id_compte = rcm.id_compte"
-			    + " and rcm.master_id in ("+INNER_SELECT+")"
-			    + " order by master_id";
+        String GET_COMPTES_FORM_NEW = "select vrcu.ID_COMPTE, "
+								+ " vrcu.COMPTE_CONTRIBUABLE ,"
+								+ " vrcu.DATE_CREATION ,"
+								+ " vrcu.DATE_NAISSANCE ,"
+								+ " vrcu.LIEU_NAISSANCE ,"
+								+ " vrcu.NOM ,"
+								+ " vrcu.PHONE_NUM ,"
+								+ " vrcu.ID_PIECE ,"
+								+ " vrcu.PRENOM ,"
+								+ " vrcu.STATUTS ,"
+								+ " vrcu.TYPE_COMPTE ,"
+								+ " vrcu.TYPE_PIECE ,"
+								+ " vrcu.TYPE_SERVICE ,"
+								+ " vrcu.SYSTEME_SOURCE_CD ,"
+								+ " vrcu.ID_NIVEAU_SUPERIEUR ,"
+								+ " vrcu.RES_ID ,"
+								+ " vrcu.DATE_CESSSATION_MID ,"
+								+ " vrcu.DATE_CREATION_MID ,"
+								+ " vrcu.MASTER_ID ,"
+								+ " vrcu.MASTER_ID_B2C ,"
+								+ " vrcu.SYSTEME_SOURCE_CD_1 ,"
+								+ " vrcu.TYPE_MATCH_CD ,"
+								+ " vrcu.TYPE_SERVICE_ID ,"
+								+ " vrcu.DATE_CESSATION_MID,"
+								+ " vrcu.LIBELLE_TYPESERVICE"  
+								+ " from V_RCU_CUSTOMER_MASTER_CS vrcu"
+				        		+ " where vrcu.MASTER_ID in ("+INNER_SELECT+")"
+							    + " order by vrcu.master_id";
         
         logger.info("La requête suivante sera exécutée pour obtenir la liste des comptes en fonction des critères de recherche: ");
 		logger.info(GET_COMPTES_FORM_NEW);
