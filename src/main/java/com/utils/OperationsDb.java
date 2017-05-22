@@ -29,14 +29,14 @@ public class OperationsDb {
 	
 	public static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
 //-------------------	 PROD ----------------------------------//
-	public static final String DB_CONNECTION = "jdbc:oracle:thin:@10.242.69.158:1521:IDENTDG";
-	public static final String DB_USER = "POCRCU";
-	public static final String DB_PASSWORD = "Password1";
+//	public static final String DB_CONNECTION = "jdbc:oracle:thin:@10.242.69.158:1521:IDENTDG";
+//	public static final String DB_USER = "POCRCU";
+//	public static final String DB_PASSWORD = "Password1";
 	
 	//-------------------	 PROD2 ----------------------------------//
-//		public static final String DB_CONNECTION = "jdbc:oracle:thin:@10.242.79.36:1521:RCUBD";
-//		public static final String DB_USER = "RCU";
-//		public static final String DB_PASSWORD = "RCU";
+		public static final String DB_CONNECTION = "jdbc:oracle:thin:@10.242.79.36:1521:RCUBD";
+		public static final String DB_USER = "RCU";
+		public static final String DB_PASSWORD = "RCU";
 //	
 	//-------------------	Local Connection ----------------------------------//
 //	public static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -77,31 +77,28 @@ public class OperationsDb {
         if(idCompte!=null && !idCompte.isEmpty())
         	INNER_SELECT += " and LOWER(vv.ID_COMPTE) = '"+idCompte.toLowerCase()+"' ";
         
-        String GET_COMPTES_FORM_NEW = "select vrcu.ID_COMPTE, "
-								+ " vrcu.COMPTE_CONTRIBUABLE ,"
-								+ " vrcu.DATE_CREATION ,"
-								+ " vrcu.DATE_NAISSANCE ,"
-								+ " vrcu.LIEU_NAISSANCE ,"
-								+ " vrcu.NOM ,"
-								+ " vrcu.PHONE_NUM ,"
-								+ " vrcu.ID_PIECE ,"
-								+ " vrcu.PRENOM ,"
+        String GET_COMPTES_FORM_NEW = "select vrcu.ID_COMPTE," 
+        						+ " vrcu.COMPTE_CONTRIBUABLE , "
+								+ " vrcu.DATE_CREATION , "
+								+ " vrcu.DATE_NAISSANCE , "
+								+ " vrcu.LIEU_NAISSANCE , "
+								+ " vrcu.NOM , "
+								+ " vrcu.PHONE_NUM ," 
+								+ " vrcu.ID_PIECE , "
+								+ " vrcu.PRENOM , "
 								+ " vrcu.STATUTS ,"
-								+ " vrcu.TYPE_COMPTE ,"
+								+ " vrcu.TYPE_COMPTE ," 
 								+ " vrcu.TYPE_PIECE ,"
 								+ " vrcu.TYPE_SERVICE ,"
 								+ " vrcu.SYSTEME_SOURCE_CD ,"
 								+ " vrcu.ID_NIVEAU_SUPERIEUR ,"
-								+ " vrcu.RES_ID ,"
-								+ " vrcu.DATE_CESSSATION_MID ,"
+								+ " vrcu.RES_ID , "
+								+ " vrcu.DATE_CESSATION_MID ," 
 								+ " vrcu.DATE_CREATION_MID ,"
-								+ " vrcu.MASTER_ID ,"
-								+ " vrcu.MASTER_ID_B2C ,"
-								+ " vrcu.SYSTEME_SOURCE_CD_1 ,"
-								+ " vrcu.TYPE_MATCH_CD ,"
-								+ " vrcu.TYPE_SERVICE_ID ,"
-								+ " vrcu.DATE_CESSATION_MID,"
-								+ " vrcu.LIBELLE_TYPESERVICE"  
+								+ " vrcu.MASTER_ID , "
+								+ " vrcu.TYPE_MATCH_CD ," 
+								+ " vrcu.TYPE_SERVICE_ID ," 
+								+ " vrcu.LIBELLE_TYPESERVICE"
 								+ " from V_RCU_CUSTOMER_MASTER_CS vrcu"
 				        		+ " where vrcu.MASTER_ID in ("+INNER_SELECT+")"
 							    + " order by vrcu.master_id";

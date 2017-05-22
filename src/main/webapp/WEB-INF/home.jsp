@@ -68,7 +68,8 @@
 								F = PRÉNOM, NOM, NUMÉRO TÉLÉPHONE <br/>
 								G = NOM, DATE NAISSANCE, NUMÉRO TÉLÉPHONE <br/>
 								H = NOM, NUMÉRO TÉLÉPHONE <br/>
-								I = PIÈCE IDENTITÉ, NUMÉRO TÉLÉPHONE
+								I = PIÈCE IDENTITÉ, NUMÉRO TÉLÉPHONE <br />
+								J = COMPTE CONTRIBUABLE
 						</div>
 								
 					</div>
@@ -96,7 +97,7 @@
 							<th>DATE NAISSANCE</th>
 							<th>LIEU NAISSANCE</th>
 							<th>PIECE</th>
-							<th>MASTER ID B2C</th>
+<!-- 							<th>MASTER ID B2C</th> -->
 							<th>COMPTE CONTRI.</th>
 							<th>TYPE SERVICE</th>
 							<th>TELEPHONE</th>							
@@ -117,7 +118,7 @@
 		                    <td data-bind="text: dateNaissance"></td>
 		                    <td data-bind="text: lieuNaissance"></td>
 			                  <td data-bind="text: piece"></td>
-			                  <td data-bind="text: masterIdB2C"></td>
+<!-- 			                  <td data-bind="text: masterIdB2C"></td> -->
 			                  <td data-bind="text: compteContri"></td>
 			                  <td data-bind="text: typeService"></td>
 			                  <td data-bind="text: numero"></td>

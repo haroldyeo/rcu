@@ -86,7 +86,7 @@ public class Utils {
 			
 			job.put("masterId", c.getMaster().getMasterId());
 			job.put("compteId", c.getMaster().getCompteId());
-			job.put("masterIdB2C", c.getMaster().getMasterIdB2C());
+//			job.put("masterIdB2C", c.getMaster().getMasterIdB2C());
 			job.put("systemSourceCode", c.getMaster().getSystemSourceCode());
 			job.put("typeMatch", c.getMaster().getTypeMatch());
 			job.put("typerService", c.getMaster().getTyperService());
@@ -121,31 +121,32 @@ public class Utils {
 			TableSource ts = new TableSource();
 			CustomerMaster cm = new CustomerMaster();
 			
-			cm.setMasterId(rs.getString("MASTER_ID"));
-			cm.setMasterIdB2C(rs.getString("MASTER_ID_B2C"));
-			cm.setTypeMatch(rs.getString("TYPE_MATCH_CD"));
-			cm.setTyperService(rs.getString("TYPE_SERVICE_ID"));
-			cm.setDateCessation(rs.getString("DATE_CESSATION_MID"));
-			cm.setDateCreation(rs.getString("DATE_CREATION_MID"));
-			
 			ts.setCompteId(rs.getString("ID_COMPTE"));
-			ts.setIdNiveauSuperieur(rs.getString("ID_NIVEAU_SUPERIEUR"));
-			
-			ts.setSystemSourceCode(rs.getString("SYSTEME_SOURCE_CD"));
-			ts.setNom(rs.getString("NOM"));
-			ts.setPrenoms(rs.getString("PRENOM"));
+			ts.setCompteContribuable(rs.getString("COMPTE_CONTRIBUABLE"));
+			ts.setDateCreation(rs.getString("DATE_CREATION"));
 			ts.setDateNaissance(rs.getString("DATE_NAISSANCE"));
 			ts.setLieuNaissance(rs.getString("LIEU_NAISSANCE"));
-			ts.setPiece(rs.getString("ID_PIECE"));
-			ts.setTypePiece(rs.getString("TYPE_PIECE"));
-			ts.setDateCreation(rs.getString("DATE_CREATION"));
-			ts.setNumero(rs.getString("PHONE_NUM"));
-			ts.setStatut(rs.getString("STATUTS"));
-			ts.setTypeCompte(rs.getString("TYPE_COMPTE"));
-			ts.setCompteContribuable(rs.getString("COMPTE_CONTRIBUABLE"));
-			ts.setTypeService(rs.getString("LIBELLE_TYPESERVICE"));
-			ts.setResId(rs.getString("RES_ID"));
 			
+			ts.setNom(rs.getString("NOM"));
+			ts.setNumero(rs.getString("PHONE_NUM"));
+			ts.setPiece(rs.getString("ID_PIECE"));
+			ts.setPrenoms(rs.getString("PRENOM"));
+			ts.setStatut(rs.getString("STATUTS"));
+			
+			ts.setTypeCompte(rs.getString("TYPE_COMPTE"));
+			ts.setTypePiece(rs.getString("TYPE_PIECE"));
+			cm.setTyperService(rs.getString("TYPE_SERVICE"));
+			ts.setSystemSourceCode(rs.getString("SYSTEME_SOURCE_CD"));
+			ts.setIdNiveauSuperieur(rs.getString("ID_NIVEAU_SUPERIEUR"));
+			
+			ts.setResId(rs.getString("RES_ID"));
+			cm.setDateCessation(rs.getString("DATE_CESSATION_MID"));
+			cm.setDateCreation(rs.getString("DATE_CREATION_MID"));
+			cm.setMasterId(rs.getString("MASTER_ID"));
+			cm.setTypeMatch(rs.getString("TYPE_MATCH_CD"));
+			cm.setTyperService(rs.getString("TYPE_SERVICE_ID"));
+			ts.setTypeService(rs.getString("LIBELLE_TYPESERVICE"));
+						
 			listAgents.add(new Agent(ts, cm));
 			
 		}
